@@ -8,63 +8,52 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios_rounded,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "About Us",
-                          style: Helper.getTheme(context).headline5,
-                        ),
-                      ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
-                        scale: 5,
-                      ),
-                    ],
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                    ),
                   ),
-                  SizedBox(
-                    height: 50,
+                  Expanded(
+                    child: Text(
+                      "About Us",
+                      style: Helper.getTheme(context).headline5,
+                    ),
                   ),
-                  Column(
-                    children: [
-                      AboutCard(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      AboutCard(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      AboutCard(),
-                    ],
+                  Image.asset(
+                    Helper.getAssetName("cart.png", "virtual"),
+                    scale: 5,
                   ),
                 ],
               ),
-            ),
+              SizedBox(
+                height: 50,
+              ),
+              Column(
+                children: [
+                  AboutCard(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  AboutCard(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  AboutCard(),
+                ],
+              ),
+            ],
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: CustomNavBar(
-              menu: true,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

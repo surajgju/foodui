@@ -65,7 +65,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -128,11 +127,9 @@ class MyApp extends StatelessWidget {
         NewPwScreen.routeName: (context) => NewPwScreen(),
         IntroScreen.routeName: (context) => IntroScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
-        MenuScreen.routeName: (context) => MenuScreen(),
         ProfileScreen.routeName: (context) => ProfileScreen(),
         MoreScreen.routeName: (context) => MoreScreen(),
         DessertScreen.routeName: (context) => DessertScreen(),
-        IndividualItem.routeName: (context) => IndividualItem(),
         PaymentScreen.routeName: (context) => PaymentScreen(),
         NotificationScreen.routeName: (context) => NotificationScreen(),
         AboutScreen.routeName: (context) => AboutScreen(),
@@ -141,7 +138,6 @@ class MyApp extends StatelessWidget {
         CheckoutScreen.routeName: (context) => CheckoutScreen(),
         ChangeAddressScreen.routeName: (context) => ChangeAddressScreen(),
         FoodHomeScreen.routeName:(context)=>FoodHomeScreen(),
-        // OfferMainHomeScreen.routeName:(context)=>OfferMainHomeScreen(),
         OfferHomeScreen.routeName:(context)=>OfferHomeScreen(),
 
         RestaurantDetailViewScreen.routeName:(context)=>RestaurantDetailViewScreen()

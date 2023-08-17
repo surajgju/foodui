@@ -152,41 +152,40 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushReplacementNamed(
-                                MyOrderScreen.routeName);
+                            Navigator.of(context)
+                                .pushNamed(MyOrderScreen.routeName);
                           },
                           child: Stack(
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 0, right: 0)
-                                        .r,
+                                    const EdgeInsets.only(top: 0, right: 0).r,
                                 child: Image.asset(
-                                  Helper.getAssetName(
-                                      "cart.png", "virtual"),
+                                  Helper.getAssetName("cart.png", "virtual"),
                                   scale: 4,
                                 ),
                               ),
-                              Positioned(
-                                right: 0,
-                                bottom: 0,
-                                child: Container(
-                                  width: 20.w,
-                                  height: 15.h,
-                                  padding: EdgeInsets.fromLTRB(
-                                      2.5, 2.5, 2.5, 2.5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      shape: BoxShape.circle),
-                                  child: Center(
-                                    child: Text(
-                                      cartProvider.cart.length.toString(),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 9),
+                              if (cartProvider.cart.length > 0)
+                                Positioned(
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    width: 20.w,
+                                    height: 15.h,
+                                    padding:
+                                        EdgeInsets.fromLTRB(2.5, 2.5, 2.5, 2.5),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle),
+                                    child: Center(
+                                      child: Text(
+                                        cartProvider.cart.length.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 9),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                             ],
                           ),
                         ),
@@ -194,7 +193,7 @@ class HomeScreen extends StatelessWidget {
                           width: 5.w,
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.of(context)
                                 .pushNamed(MoreScreen.routeName);
                           },
@@ -297,8 +296,7 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, top: 10).r,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount:
-                          featuredCategoriesProvider.foodCategory.length,
+                      itemCount: featuredCategoriesProvider.foodCategory.length,
                       itemBuilder: (c, i) {
                         String food_id = featuredCategoriesProvider
                             .foodCategory[i]!.food_id!;
@@ -311,15 +309,12 @@ class HomeScreen extends StatelessWidget {
                               image: foods.food_images![0],
                               name: foods.food_name,
                               imageTitle: featuredCategoriesProvider
-                                      .foodCategory[i]
-                                      .offer_price!
-                                      .isNotEmpty
+                                      .foodCategory[i].offer_price!.isNotEmpty
                                   ? featuredCategoriesProvider
                                           .foodCategory[i].offer_price! +
                                       " OFF"
                                   : featuredCategoriesProvider
-                                          .foodCategory[i]
-                                          .offer_percentage! +
+                                          .foodCategory[i].offer_percentage! +
                                       "% OFF",
                               imageSubTitle: "ABOVE 200",
                               orderTime: "40 min",
@@ -381,15 +376,12 @@ class HomeScreen extends StatelessWidget {
                               image: foods.food_images![0],
                               name: foods.food_name,
                               imageTitle: featuredCategoriesProvider
-                                      .foodCategory2[i]
-                                      .offer_price!
-                                      .isNotEmpty
+                                      .foodCategory2[i].offer_price!.isNotEmpty
                                   ? featuredCategoriesProvider
                                           .foodCategory2[i].offer_price! +
                                       " OFF"
                                   : featuredCategoriesProvider
-                                          .foodCategory2[i]
-                                          .offer_percentage! +
+                                          .foodCategory2[i].offer_percentage! +
                                       "% OFF",
                               imageSubTitle: "ABOVE 200",
                               orderTime: "40 min",
@@ -538,10 +530,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(IndividualItem.routeName);
-                      },
+                      onTap: () {},
                       child: RecentItemCard(
                         image: Image.asset(
                           Helper.getAssetName("pizza3.jpg", "real"),

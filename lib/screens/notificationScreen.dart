@@ -8,84 +8,74 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: SafeArea(
+          child: Column(
         children: [
-          SafeArea(
-              child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Notifications",
-                        style: Helper.getTheme(context).headline5,
-                      ),
-                    ),
-                    Image.asset(
-                      Helper.getAssetName("cart.png", "virtual"),
-                      scale: 5,
-                    ),
-                  ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_rounded,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              NotiCard(
-                title: "Your order has been picked up",
-                time: "Now",
-              ),
-              NotiCard(
-                title: "Your order has been delivered",
-                time: "1 h ago",
-                color: AppColor.placeholderBg,
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "3 h ago",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "5 h ago",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "05 Sep 2020",
-                color: AppColor.placeholderBg,
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "12 Aug 2020",
-                color: AppColor.placeholderBg,
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "20 Jul 2020",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "12 Jul 2020",
-              ),
-            ],
-          )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              child: CustomNavBar(
-                menu: true,
-              ))
+                Expanded(
+                  child: Text(
+                    "Notifications",
+                    style: Helper.getTheme(context).headline5,
+                  ),
+                ),
+                Image.asset(
+                  Helper.getAssetName("cart.png", "virtual"),
+                  scale: 5,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          NotiCard(
+            title: "Your order has been picked up",
+            time: "Now",
+          ),
+          NotiCard(
+            title: "Your order has been delivered",
+            time: "1 h ago",
+            color: AppColor.placeholderBg,
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "3 h ago",
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "5 h ago",
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "05 Sep 2020",
+            color: AppColor.placeholderBg,
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "12 Aug 2020",
+            color: AppColor.placeholderBg,
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "20 Jul 2020",
+          ),
+          NotiCard(
+            title: "Lorem ipsum dolor sit amet, consectetur",
+            time: "12 Jul 2020",
+          ),
         ],
-      ),
+      )),
     );
   }
 }

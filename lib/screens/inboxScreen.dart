@@ -8,86 +8,75 @@ class InboxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: Icon(Icons.arrow_back_ios_rounded),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Inbox",
-                          style: Helper.getTheme(context).headline5,
-                        ),
-                      ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
-                        scale: 5,
-                      ),
-                    ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back_ios_rounded),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                  color: AppColor.placeholderBg,
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                  color: AppColor.placeholderBg,
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                ),
-                MailCard(
-                  title: "qconnect Promotions",
-                  description:
-                      "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-                  time: "6th July",
-                ),
-              ],
+                  Expanded(
+                    child: Text(
+                      "Inbox",
+                      style: Helper.getTheme(context).headline5,
+                    ),
+                  ),
+                  Image.asset(
+                    Helper.getAssetName("cart.png", "virtual"),
+                    scale: 5,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: CustomNavBar(
-              menu: true,
+            SizedBox(
+              height: 30,
             ),
-          ),
-        ],
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+            ),
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+              color: AppColor.placeholderBg,
+            ),
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+            ),
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+              color: AppColor.placeholderBg,
+            ),
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+            ),
+            MailCard(
+              title: "qconnect Promotions",
+              description:
+                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
+              time: "6th July",
+            ),
+          ],
+        ),
       ),
     );
   }

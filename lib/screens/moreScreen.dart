@@ -21,164 +21,153 @@ class MoreScreen extends StatelessWidget {
     ScreenUtil.init(context);
 
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Container(
-              height: Helper.getScreenHeight(context),
-              width: Helper.getScreenWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+      body: SafeArea(
+        child: Container(
+          height: Helper.getScreenHeight(context),
+          width: Helper.getScreenWidth(context),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              margin:
-                              EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 5).r,
-                              // decoration: BoxDecoration(
-                              //     color: Colors.white, shape: BoxShape.circle),
-                              child: Icon(
-                                Icons.arrow_back_outlined,
-                                color: Colors.black87,
-                              ),
-                            ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          margin:
+                          EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 5).r,
+                          // decoration: BoxDecoration(
+                          //     color: Colors.white, shape: BoxShape.circle),
+                          child: Icon(
+                            Icons.arrow_back_outlined,
+                            color: Colors.black87,
                           ),
-                          Text(
-                            "More",
-                            style: Helper.getTheme(context).headline5,
-                          ),
-                        ],
+                        ),
                       ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
-                        scale: 5,
+                      Text(
+                        "More",
+                        style: Helper.getTheme(context).headline5,
                       ),
                     ],
                   ),
-
-                  SizedBox(
-                    height: 20,
+                  Image.asset(
+                    Helper.getAssetName("cart.png", "virtual"),
+                    scale: 5,
                   ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("user.png", "virtual"),
-                      color: Colors.black54,
-                    ),
-                    name: "User Profile",
-                    handler: () {
-                      Navigator.of(context).pushNamed(ProfileScreen.routeName);
-
-                   //   Navigator.of(context).pushNamed(PaymentScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("income.png", "virtual"),
-                    ),
-                    name: "Payment Details",
-                    handler: () {
-                      Navigator.of(context).pushNamed(PaymentScreen.routeName);
-                    },
-                  ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // MoreCard(
-                  //   image: Image.asset(
-                  //     Helper.getAssetName("shopping_bag.png", "virtual"),
-                  //   ),
-                  //   name: "My Orders",
-                  //   handler: () {
-                  //     Navigator.of(context).pushNamed(MyOrderScreen.routeName);
-                  //   },
-                  // ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("noti.png", "virtual"),
-                    ),
-                    name: "Notifications",
-                    isNoti: true,
-                    handler: () {
-                      Navigator.of(context)
-                          .pushNamed(NotificationScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("mail.png", "virtual"),
-                    ),
-                    name: "Inbox",
-                    handler: () {
-                      Navigator.of(context).pushNamed(InboxScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("info.png", "virtual"),
-                    ),
-                    name: "About Us",
-                    handler: () {
-                      Navigator.of(context).pushNamed(AboutScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("info.png", "virtual"),
-                    ),
-                    name: "Temporary",
-                    handler: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FirebaseDataFilling()));
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("info.png", "virtual"),
-                    ),
-                    name: "Sign Out",
-                    handler: () async{
-                     await FirebaseAuth.instance.signOut();
-
-                      Navigator.of(context).pushReplacementNamed(IntroScreen.routeName);
-                    },
-                  ),
-                ]),
+                ],
               ),
-            ),
+
+              SizedBox(
+                height: 20,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("user.png", "virtual"),
+                  color: Colors.black54,
+                ),
+                name: "User Profile",
+                handler: () {
+                  Navigator.of(context).pushNamed(ProfileScreen.routeName);
+
+               //   Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("income.png", "virtual"),
+                ),
+                name: "Payment Details",
+                handler: () {
+                  Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                },
+              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // MoreCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("shopping_bag.png", "virtual"),
+              //   ),
+              //   name: "My Orders",
+              //   handler: () {
+              //     Navigator.of(context).pushNamed(MyOrderScreen.routeName);
+              //   },
+              // ),
+              SizedBox(
+                height: 10,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("noti.png", "virtual"),
+                ),
+                name: "Notifications",
+                isNoti: true,
+                handler: () {
+                  Navigator.of(context)
+                      .pushNamed(NotificationScreen.routeName);
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("mail.png", "virtual"),
+                ),
+                name: "Inbox",
+                handler: () {
+                  Navigator.of(context).pushNamed(InboxScreen.routeName);
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("info.png", "virtual"),
+                ),
+                name: "About Us",
+                handler: () {
+                  Navigator.of(context).pushNamed(AboutScreen.routeName);
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("info.png", "virtual"),
+                ),
+                name: "Temporary",
+                handler: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FirebaseDataFilling()));
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MoreCard(
+                image: Image.asset(
+                  Helper.getAssetName("info.png", "virtual"),
+                ),
+                name: "Sign Out",
+                handler: () async{
+                 await FirebaseAuth.instance.signOut();
+
+                  Navigator.of(context).pushReplacementNamed(IntroScreen.routeName);
+                },
+              ),
+            ]),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: CustomNavBar(
-              more: true,
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -249,8 +238,8 @@ class MoreCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Container(
-                height: 30,
-                width: 30,
+                height: 45.h,
+                width: 45.w,
                 decoration: ShapeDecoration(
                   shape: CircleBorder(),
                   color: AppColor.placeholderBg,
