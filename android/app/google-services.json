@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "95583806226",
+    "project_id": "qconnect-5e16e",
+    "storage_bucket": "qconnect-5e16e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95583806226:android:5a7db5174560bbb96ec9cb",
+        "android_client_info": {
+          "package_name": "com.example.foodui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95583806226-g1c974spa1tu6qjtrr7l7d8v3c81h7rk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPE18-FRwv4EV2JJw6j_-EoBDj3ek-lQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95583806226-g1c974spa1tu6qjtrr7l7d8v3c81h7rk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "95583806226-86td1k67jrr7q565flofbstrolqcqonq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.qconnect.app.qconnect.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95583806226:android:020efd8c4da182776ec9cb",
+        "android_client_info": {
+          "package_name": "com.qconnect.app.qconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95583806226-57afn0g0g1ejupeds4k493mkeju79eci.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qconnect.app.qconnect",
+            "certificate_hash": "2a76adb80797f39903eba2efb08cb74d68ae8f85"
+          }
+        },
+        {
+          "client_id": "95583806226-g1c974spa1tu6qjtrr7l7d8v3c81h7rk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPE18-FRwv4EV2JJw6j_-EoBDj3ek-lQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95583806226-g1c974spa1tu6qjtrr7l7d8v3c81h7rk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "95583806226-86td1k67jrr7q565flofbstrolqcqonq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.qconnect.app.qconnect.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
