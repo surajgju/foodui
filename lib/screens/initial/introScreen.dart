@@ -305,34 +305,39 @@ class _IntroScreenState extends State<IntroScreen> {
                             SizedBox(
                               height: 45.h,
                               width: 330.w,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border:
-                                        Border.all(color: AppColor.placeholder),
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: Image.asset(
-                                        Helper.getAssetName(
-                                          "google.png",
-                                          "virtual",
+                              child: GestureDetector(
+                                onTap: (){
+                                  authProvider.signInWithGoogle();
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: AppColor.placeholder),
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(3),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Image.asset(
+                                          Helper.getAssetName(
+                                            "google.png",
+                                            "virtual",
+                                          ),
+                                          width: 15.w,
                                         ),
-                                        width: 15.w,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 30.w,
-                                    ),
-                                    Text("Continue with Google")
-                                  ],
+                                      SizedBox(
+                                        width: 30.w,
+                                      ),
+                                      Text("Continue with Google")
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

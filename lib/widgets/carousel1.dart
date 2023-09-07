@@ -42,7 +42,7 @@ class _CarouselOneState extends State<CarouselOne> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return SizedBox(
-      height: 195.h,
+      height: 185.h,
       child: CustomScrollView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,

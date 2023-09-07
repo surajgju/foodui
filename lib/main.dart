@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodui/provider/authProvider.dart';
 import 'package:foodui/provider/cart.dart';
+import 'package:foodui/provider/checkoutProvider.dart';
 import 'package:foodui/provider/featuredCategoriesProvider.dart';
 import 'package:foodui/provider/featuredRestaurantCategoriesProvider.dart';
 import 'package:foodui/provider/foodMainScreenProvider.dart';
 import 'package:foodui/provider/menuProvider.dart';
 import 'package:foodui/provider/onBoardingProvider.dart';
-import 'package:foodui/provider/orders.dart';
+import 'package:foodui/provider/ordersProviders.dart';
 import 'package:foodui/screens/auth/changeAddressScreen.dart';
 import 'package:foodui/screens/food/foodHomeScreen.dart';
 import 'package:foodui/screens/food/offerHomeScreen.dart';
 import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
 import 'package:foodui/screens/offers/offersMainHomeScreen.dart';
+import 'package:foodui/screens/tracking/locationTracking.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'screens/initial/spashScreen.dart';
 import 'screens/initial/landingScreen.dart';
@@ -52,7 +55,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=>Cart()),
         ChangeNotifierProvider(create: (_)=>Orders()),
         ChangeNotifierProvider(create: (_)=>FeaturedRestaurantCategoriesProvider()),
-
+        ChangeNotifierProvider(create: (_)=>CheckoutProvider()),
 
       ],
       child: MyApp()));
@@ -71,7 +74,7 @@ class MyApp extends StatelessWidget {
       title: 'Qconnect',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Metropolis",
+        fontFamily: GoogleFonts.metrophobic().fontFamily,
         colorScheme: ColorScheme.fromSwatch().copyWith(primary: Color(0xFF3cb44c)),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
@@ -139,6 +142,7 @@ class MyApp extends StatelessWidget {
         ChangeAddressScreen.routeName: (context) => ChangeAddressScreen(),
         FoodHomeScreen.routeName:(context)=>FoodHomeScreen(),
         OfferHomeScreen.routeName:(context)=>OfferHomeScreen(),
+        MyMaps.routeName:(context)=>MyMaps(),
 
         RestaurantDetailViewScreen.routeName:(context)=>RestaurantDetailViewScreen()
       },

@@ -9,15 +9,24 @@ import 'package:foodui/widgets/customTextInput.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/cart.dart';
-import '../../provider/orders.dart';
+import '../../provider/checkoutProvider.dart';
+import '../../provider/ordersProviders.dart';
 
-class CheckoutScreen extends StatelessWidget {
+class CheckoutScreen extends StatefulWidget {
   static const routeName = "/checkoutScreen";
+
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     final cartProvider = Provider.of<Cart>(context);
     final orderProvider = Provider.of<Orders>(context);
+    final checkoutProvider = Provider.of<CheckoutProvider>(context);
+
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -56,9 +65,11 @@ class CheckoutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: Helper.getScreenWidth(context) * 0.4,
+                    width: Helper.getScreenWidth(context) * 0.6,
                     child: Text(
-                      "653 Nostrand Ave., Brooklyn, NY 11216",
+                      checkoutProvider.checkoutAddress,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                       style: Helper.getTheme(context).headline3,
                     ),
                   ),
@@ -106,163 +117,164 @@ class CheckoutScreen extends StatelessWidget {
                           builder: (context) {
                             return Container(
                               height: Helper.getScreenHeight(context) * 0.7,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.end,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        icon: Icon(
-                                          Icons.clear,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: Row(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text(
-                                          "Add Credit/Debit Card",
-                                          style: Helper.getTheme(context)
-                                              .headline3,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: Divider(
-                                      color: AppColor.placeholder
-                                          .withOpacity(0.5),
-                                      thickness: 1.5,
-                                      height: 40,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: CustomTextInput(
-                                        hintText: "card Number"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Expiry"),
-                                        SizedBox(
-                                          height: 50,
-                                          width: 100,
-                                          child: CustomTextInput(
-                                            hintText: "MM",
-                                            padding: const EdgeInsets.only(
-                                                left: 35),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                          width: 100,
-                                          child: CustomTextInput(
-                                            hintText: "YY",
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: CustomTextInput(
-                                        hintText: "Security Code"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: CustomTextInput(
-                                        hintText: "First Name"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: CustomTextInput(
-                                        hintText: "Last Name"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                          width: Helper.getScreenWidth(
-                                                  context) *
-                                              0.4,
-                                          child: Text(
-                                              "You can remove this card at anytime"),
-                                        ),
-                                        Switch(
-                                          value: false,
-                                          onChanged: (_) {},
-                                          thumbColor:
-                                              MaterialStateProperty.all(
-                                            AppColor.secondary,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: SizedBox(
-                                      height: 50,
-                                      child: ElevatedButton(
+                                        IconButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.add,
-                                              ),
-                                              SizedBox(width: 40),
-                                              Text("Add Card"),
-                                              SizedBox(width: 40),
-                                            ],
-                                          )),
+                                          icon: Icon(
+                                            Icons.clear,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Add Credit/Debit Card",
+                                            style: Helper.getTheme(context)
+                                                .headline3,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Divider(
+                                        color: AppColor.placeholder
+                                            .withOpacity(0.5),
+                                        thickness: 1.5,
+                                        height: 40,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: CustomTextInput(
+                                          hintText: "card Number"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Expiry"),
+                                          SizedBox(
+                                            height: 50,
+                                            width: 100,
+                                            child: CustomTextInput(
+                                              hintText: "MM",
+                                              padding: const EdgeInsets.only(
+                                                  left: 35),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 50,
+                                            width: 100,
+                                            child: CustomTextInput(
+                                              hintText: "YY",
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: CustomTextInput(
+                                          hintText: "Security Code"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: CustomTextInput(
+                                          hintText: "First Name"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: CustomTextInput(
+                                          hintText: "Last Name"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width:
+                                                Helper.getScreenWidth(context) *
+                                                    0.4,
+                                            child: Text(
+                                                "You can remove this card at anytime"),
+                                          ),
+                                          Switch(
+                                            value: false,
+                                            onChanged: (_) {},
+                                            thumbColor:
+                                                MaterialStateProperty.all(
+                                              AppColor.secondary,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: SizedBox(
+                                        height: 50,
+                                        child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.add,
+                                                ),
+                                                SizedBox(width: 40),
+                                                Text("Add Card"),
+                                                SizedBox(width: 40),
+                                              ],
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           });
@@ -287,12 +299,20 @@ class CheckoutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Cash on delivery"),
-                  Container(
-                    width: 15,
-                    height: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(
-                        side: BorderSide(color: AppColor.green),
+                  InkWell(
+                    onTap: (){
+                      setState((){
+                        checkoutProvider.paymentMethod=1;
+                      });
+                    },
+                    child: Container(
+                      width: 15,
+                      height: 15,
+                      decoration: ShapeDecoration(
+                        color: checkoutProvider.paymentMethod ==1? Colors.green:AppColor.placeholderBg,
+                        shape: CircleBorder(
+                          side: BorderSide(color: AppColor.placeholder),
+                        ),
                       ),
                     ),
                   )
@@ -323,12 +343,20 @@ class CheckoutScreen extends StatelessWidget {
                       Text("**** **** **** 2187"),
                     ],
                   ),
-                  Container(
-                    width: 15,
-                    height: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(
-                        side: BorderSide(color: AppColor.green),
+                  InkWell(
+                    onTap: (){
+                      setState((){
+                        checkoutProvider.paymentMethod=2;
+                      });
+                    },
+                    child: Container(
+                      width: 15,
+                      height: 15,
+                      decoration: ShapeDecoration(
+                        color: checkoutProvider.paymentMethod ==2? Colors.green:AppColor.placeholderBg,
+                        shape: CircleBorder(
+                          side: BorderSide(color: AppColor.placeholder),
+                        ),
                       ),
                     ),
                   )
@@ -360,12 +388,20 @@ class CheckoutScreen extends StatelessWidget {
                       Text("johndoe@email.com"),
                     ],
                   ),
-                  Container(
-                    width: 15,
-                    height: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(
-                        side: BorderSide(color: AppColor.green),
+                  InkWell(
+                    onTap: (){
+                      setState((){
+                        checkoutProvider.paymentMethod=3;
+                      });
+                    },
+                    child: Container(
+                      width: 15,
+                      height: 15,
+                      decoration: ShapeDecoration(
+                        color: checkoutProvider.paymentMethod ==3? Colors.green:AppColor.placeholderBg,
+                        shape: CircleBorder(
+                          side: BorderSide(color: AppColor.placeholder),
+                        ),
                       ),
                     ),
                   )
@@ -423,6 +459,20 @@ class CheckoutScreen extends StatelessWidget {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                if(orderProvider.couponAmount>0)  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Applied Coupon (${orderProvider.couponCode})"),
+                      Text(
+                        "-\$${orderProvider.couponAmount}",
+                        style: Helper.getTheme(context).headline3,
+                      )
+                    ],
+                  ),
+
                   Divider(
                     height: 40,
                     color: AppColor.placeholder.withOpacity(0.25),
@@ -433,7 +483,7 @@ class CheckoutScreen extends StatelessWidget {
                     children: [
                       Text("Total"),
                       Text(
-                        "\$${orderProvider.subTotal+orderProvider.deliveryCost-orderProvider.discount}",
+                        "\$${orderProvider.subTotal + orderProvider.deliveryCost -( orderProvider.discount+orderProvider.couponAmount)}",
                         style: Helper.getTheme(context).headline3,
                       )
                     ],
@@ -516,7 +566,8 @@ class CheckoutScreen extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0).r,
+                                            horizontal: 20.0)
+                                        .r,
                                     child: Text(
                                         "Your order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your order"),
                                   ),
@@ -565,7 +616,6 @@ class CheckoutScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 100.h,width: 20,)
           ],
         ),
       ),

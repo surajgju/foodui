@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Cart extends ChangeNotifier{
 
   List<String> _cart = [];
-
+  bool cartDetailVisibility = false;
   get cart => _cart;
   addToCart(product_id){
     _cart.add(product_id);

@@ -9,7 +9,7 @@ import '../../const/colors.dart';
 import '../../modals/foods/food.dart';
 import '../../modals/restaurants/restaurant.dart';
 import '../../provider/cart.dart';
-import '../../provider/orders.dart';
+import '../../provider/ordersProviders.dart';
 import '../../utils/helper.dart';
 
 class FoodCompactDetailCard extends StatefulWidget {
@@ -227,11 +227,11 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                 width: 100.w,
                 height: 30.w,
                 child: Container(
-                  padding:EdgeInsets.only(left: 10,right: 10),
+
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: AppColor.placeholder),
+                    border: Border.all(color: AppColor.green,width: 0.7),
                     boxShadow: [
                       BoxShadow(
                         color: AppColor.placeholder,
@@ -241,60 +241,19 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                     ],
                   ),
                   // color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // mainAxisSize: MainAxisSize.max,
-                    children: [
-                      GestureDetector(
-                        onTap:(){
-                          cartProvider.removeFromCart(widget._foodId);
-                          orderProvider.removeOrder("9cO7oNxlZG1zahF397s2",
-                              widget._foodId!,
-                              Foods(
-                                  food_name: widget._name,
-                                  food_description: "delicious taste and sugar free",
-                                  food_minimum_order: "1",
-                                  food_rating: "4.8",
-                                  cuisines_id: "2,1",
-                                  food_images: [widget._image!],
-                                  food_type: "French",
-                                  food_price: "23",
-                                  food_reviews_id: "snFdsEFEnjsds"),
-                              Restaurants(rest_name: "restaurent 1",
-                                  rest_owner_name:"owner name",
-                                  rest_owner_number :"+91 8168673754",
-                                  rest_description:"restaurant description in datail. Fast food available",
-                                  rest_address :"16 street, park avenue, New york,USA",
-                                  rest_opening_hrs : "9:30 AM - 12:30 AM",
-                                  rest_delivery_time:"30 min",
-                                  rest_minimum_order :"1",
-                                  rest_rating:"2.5",
-                                  cuisines_id:"2,4",
-                                  rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
-                              ));
-                        },
-                        child: Container(
-                          child: Text(
-                            "−",
-                            style: TextStyle(
-                                color: AppColor.green,
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "${orderProvider.orderQuantity.containsKey!(widget._foodId)?orderProvider.orderQuantity[widget._foodId]:0}",
-                        style: TextStyle(
-                            color: AppColor.green,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      GestureDetector(
-                        onTap: (){
-
-                            cartProvider.addToCart(widget._foodId);
-                            orderProvider.addOrder("9cO7oNxlZG1zahF397s2",
+                  child:
+                  orderProvider.orderQuantity.containsKey!(widget._foodId)
+                      && orderProvider.orderQuantity[widget._foodId]! >0?
+                  Padding(
+                    padding:EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisSize: MainAxisSize.max,
+                      children: [
+                        GestureDetector(
+                          onTap:(){
+                            cartProvider.removeFromCart(widget._foodId);
+                            orderProvider.removeOrder("9cO7oNxlZG1zahF397s2",
                                 widget._foodId!,
                                 Foods(
                                     food_name: widget._name,
@@ -318,22 +277,120 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                                     cuisines_id:"2,4",
                                     rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
                                 ));
-
-
-                        },
-
-                        child: Container(
-                          child: Text(
-                            "+",
-                            style: TextStyle(
-                                color: AppColor.green,
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.w600),
+                          },
+                          child: Container(
+                            child: Text(
+                              "−",
+                              style: TextStyle(
+                                  color: AppColor.green,
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                        Text(
+                          "${orderProvider.orderQuantity.containsKey!(widget._foodId)?orderProvider.orderQuantity[widget._foodId]:0}",
+                          style: TextStyle(
+                              color: AppColor.green,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+
+                              cartProvider.addToCart(widget._foodId);
+                              orderProvider.addOrder("9cO7oNxlZG1zahF397s2",
+                                  widget._foodId!,
+                                  Foods(
+                                      food_name: widget._name,
+                                      food_description: "delicious taste and sugar free",
+                                      food_minimum_order: "1",
+                                      food_rating: "4.8",
+                                      cuisines_id: "2,1",
+                                      food_images: [widget._image!],
+                                      food_type: "French",
+                                      food_price: "23",
+                                      food_reviews_id: "snFdsEFEnjsds"),
+                                  Restaurants(rest_name: "restaurent 1",
+                                      rest_owner_name:"owner name",
+                                      rest_owner_number :"+91 8168673754",
+                                      rest_description:"restaurant description in datail. Fast food available",
+                                      rest_address :"16 street, park avenue, New york,USA",
+                                      rest_opening_hrs : "9:30 AM - 12:30 AM",
+                                      rest_delivery_time:"30 min",
+                                      rest_minimum_order :"1",
+                                      rest_rating:"2.5",
+                                      cuisines_id:"2,4",
+                                      rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
+                                  ));
+                          },
+
+                          child: Container(
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                  color: AppColor.green,
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ):
+                  GestureDetector(
+                    onTap: (){
+
+                      cartProvider.addToCart(widget._foodId);
+                      orderProvider.addOrder("9cO7oNxlZG1zahF397s2",
+                          widget._foodId!,
+                          Foods(
+                              food_name: widget._name,
+                              food_description: "delicious taste and sugar free",
+                              food_minimum_order: "1",
+                              food_rating: "4.8",
+                              cuisines_id: "2,1",
+                              food_images: [widget._image!],
+                              food_type: "French",
+                              food_price: "23",
+                              food_reviews_id: "snFdsEFEnjsds"),
+                          Restaurants(rest_name: "restaurent 1",
+                              rest_owner_name:"owner name",
+                              rest_owner_number :"+91 8168673754",
+                              rest_description:"restaurant description in datail. Fast food available",
+                              rest_address :"16 street, park avenue, New york,USA",
+                              rest_opening_hrs : "9:30 AM - 12:30 AM",
+                              rest_delivery_time:"30 min",
+                              rest_minimum_order :"1",
+                              rest_rating:"2.5",
+                              cuisines_id:"2,4",
+                              rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
+                          ));
+                    },
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        
+                        Padding(
+                          padding: EdgeInsets.only(left: 32,top: 2).r,
+                          child: Text(
+                            "ADD",
+                            style: TextStyle(
+                                color: AppColor.green,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15,top: 2).r,
+                          child: Icon(Icons.add,color: AppColor.green,size: 13.sp,),
+                        )
+                      ],
+                    ),
+                  )
+                  ,
                 ),
               )
             ],

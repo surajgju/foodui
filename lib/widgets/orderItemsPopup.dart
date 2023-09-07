@@ -8,14 +8,14 @@ import '../../provider/cart.dart';
 import '../../provider/ordersProviders.dart';
 import '../../utils/helper.dart';
 
-class OrderItems extends StatefulWidget {
-  const OrderItems({super.key});
+class OrderItemsPopup extends StatefulWidget {
+  const OrderItemsPopup({super.key});
 
   @override
-  State<OrderItems> createState() => _OrderdRestaurantDetailsState();
+  State<OrderItemsPopup> createState() => _OrderdItemsDetailsState();
 }
 
-class _OrderdRestaurantDetailsState extends State<OrderItems> {
+class _OrderdItemsDetailsState extends State<OrderItemsPopup> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -23,40 +23,33 @@ class _OrderdRestaurantDetailsState extends State<OrderItems> {
     final orderProvider = Provider.of<Orders>(context);
     return  Container(
       width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(top:10.0),
-              child: Text("ITEMS IN CART",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-            ),),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              physics: ScrollPhysics(),
+      color: AppColor.placeholderBg,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: orderProvider.orders.keys.length,
                 itemBuilder: (c,i){
-                String id = orderProvider.orders.keys.elementAt(i);
+                  String id = orderProvider.orders.keys.elementAt(i);
                   return OrderItemCard(
                       price:( num.parse(orderProvider.orders[id]!.food_price!) * orderProvider.orderQuantity[id]!).toString(),
                       name: orderProvider.orders[id]!.food_name!,
                       quantity:orderProvider.orderQuantity[id]
 
                   );
-                }),
-          ),
-        ],
+                })
+          ],
+        ),
       ),
     );
   }
 }
 
 class OrderItemCard extends StatelessWidget {
-   OrderItemCard({
+  OrderItemCard({
     Key? key,
     String? name,
     String? price,
@@ -65,7 +58,7 @@ class OrderItemCard extends StatelessWidget {
   })  : _name = name,
         _price = price,
         _isLast = isLast,
-  _quantity = quantity,
+        _quantity = quantity,
         super(key: key);
 
   final String? _name;
@@ -76,8 +69,7 @@ class OrderItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
-      margin: EdgeInsets.only(left: 20,right: 20),
+      height: 50,
       decoration: BoxDecoration(
         border: Border(
           bottom: _isLast!
@@ -91,9 +83,9 @@ class OrderItemCard extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              "${_name![0].toUpperCase()+ _name!.substring(1)} x$_quantity",
+              "${_name} x$_quantity",
               style: TextStyle(
-                color: Colors.black,
+                color: AppColor.primary,
                 fontSize: 16,
               ),
             ),

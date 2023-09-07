@@ -5,6 +5,9 @@
         android:label="qconnect"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!--           google api key-->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAQE74omapjTw2cmW8qEfyPcG_56Mty2PI"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

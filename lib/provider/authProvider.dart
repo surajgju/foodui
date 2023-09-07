@@ -1,11 +1,15 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:foodui/screens/home/homeScreen.dart';
 import 'package:foodui/utils/snackbar.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 import '../screens/auth/sentOTPScreen.dart';
+import '../utils/api_provider.dart';
 import '../widgets/loading_widget.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -23,70 +27,65 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController fourthOtp = TextEditingController();
   TextEditingController fifthOtp = TextEditingController();
   TextEditingController sixthOtp = TextEditingController();
-
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+var logger = Logger();
+  APIProvider apiProvider = APIProvider();
   varifyOtp(context) async {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    loadingWidget(context, true);
     smsCode = firstOtp.text.trim() +
         secondOtp.text.trim() +
         thirdOtp.text.trim() +
         fourthOtp.text.trim() +
         fifthOtp.text.trim() +
         sixthOtp.text.trim();
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: smsVerificationId, smsCode: smsCode);
-    // Sign the user in (or link) with the credential
-    if (credential != null) {
-      final UserCredential userCred =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      DocumentSnapshot user = await users.doc(userCred.user?.uid).get();
+    Response response = await apiProvider.post(url: "/user/auth/verify", payload: {"otp":smsCode});
+    //logger.i(response);
 
-      if (user.data() == null ) {
-        registerUser(userCred, users);
-      }
+    if(response.data['status']==true){
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    }else if(response.data['status']==false){
+      loadingWidget(context, false);
+      warningToast("response.data['message']");
+    }else{
+      warningToast("Something Went wrong");
     }
+    //loadingWidget(context, false);
   }
 
   loginWithPhone(context) async {
     loadingWidget(context, true);
-    await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "+91" + mobileInputController.text.trim(),
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException exception) {
-          loadingWidget(context, true);
-          showDialog(
-              context: context,
-              builder: (c) {
-                return AlertDialog(
-                  title: Text(exception.message.toString()),
-                );
-              });
-        },
-        codeSent: (String? verificationId, int? resendCode) {
-          successToast("Otp sent");
+    Response response = await apiProvider.post(url: "/user/auth", payload: {"phone":mobileInputController.text});
+   logger.i(response);
+   if(response.data['status']==true){
+     //loadingWidget(context, false);
+     Navigator.of(context).pushReplacementNamed(SendOTPScreen.routeName);
 
-          Navigator.of(context).pushReplacementNamed(SendOTPScreen.routeName);
-          smsVerificationId = verificationId!;
-          notifyListeners();
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          print(
-              "************************** codeAutoRetrievalTimeout $verificationId**************************");
-        });
+   }else{
+     loadingWidget(context, false);
+     warningToast("Something went Wrong");
+   }
+
   }
 
-  registerUser(UserCredential userCred, CollectionReference users) async {
-    await users
-        .add({
-          'uid': userCred.user?.uid,
-          'displayName': randomString(),
-          'phoneNumber': userCred.user?.phoneNumber,
-          'profileImage':
-              'https://i.pravatar.cc/300?u=${userCred.user?.phoneNumber}'
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+
+
+  signInWithGoogle()async{
+  try{
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
+          .authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      logger.i(credential);
+    }
+    }catch(err){
+    logger.e(err);
   }
+  }
+
 }
 
 randomString() {

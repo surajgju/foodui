@@ -14,6 +14,7 @@ import '../../widgets/categoryCard.dart';
 import '../../widgets/compactCard1.dart';
 import '../../widgets/compactCard2.dart';
 import '../../widgets/customNavBar.dart';
+import '../../widgets/temporary.dart';
 import '../food/foodCompactScroller.dart';
 import '../food/restaurantsListing.dart';
 import '../individualItem.dart';
@@ -24,6 +25,7 @@ import 'package:foodui/widgets/searchBar.dart' as sb;
 import '../food/foodHomeScreen.dart';
 import '../moreScreen.dart';
 import '../orders/myOrderScreen.dart';
+import '../tracking/locationTracking.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = "/homeScreen";
@@ -147,7 +149,11 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Container(
                         padding: EdgeInsets.only(left: 15).r,
-                        child: DeliverLocation()),
+                        child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, MyMaps.routeName);
+                            },
+                            child: DeliverLocation())),
                     Row(
                       children: [
                         GestureDetector(
@@ -239,9 +245,9 @@ class HomeScreen extends StatelessWidget {
                         image: Image.asset(
                           Helper.getAssetName(
                               "last_minute_offer.png", "virtual"),
-                          height: 50.h,
-                          // width: 50.w,
-                          fit: BoxFit.fill,
+                          height: 100.h,
+                           width: 80.w,
+                          fit: BoxFit.cover,
                         ),
                         name: "Offer Zone",
                         onTap: () {
@@ -257,8 +263,8 @@ class HomeScreen extends StatelessWidget {
                       child: CategoryCard(
                         image: Image.asset(
                           Helper.getAssetName("grocery.png", "real"),
-                          height: 50.h,
-                          // width: 50.w,
+                          height: 100.h,
+                          width: 80.w,
                           fit: BoxFit.cover,
                         ),
                         name: "Premium",
@@ -275,7 +281,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              CarouselOne(),
+              GestureDetector(
+                  onTap:(){
+                   // Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>CustomHeaderPage()));
+                  },
+                  child: CarouselOne()),
               SizedBox(
                 height: 20.h,
               ),

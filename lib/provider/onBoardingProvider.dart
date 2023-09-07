@@ -11,9 +11,8 @@ class OnBoardingProvider extends ChangeNotifier{
 
   isUserLoggedin(context){
     final uid = FirebaseAuth.instance.currentUser?.uid;
+    getData(context);
     if(uid != null){
-
-      getData(context);
       Future.delayed(Duration(seconds: 1),()=>Navigator.of(context).pushReplacementNamed(HomeScreen.routeName));
       // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     }else{

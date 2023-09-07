@@ -77,7 +77,7 @@ class RestaurantDescriptionCard extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(top: 10),
-                  height: 87.h,
+                  height: 80.h,
                   //color: Colors.red,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,46 +192,46 @@ class RestaurantDescriptionCard extends StatelessWidget {
               )
             ],
           ),
-          Container(
-           // color: Colors.yellow,
-            padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-
-              Flexible(
-               // padding: EdgeInsets.only(left: 10,right: 10),
-                child: Column(
-                  children: [
-                    Text("Delivery fee",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                    SizedBox(height: 5.h,), Text("ADE 6.50",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                  ],
-                ),
-              ),
-              Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-              Flexible(
-               // padding: EdgeInsets.only(left: 10,right: 10),
-                child: Column(
-                  children: [
-                    Text("Delivery time",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                    SizedBox(height: 5.h,), Text("40 mins",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                  ],
-                ),
-              ), Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-
-              Flexible(
-               // padding: EdgeInsets.only(left: 10,right: 10),
-                child: Column(
-                  children: [
-                    Text("Delivered by",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                   SizedBox(height: 5.h,),
-                    Text("Qconnect",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                  ],
-                ),
-              ),
-
-            ],),
-          )
+          // Container(
+          //  // color: Colors.yellow,
+          //   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //
+          //     Flexible(
+          //      // padding: EdgeInsets.only(left: 10,right: 10),
+          //       child: Column(
+          //         children: [
+          //           Text("Delivery fee",style: TextStyle(fontSize: 16,color: Colors.black54),),
+          //           SizedBox(height: 5.h,), Text("ADE 6.50",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
+          //         ],
+          //       ),
+          //     ),
+          //     Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
+          //     Flexible(
+          //      // padding: EdgeInsets.only(left: 10,right: 10),
+          //       child: Column(
+          //         children: [
+          //           Text("Delivery time",style: TextStyle(fontSize: 16,color: Colors.black54),),
+          //           SizedBox(height: 5.h,), Text("40 mins",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
+          //         ],
+          //       ),
+          //     ), Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
+          //
+          //     Flexible(
+          //      // padding: EdgeInsets.only(left: 10,right: 10),
+          //       child: Column(
+          //         children: [
+          //           Text("Delivered by",style: TextStyle(fontSize: 16,color: Colors.black54),),
+          //          SizedBox(height: 5.h,),
+          //           Text("Qconnect",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
+          //         ],
+          //       ),
+          //     ),
+          //
+          //   ],),
+          // )
         ],
       ),
     );

@@ -11,6 +11,10 @@ class Orders extends ChangeNotifier {
   num subTotal = 0;
   num deliveryCost = 2;
   num discount = 2;
+  num couponAmount = 0;
+
+  String couponCode = "";
+  List<String> validCoupons = ["FIRST","NEW","HELLO","Unique"];
   addOrder(String restaurant_id, String food_id, Foods food,
       Restaurants restaurantDetail) {
     if (!orderQuantity.containsKey(food_id)) {
@@ -43,4 +47,32 @@ class Orders extends ChangeNotifier {
       subTotal = subTotal - num.parse(food.food_price!);
     }
   }
+
+  bool validateCoupon(){
+    if(couponCode.isEmpty){
+      return false;
+    }else if(validCoupons.contains(couponCode)){
+
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  calculateCouponAmount(appliedCouponCode){
+    num localAmount=0;
+    if(appliedCouponCode == "NEW"){
+      localAmount =2;
+    }else
+    if(appliedCouponCode == "FIRST"){
+      localAmount =3;
+    }else
+    if(appliedCouponCode == "HELLO"){
+      localAmount =1.5;
+    }
+    couponAmount=  localAmount;
+    subTotal= subTotal-localAmount;
+    notifyListeners();
+  }
+
 }

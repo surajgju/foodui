@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/utils/helper.dart';
 
+import '../screens/food/restaurantDetailViewScreen.dart';
+
 class ProductCompactDetailCard extends StatelessWidget {
   ProductCompactDetailCard(
       {super.key,
@@ -25,7 +27,10 @@ class ProductCompactDetailCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 14),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: (){
+          Navigator.of(context).pushNamed(RestaurantDetailViewScreen.routeName,arguments: {"restaurantId":"_restaurantId"});
+
+        },
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
