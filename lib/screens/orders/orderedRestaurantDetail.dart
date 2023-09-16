@@ -17,8 +17,9 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
 
-    return SizedBox(
-      height: 80.h,
+    return ConstrainedBox(
+     // height: 80.h,
+      constraints: BoxConstraints(maxHeight: 90.h,minHeight: 70.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -34,7 +35,7 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
             ),
           ),
           SizedBox(
-            width: 10,
+            width: 10.w,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +44,7 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
             children: [
               Text(
                 "King Burgers",
-                style: Helper.getTheme(context).headline3,
+                style: Helper.getTheme(context).titleLarge,
               ),
               Row(
                 children: [
@@ -67,11 +68,11 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
               ),
               Row(
                 children: [
-                  Text("Burger"),
+                  Text("Burger",style: Helper.getTheme(context).titleSmall),
                   Padding(
                     padding: const EdgeInsets.only(
-                      bottom: 5,
-                    ),
+                      bottom: 2,
+                    ).r,
                     child: Text(
                       ".",
                       style: TextStyle(
@@ -80,13 +81,13 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
                       ),
                     ),
                   ),
-                  Text("Western Food"),
+                  Text("Western Food",style: Helper.getTheme(context).titleSmall),
                 ],
               ),
               Row(
                 children: [
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                     child: Image.asset(
                       Helper.getAssetName(
                         "loc.png",
@@ -95,9 +96,9 @@ class _OrderdRestaurantDetailsState extends State<OrderdRestaurantDetails> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 5.w,
                   ),
-                  Text("No 03, 4th Lane, Newyork")
+                  Text("No 03, 4th Lane, Newyork",style: TextStyle(fontSize: 12),)
                 ],
               )
             ],

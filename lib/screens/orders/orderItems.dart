@@ -33,8 +33,9 @@ class _OrderdRestaurantDetailsState extends State<OrderItems> {
               padding: const EdgeInsets.only(top:10.0),
               child: Text("ITEMS IN CART",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
             ),),
-          SizedBox(
-            height: 200,
+          ConstrainedBox(
+            constraints: BoxConstraints(minHeight: 20),
+           // height: 200,
             child: ListView.builder(
               physics: ScrollPhysics(),
                 shrinkWrap: true,
@@ -92,19 +93,14 @@ class OrderItemCard extends StatelessWidget {
           Expanded(
             child: Text(
               "${_name![0].toUpperCase()+ _name!.substring(1)} x$_quantity",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-              ),
+              style: Helper.getTheme(context)
+                  .titleMedium,
             ),
           ),
           Text(
-            "\$$_price",
-            style: TextStyle(
-              color: AppColor.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-            ),
+            "$_price \₹",
+            style: Helper.getTheme(context)
+                .titleMedium,
           )
         ],
       ),

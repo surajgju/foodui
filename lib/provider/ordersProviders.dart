@@ -15,6 +15,8 @@ class Orders extends ChangeNotifier {
 
   String couponCode = "";
   List<String> validCoupons = ["FIRST","NEW","HELLO","Unique"];
+
+  TextEditingController deliveryInstruction =TextEditingController();
   addOrder(String restaurant_id, String food_id, Foods food,
       Restaurants restaurantDetail) {
     if (!orderQuantity.containsKey(food_id)) {

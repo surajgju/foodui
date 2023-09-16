@@ -21,15 +21,23 @@ class _OrderdItemsDetailsState extends State<OrderItemsPopup> {
     ScreenUtil.init(context);
     final cartProvider = Provider.of<Cart>(context);
     final orderProvider = Provider.of<Orders>(context);
-    return  Container(
+    return   Container(
       width: double.infinity,
-      color: AppColor.placeholderBg,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+      constraints: BoxConstraints(maxHeight: 240),
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.only(top:10.0),
+              child: Text("ITEMS IN CART",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+            ),),
+          Expanded(
+            child: ListView.builder(
+                physics: ScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: orderProvider.orders.keys.length,
                 itemBuilder: (c,i){
@@ -40,9 +48,9 @@ class _OrderdItemsDetailsState extends State<OrderItemsPopup> {
                       quantity:orderProvider.orderQuantity[id]
 
                   );
-                })
-          ],
-        ),
+                }),
+          ),
+        ],
       ),
     );
   }
@@ -91,7 +99,7 @@ class OrderItemCard extends StatelessWidget {
             ),
           ),
           Text(
-            "\$$_price",
+            "$_price ₹",
             style: TextStyle(
               color: AppColor.primary,
               fontSize: 16,

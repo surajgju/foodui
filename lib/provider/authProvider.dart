@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -38,17 +37,23 @@ var logger = Logger();
         fourthOtp.text.trim() +
         fifthOtp.text.trim() +
         sixthOtp.text.trim();
-    Response response = await apiProvider.post(url: "/user/auth/verify", payload: {"otp":smsCode});
-    //logger.i(response);
+   try {
+     Response response = await apiProvider.post(
+         url: "/user/auth/verify", payload: {"otp": smsCode});
+     //logger.i(response);
 
     if(response.data['status']==true){
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     }else if(response.data['status']==false){
       loadingWidget(context, false);
-      warningToast("response.data['message']");
+      warningToast(response.data['message']);
     }else{
       warningToast("Something Went wrong");
     }
+   }catch(err){
+     logger.e(err);
+     loadingWidget(context, false);
+   }
     //loadingWidget(context, false);
   }
 

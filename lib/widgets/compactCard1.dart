@@ -34,7 +34,7 @@ class CompactCard1 extends StatelessWidget {
         Text(
           _name!,
           style: Helper.getTheme(context)
-              .headline4
+              .titleLarge
               ?.copyWith(color: AppColor.primary),
         ),
         Row(

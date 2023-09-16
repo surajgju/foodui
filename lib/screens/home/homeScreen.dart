@@ -14,22 +14,30 @@ import '../../widgets/categoryCard.dart';
 import '../../widgets/compactCard1.dart';
 import '../../widgets/compactCard2.dart';
 import '../../widgets/customNavBar.dart';
+import '../../widgets/orderItemsPopup.dart';
 import '../../widgets/temporary.dart';
 import '../food/foodCompactScroller.dart';
 import '../food/restaurantsListing.dart';
+import '../food_categories/food_categories_card.dart';
 import '../individualItem.dart';
 import '../../widgets/deliverLocation.dart';
 import '../../widgets/searchBar.dart';
 import 'package:foodui/widgets/searchBar.dart' as sb;
 
 import '../food/foodHomeScreen.dart';
+import '../food_categories/menuScreen.dart';
 import '../moreScreen.dart';
 import '../orders/myOrderScreen.dart';
 import '../tracking/locationTracking.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = "/homeScreen";
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List<Restaurants> restaurantDetails = [
     Restaurants(
         rest_name: "restaurent 1",
@@ -144,7 +152,7 @@ class HomeScreen extends StatelessWidget {
                   right: 10,
                 ).r,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
@@ -153,7 +161,12 @@ class HomeScreen extends StatelessWidget {
                             onTap: (){
                               Navigator.pushNamed(context, MyMaps.routeName);
                             },
-                            child: DeliverLocation())),
+                            child: DeliverLocation())),SizedBox(width: 20.w,),
+                    GestureDetector(
+                        onTap: (){
+                        },
+                        child: Image.asset("assets/images/virtual/logo.png",color:AppColor.green,width: 100.w,)),
+                    SizedBox(width: 50.w,),
                     Row(
                       children: [
                         GestureDetector(
@@ -209,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                             margin: EdgeInsets.only(top: 3),
                             padding: EdgeInsets.fromLTRB(2.5, 2.5, 2.5, 2.5),
                             decoration: BoxDecoration(
-                                color: Colors.black54,
+                                color: AppColor.darkShade1,
                                 shape: BoxShape.circle,
                                 //borderRadius: BorderRadius.circular(50)
                                 border: Border.all(
@@ -226,14 +239,25 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 10.h,
-              ),
-              sb.SearchBar(
-                title: "Search Food",
-              ),
-              SizedBox(
                 height: 15.h,
               ),
+              sb.SearchBar(
+                title: "Search foods",
+              ),SizedBox(
+                height: 20.h,
+              ),
+              SizedBox(
+                  width: 0.975.sw,
+                  child: CarouselOne()),
+              SizedBox(
+                height: 25.h,
+              ),
+              // Divider(color: Colors.grey,
+              //   thickness: 0.5,
+              //   height: 30.h,
+              //   indent: 20,
+              //   endIndent: 20,
+              // ),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.only(left: 10, right: 10).r,
@@ -259,6 +283,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       width: 10.w,
                     ),
+
                     Flexible(
                       child: CategoryCard(
                         image: Image.asset(
@@ -281,11 +306,35 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              GestureDetector(
-                  onTap:(){
-                   // Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>CustomHeaderPage()));
-                  },
-                  child: CarouselOne()),
+
+              // SizedBox(
+              //   height: 20.h,
+              // ),
+              Container(
+                width: 0.975.sw,
+                padding: const EdgeInsets.only(left: 10,bottom: 10).r,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Featured Categories",
+                      style: Helper.getTheme(context).titleLarge!.copyWith(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ),Spacer(),
+                    TextButton(
+                      onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuScreen()));
+                      },
+                      child: Text("View all",style: TextStyle(color: AppColor.secondary),),
+                    ),
+                  ],
+                ),
+              ),
+          SizedBox(
+            height: 250.h,
+              width: 1.sw,
+              child:Expanded(child: FoodCategoriesCard())),
               SizedBox(
                 height: 20.h,
               ),
@@ -301,8 +350,8 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                   height: 170.h,
-                  //color: Colors.red,
-                  width: double.infinity,
+                 // width: double.infinity,
+                  width: 0.975.sw,
                   padding: const EdgeInsets.only(left: 10, top: 10).r,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -351,11 +400,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 5, 5, 12).r,
+              Container(
+                width: 0.975.sw,
+                padding: EdgeInsets.fromLTRB(10, 5, 0, 12).r,
                 child: FoodCompactScroller(),
               ),
               Container(
+                width: 0.975.sw,
                 padding: EdgeInsets.fromLTRB(10, 10, 5, 8).r,
                 child: Text(
                   "Featured for you ",
@@ -368,7 +419,8 @@ class HomeScreen extends StatelessWidget {
               Container(
                   height: 170.h,
                   //color: Colors.red,
-                  width: double.infinity,
+                  //width: double.infinity,
+                  width: 0.975.sw,
                   padding: const EdgeInsets.only(left: 10, top: 10).r,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -465,8 +517,9 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 50.h,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
+              Container(
+                width: 0.975.sw,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -476,7 +529,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text("View all"),
+                      child: Text("View all",style: TextStyle(color: AppColor.secondary),),
                     ),
                   ],
                 ),
@@ -486,8 +539,9 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 height: 260.h,
-                width: double.infinity,
-                padding: const EdgeInsets.only(left: 20).r,
+                width: 0.975.sw,
+               // width: double.infinity,
+                padding: const EdgeInsets.only(left: 10).r,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -500,7 +554,7 @@ class HomeScreen extends StatelessWidget {
                         name: "Cafe De Bambaa",
                       ),
                       SizedBox(
-                        width: 30.w,
+                        width: 10.w,
                       ),
                       CompactCard1(
                         name: "Burger by Bella",
@@ -523,7 +577,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Recent Items",
-                      style: Helper.getTheme(context).headline5,
+                      style: Helper.getTheme(context).headlineSmall,
                     ),
                     TextButton(
                       onPressed: () {},
@@ -568,7 +622,127 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: cartProvider.cart.length > 0?
+    Stack(
+
+      children: [
+        Visibility(
+          visible: cartProvider.cartDetailVisibility,
+          child:
+          Container(
+            width: 1.sw,
+            height: 1.sh,
+            margin: EdgeInsets.only(bottom: 52),
+            color: Colors.black45,
+            child: Align(
+              alignment: Alignment.bottomCenter, child:Wrap(children:[
+              Align(alignment: Alignment.center,child: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    cartProvider.cartDetailVisibility = false;
+                  });
+                },
+                child: Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.only(bottom: 5),
+                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
+                    child: Icon(Icons.close,color: Colors.white,)),
+              ),),
+              OrderItemsPopup()
+              // OrderItems()
+            ]),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Card(
+            elevation: 5,
+            child: Container(
+              color: Colors.white,
+              width: double.maxFinite,
+              height: 50.h,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      Helper.getAssetName("cart.png", "virtual"),
+                      scale: 5,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        cartProvider.cartDetailVisibility = !cartProvider.cartDetailVisibility;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10, left: 5),
+                      child: Row(
+                        children: [
+                          Text("${cartProvider.cart.length} ITEMS ADDED",
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12)),
+                          Icon(
+                            Icons.arrow_drop_up_outlined,
+                            color: AppColor.green,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50.w,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(MyOrderScreen.routeName);
+                    },
+                    child: Container(
+                      width: 130.w,
+                      height: 35.h,
+                      //   padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: AppColor.green,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Next",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: Icon(
+                                Icons.arrow_right,
+                                size: 16.sp,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+
+        ),
+      ],
+    ):Container());
   }
 }
 
@@ -609,7 +783,7 @@ class RecentItemCard extends StatelessWidget {
                 Text(
                   _name!,
                   style: Helper.getTheme(context)
-                      .headlineMedium
+                      .headlineSmall
                       ?.copyWith(color: AppColor.primary),
                 ),
                 Row(
@@ -697,7 +871,7 @@ class RestaurantCard extends StatelessWidget {
                   children: [
                     Text(
                       _name!,
-                      style: Helper.getTheme(context).headline3,
+                      style: Helper.getTheme(context).titleLarge,
                     ),
                   ],
                 ),

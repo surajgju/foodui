@@ -409,7 +409,7 @@ packages:
     source: hosted
     version: "2.5.0"
   google_maps_flutter_android:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_maps_flutter_android
       sha256: e6cb018169e49332f88d23b1d2119b09e8ab4e7d3a1b889a1b7b3fd113e034ba
@@ -425,7 +425,7 @@ packages:
     source: hosted
     version: "2.3.1"
   google_maps_flutter_platform_interface:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_maps_flutter_platform_interface
       sha256: a3e9e6896501e566d902c6c69f010834d410ef4b7b5c18b90c77e871c86b7907
@@ -497,7 +497,7 @@ packages:
     source: hosted
     version: "0.15.4"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"

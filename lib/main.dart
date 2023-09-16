@@ -26,7 +26,7 @@ import 'screens/auth/sentOTPScreen.dart';
 import './screens/newPwScreen.dart';
 import 'screens/initial/introScreen.dart';
 import 'screens/home/homeScreen.dart';
-import './screens/menuScreen.dart';
+import 'screens/food_categories/menuScreen.dart';
 import './screens/moreScreen.dart';
 import 'screens/auth/profileScreen.dart';
 import './screens/dessertScreen.dart';
@@ -73,13 +73,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Qconnect',
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
-        fontFamily: GoogleFonts.metrophobic().fontFamily,
-        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Color(0xFF3cb44c)),
+        useMaterial3: true,
+        fontFamily: GoogleFonts.openSans().fontFamily,
+        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Color(0xFF3cb44c) ),
+        scaffoldBackgroundColor: Colors.white,
+        // dialogBackgroundColor: Colors.white,
+        dialogTheme: DialogTheme(
+          backgroundColor: Colors.white,
+          contentTextStyle: TextStyle(color: Colors.black45)
+        ),
+        appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.white10,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.white
+        ),
+
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
               AppColor.green,
+            ),
+            foregroundColor: MaterialStateProperty.all(
+              Colors.white,
             ),
             shape: MaterialStateProperty.all(
               StadiumBorder(),
@@ -89,35 +106,19 @@ class MyApp extends StatelessWidget {
         ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
+            textStyle: MaterialStateProperty.all(TextStyle(color: Colors.white)),
             foregroundColor: MaterialStateProperty.all(
-              AppColor.green,
+              Colors.white,
             ),
           ),
         ),
         textTheme: TextTheme(
-          headline3: TextStyle(
-            color: AppColor.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          headline4: TextStyle(
-            color: AppColor.secondary,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          headline5: TextStyle(
-            color: AppColor.primary,
-            fontWeight: FontWeight.normal,
-            fontSize: 25,
-          ),
-          headline6: TextStyle(
-            color: AppColor.primary,
-            fontSize: 25,
-          ),
-          bodyText2: TextStyle(
-            color: AppColor.secondary,
-          ),
+          titleMedium: TextStyle(color: AppColor.primary,fontSize: 14,fontWeight: FontWeight.normal),
+          titleSmall: TextStyle(color: AppColor.primary,fontSize: 12,fontWeight: FontWeight.normal),
+          titleLarge: TextStyle(color: AppColor.primary,fontSize: 20,fontWeight: FontWeight.normal),
+
         ),
+
       ),
       home: SplashScreen(),
      //home:HomeScreen(),

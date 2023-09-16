@@ -52,12 +52,12 @@ class ProductCompactDetailCard extends StatelessWidget {
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   style: Helper.getTheme(context)
-                      .titleMedium!
-                      .copyWith(fontWeight: FontWeight.w600, fontSize: 19)),
+                      .titleSmall!
+                      .copyWith(fontWeight: FontWeight.w600, fontSize: 18)),
             ),
             Container(
               child: Text(productSubtitle!,
-                  style: Helper.getTheme(context).bodySmall),
+                  style: Helper.getTheme(context).labelSmall),
             ),
             if (productRating != null)
               Container(
@@ -69,10 +69,10 @@ class ProductCompactDetailCard extends StatelessWidget {
                       size: 20,
                     ),
                     Text(productRating!,
-                        style: Helper.getTheme(context).titleMedium),
+                        style: Helper.getTheme(context).labelSmall),
                     Text("($productReviewCount)",
                         style: Helper.getTheme(context)
-                            .titleMedium!
+                            .labelSmall!
                             .copyWith(fontWeight: FontWeight.w300)),
                   ],
                 ),

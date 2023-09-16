@@ -11,6 +11,7 @@ import '../../modals/foods/food.dart';
 import '../../provider/cart.dart';
 import '../../provider/ordersProviders.dart';
 import '../../utils/helper.dart';
+import '../../widgets/orderItemsPopup.dart';
 import '../orders/myOrderScreen.dart';
 import '../orders/orderItems.dart';
 import 'foodCompactDetailCard.dart';
@@ -197,7 +198,7 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
                 ),
               ),
               bottom: PreferredSize(
-                preferredSize: Size(1.sw, 90),
+                preferredSize: Size(1.sw, 90.h),
                 child: Container(
                   margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                   child: GestureDetector(
@@ -221,7 +222,7 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
                             child: Column(
                               children: [
                                 Text("Delivery fee",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                                SizedBox(height: 5.h,), Text("ADE 6.50",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
+                                SizedBox(height: 5.h,), Text("6.50 \₹",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
                               ],
                             ),
                           ),
@@ -258,7 +259,7 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
               (BuildContext context, int index) {
                 // Build the list of items
                 return Container(
-                  margin: EdgeInsets.only(left: 15, right: 10, top: 15),
+                  margin: EdgeInsets.only(left: 15, right: 10, top: 15 ),
                   child: FoodCompactDetailCard(
                     // name: "Pizza",
                     name: foodList[index].food_name,
@@ -277,6 +278,7 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
               Container(
                 width: 1.sw,
                 height: 1.sh,
+                margin: EdgeInsets.only(bottom: 52),
                 color: Colors.black45,
                 child: Align(
                   alignment: Alignment.bottomCenter, child:Wrap(children:[
@@ -292,7 +294,9 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
                           decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
                           child: Icon(Icons.close,color: Colors.white,)),
                     ),),
-                    OrderItems()]),
+                  OrderItemsPopup()
+                    // OrderItems()
+                ]),
               ),
             ),
           ),

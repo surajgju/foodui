@@ -25,7 +25,7 @@ class _FoodHomeScreenState extends State<FoodCompactScroller> {
     final foodController = Provider.of<FoodMainScreenProvider>(context);
     ScreenUtil.init(context);
     return Container(
-      height: 200.h,
+      height: 210.h,
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,

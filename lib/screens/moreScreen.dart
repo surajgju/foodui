@@ -139,18 +139,18 @@ class MoreScreen extends StatelessWidget {
                   Navigator.of(context).pushNamed(AboutScreen.routeName);
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
-              MoreCard(
-                image: Image.asset(
-                  Helper.getAssetName("info.png", "virtual"),
-                ),
-                name: "Temporary",
-                handler: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FirebaseDataFilling()));
-                },
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // MoreCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("info.png", "virtual"),
+              //   ),
+              //   name: "Temporary",
+              //   handler: () {
+              //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FirebaseDataFilling()));
+              //   },
+              // ),
               SizedBox(
                 height: 10,
               ),

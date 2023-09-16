@@ -75,7 +75,7 @@ class MyOrderScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            height: 50,
+                            //height: 50,
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
@@ -83,30 +83,59 @@ class MyOrderScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: Row(
+                            child: Column(
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    "Delivery Instruction",
-                                    style: Helper.getTheme(context).headline3,
-                                  ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Delivery Instruction",
+                                        style:
+                                            Helper.getTheme(context).titleMedium,
+                                      ),
+                                    ),
+                                    TextButton(
+                                        onPressed: () => showNotes(context),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.add,
+                                              color: AppColor.green,
+                                            ),
+                                            Text(
+                                              "Add Notes",
+                                              style: TextStyle(
+                                                color: AppColor.green,
+                                              ),
+                                            ),
+                                          ],
+                                        ))
+                                  ],
                                 ),
-                                TextButton(
-                                    onPressed: () => showNotes(context),
+                                if (orderProvider
+                                    .deliveryInstruction.text.isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 12.0),
                                     child: Row(
                                       children: [
                                         Icon(
-                                          Icons.add,
-                                          color: AppColor.green,
+                                          Icons.arrow_right,
+                                          color: AppColor.primary,
+                                          size: 14,
                                         ),
-                                        Text(
-                                          "Add Notes",
-                                          style: TextStyle(
-                                            color: AppColor.green,
+                                        Container(
+                                         // width: 300.w,
+                                          constraints: BoxConstraints(maxWidth: 310.w),
+                                          child: Text(
+                                            orderProvider.deliveryInstruction.text,
+                                            style: TextStyle(
+                                              color: AppColor.primary,
+                                            ),
                                           ),
                                         )
                                       ],
-                                    ))
+                                    ),
+                                  )
                               ],
                             ),
                           ),
@@ -143,16 +172,22 @@ class MyOrderScreen extends StatelessWidget {
                                         Text(
                                           "Apply Coupon",
                                           style: Helper.getTheme(context)
-                                              .headline3,
+                                              .titleMedium,
                                         ),
-                                       if (orderProvider.validateCoupon()) SizedBox(
-                                         width:100.w,
-                                         child: Text(
-                                           orderProvider.couponCode,
-                                            style: TextStyle(color: Colors.red,fontSize: 12,fontFamily: GoogleFonts.openSans().fontFamily),
-                                           maxLines: 1,
-                                          ),
-                                       )
+                                        if (orderProvider.validateCoupon())
+                                          SizedBox(
+                                            width: 100.w,
+                                            child: Text(
+                                              orderProvider.couponCode,
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      GoogleFonts.openSans()
+                                                          .fontFamily),
+                                              maxLines: 1,
+                                            ),
+                                          )
                                       ],
                                     ),
                                   ),
@@ -172,15 +207,15 @@ class MyOrderScreen extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   "Sub Total",
-                                  style: Helper.getTheme(context).headline3,
+                                  style: Helper.getTheme(context).titleMedium!.copyWith(color: AppColor.primary),
                                 ),
                               ),
                               Text(
-                                "\$${orderProvider.subTotal}",
+                                "${orderProvider.subTotal} \₹",
                                 style: Helper.getTheme(context)
-                                    .headline3
+                                    .titleMedium
                                     ?.copyWith(
-                                      color: AppColor.green,
+                                      color: AppColor.primary,
                                     ),
                               )
                             ],
@@ -193,15 +228,15 @@ class MyOrderScreen extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   "Delivery Cost",
-                                  style: Helper.getTheme(context).headline3,
+                                  style: Helper.getTheme(context).titleMedium,
                                 ),
                               ),
                               Text(
-                                "\$${orderProvider.deliveryCost}",
+                                "${orderProvider.deliveryCost} \₹",
                                 style: Helper.getTheme(context)
-                                    .headline3
+                                    .titleMedium
                                     ?.copyWith(
-                                      color: AppColor.green,
+                                      color: AppColor.primary,
                                     ),
                               )
                             ],
@@ -221,16 +256,16 @@ class MyOrderScreen extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   "Total",
-                                  style: Helper.getTheme(context).headline3,
+                                  style: Helper.getTheme(context).titleMedium,
                                 ),
                               ),
                               Text(
-                                "\$${orderProvider.subTotal + orderProvider.deliveryCost}",
+                                "${orderProvider.subTotal + orderProvider.deliveryCost} \₹",
                                 style: Helper.getTheme(context)
-                                    .headline3
+                                    .titleMedium
                                     ?.copyWith(
                                       color: AppColor.green,
-                                      fontSize: 22,
+
                                     ),
                               )
                             ],
@@ -244,7 +279,7 @@ class MyOrderScreen extends StatelessWidget {
                                 Navigator.of(context)
                                     .pushNamed(CheckoutScreen.routeName);
                               },
-                              child: Text("Checkout"),
+                              child: Text("Checkout",),
                             ),
                           ),
                         ],
@@ -269,9 +304,12 @@ class MyOrderScreen extends StatelessWidget {
   }
 
   showNotes(context) {
+    final orderProvider = Provider.of<Orders>(context, listen: false);
+
     return showDialog(
         context: context,
-        builder: (c) {
+        builder: (context) {
+
           return AlertDialog(
             title: Text("Add delivery Instructions"),
             content: Column(
@@ -281,26 +319,38 @@ class MyOrderScreen extends StatelessWidget {
                 TextFormField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColor.placeholderBg)),
+                        borderSide: BorderSide(color: AppColor.green)),
+                    enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColor.green)),
+                    disabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColor.green)),
                     // labelText: "note",
                     contentPadding:
                         const EdgeInsets.only(top: 10, bottom: 10, left: 5),
                   ),
+                  // controller: orderProvider.deliveryInstruction,
+                  onChanged: (value) {
+                    orderProvider.deliveryInstruction.text = value;
+                  },
                   maxLines: 3,
-                  initialValue: "",
+                  initialValue: orderProvider.deliveryInstruction.text.isNotEmpty ?orderProvider.deliveryInstruction.text:"",
                   style: TextStyle(
                     fontSize: 14,
                   ),
                 ),
                 Row(
                   children: [
-                    TextButton(onPressed: () {
-                      Navigator.of(context).pop();
-                    }, child: Text("CANCEL")),
-                    TextButton(onPressed: () {
-                      successToast("Instruction added Successfully");
-                      Navigator.of(context).pop();
-                    }, child: Text("SUBMIT"))
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("CANCEL",style: Helper.getTheme(context).titleMedium,)),
+                    TextButton(
+                        onPressed: () {
+                          successToast("Instruction added Successfully");
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("SUBMIT",style: Helper.getTheme(context).titleMedium,))
                   ],
                 ),
               ],
@@ -310,7 +360,7 @@ class MyOrderScreen extends StatelessWidget {
   }
 
   applyCoupon(context) {
-    final orderProvider = Provider.of<Orders>(context,listen: false);
+    final orderProvider = Provider.of<Orders>(context, listen: false);
 
     return showModalBottomSheet(
       context: context,
@@ -338,7 +388,9 @@ class MyOrderScreen extends StatelessWidget {
                   TextField(
                     decoration: InputDecoration(
                       hintText: 'Enter coupon code',
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.green)),
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.green)),
+                      disabledBorder:OutlineInputBorder(borderSide: BorderSide(color: AppColor.green)),
                     ),
                     onChanged: (value) {
                       orderProvider.couponCode = value;
@@ -354,7 +406,8 @@ class MyOrderScreen extends StatelessWidget {
                           if (orderProvider.validateCoupon()) {
                             // Apply the coupon code
                             // You can add your coupon validation logic here
-                            orderProvider.calculateCouponAmount(orderProvider.couponCode);
+                            orderProvider.calculateCouponAmount(
+                                orderProvider.couponCode);
                             successToast("Coupon Applied Successfully");
                             Navigator.pop(context);
                           } else {
@@ -381,8 +434,4 @@ class MyOrderScreen extends StatelessWidget {
       },
     );
   }
-
-  }
-
-
-
+}

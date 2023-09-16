@@ -16,13 +16,18 @@ class _CarouselOneState extends State<CarouselOne> {
   int? count;
   final List<Map<String, String>> _pages = [
     {
-      "image": "banner2.jpg",
+      "image": "banner01.jpeg",
+      "title": "Best Food You Love",
+      "desc":
+          "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"
+    }, {
+      "image": "banner3.jpg",
       "title": "Find Food You Love",
       "desc":
           "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"
     },
     {
-      "image": "banner3.jpg",
+      "image": "banner03.jpeg",
       "title": "Fast Delivery",
       "desc": "Fast food delivery to your home, office wherever you are"
     },
@@ -52,16 +57,16 @@ class _CarouselOneState extends State<CarouselOne> {
             ClipRRect(
               borderRadius: BorderRadius.circular(17),
               child: Image.asset(Helper.getAssetName(_pages[0]['image']!,'real'),
-                width: 0.9.sw,
-                height: 195.h,
+                width: 0.85.sw,
+                height: 200.h,
                 fit: BoxFit.fill,
               ),
             ),SizedBox(width: 10,),
             ClipRRect(
               borderRadius: BorderRadius.circular(17),
               child: Image.asset(Helper.getAssetName(_pages[1]['image']!,'real'),
-                width: 0.9.sw,
-                height: 195.h,
+                width: 0.85.sw,
+                height: 200.h,
                 fit: BoxFit.fill,
               ),
             ),SizedBox(width: 10,),
@@ -69,8 +74,16 @@ class _CarouselOneState extends State<CarouselOne> {
               borderRadius: BorderRadius.circular(17),
               child: Image.asset(Helper.getAssetName(_pages[2]['image']!,'real'),
                 width: 0.9.sw,
-                height: 195.h,
+                height: 200.h,
                 fit: BoxFit.fill,
+              ),
+            ),SizedBox(width: 10,),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(17),
+              child: Image.asset(Helper.getAssetName(_pages[3]['image']!,'real'),
+                width: 0.9.sw,
+                height: 200.h,
+                fit: BoxFit.cover,
               ),
             ),
 

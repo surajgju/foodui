@@ -14,7 +14,7 @@ class DeliverLocation extends StatelessWidget {
       children: [
         Container(
 
-          child: Text("Delivering to", style: TextStyle(fontSize: 12,color: Colors.black45)),
+          child: Text("Delivering to", style: TextStyle(fontSize: 12,color:AppColor.primary)),
         ), DropdownButtonHideUnderline(
           child: SizedBox(
             width: 120,

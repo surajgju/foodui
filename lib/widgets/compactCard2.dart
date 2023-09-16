@@ -80,19 +80,21 @@ class CompactCard2 extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         Container(
+         // color: Colors.red ,
           width: 90.w,
           padding: EdgeInsets.only(left: 5),
           child: Text(
             _name!,
+            maxLines: 1,
             style: Helper.getTheme(context)
-                .labelSmall
+                .titleMedium
                 ?.copyWith(color: AppColor.primary),
           ),
         ),
         Container(
           width: 60.w,
           padding: EdgeInsets.only(left: 5),
-          child: Text(_orderTime!),
+          child: Text(_orderTime!,style: Helper.getTheme(context).titleSmall,),
         )
       ],
     );

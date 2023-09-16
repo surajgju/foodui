@@ -54,7 +54,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text("Delivery Address"),
+              child: Text("Delivery Address",
+                  style: Helper.getTheme(context).titleLarge),
             ),
             SizedBox(
               height: 10,
@@ -70,7 +71,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       checkoutProvider.checkoutAddress,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: Helper.getTheme(context).headline3,
+                      style: Helper.getTheme(context).titleMedium,
                     ),
                   ),
                   TextButton(
@@ -80,9 +81,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     },
                     child: Text(
                       "Change",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Helper.getTheme(context).titleMedium,
                     ),
                   ),
                 ],
@@ -104,7 +103,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Payment method"),
+                  Text(
+                    "Payment method",
+                    style: Helper.getTheme(context).titleLarge,
+                  ),
                   TextButton(
                     onPressed: () {
                       showModalBottomSheet(
@@ -141,7 +143,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           Text(
                                             "Add Credit/Debit Card",
                                             style: Helper.getTheme(context)
-                                                .headline3,
+                                                .titleMedium,
                                           )
                                         ],
                                       ),
@@ -284,9 +286,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         Icon(Icons.add),
                         Text(
                           "Add Card",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Helper.getTheme(context).titleMedium,
                         )
                       ],
                     ),
@@ -300,16 +300,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Text("Cash on delivery"),
                   InkWell(
-                    onTap: (){
-                      setState((){
-                        checkoutProvider.paymentMethod=1;
+                    onTap: () {
+                      setState(() {
+                        checkoutProvider.paymentMethod = 1;
                       });
                     },
                     child: Container(
                       width: 15,
                       height: 15,
                       decoration: ShapeDecoration(
-                        color: checkoutProvider.paymentMethod ==1? Colors.green:AppColor.placeholderBg,
+                        color: checkoutProvider.paymentMethod == 1
+                            ? Colors.green
+                            : AppColor.placeholderBg,
                         shape: CircleBorder(
                           side: BorderSide(color: AppColor.placeholder),
                         ),
@@ -344,16 +346,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ],
                   ),
                   InkWell(
-                    onTap: (){
-                      setState((){
-                        checkoutProvider.paymentMethod=2;
+                    onTap: () {
+                      setState(() {
+                        checkoutProvider.paymentMethod = 2;
                       });
                     },
                     child: Container(
                       width: 15,
                       height: 15,
                       decoration: ShapeDecoration(
-                        color: checkoutProvider.paymentMethod ==2? Colors.green:AppColor.placeholderBg,
+                        color: checkoutProvider.paymentMethod == 2
+                            ? Colors.green
+                            : AppColor.placeholderBg,
                         shape: CircleBorder(
                           side: BorderSide(color: AppColor.placeholder),
                         ),
@@ -389,16 +393,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ],
                   ),
                   InkWell(
-                    onTap: (){
-                      setState((){
-                        checkoutProvider.paymentMethod=3;
+                    onTap: () {
+                      setState(() {
+                        checkoutProvider.paymentMethod = 3;
                       });
                     },
                     child: Container(
                       width: 15,
                       height: 15,
                       decoration: ShapeDecoration(
-                        color: checkoutProvider.paymentMethod ==3? Colors.green:AppColor.placeholderBg,
+                        color: checkoutProvider.paymentMethod == 3
+                            ? Colors.green
+                            : AppColor.placeholderBg,
                         shape: CircleBorder(
                           side: BorderSide(color: AppColor.placeholder),
                         ),
@@ -428,8 +434,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     children: [
                       Text("Sub Total"),
                       Text(
-                        "\$${orderProvider.subTotal}",
-                        style: Helper.getTheme(context).headline3,
+                        "${orderProvider.subTotal} \₹",
+                        style: Helper.getTheme(context).titleLarge,
                       )
                     ],
                   ),
@@ -441,8 +447,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     children: [
                       Text("Delivery Cost"),
                       Text(
-                        "\$${orderProvider.deliveryCost}",
-                        style: Helper.getTheme(context).headline3,
+                        "${orderProvider.deliveryCost} \₹",
+                        style: Helper.getTheme(context).titleLarge,
                       )
                     ],
                   ),
@@ -454,25 +460,25 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     children: [
                       Text("Discount"),
                       Text(
-                        "-\$${orderProvider.discount}",
-                        style: Helper.getTheme(context).headline3,
+                        "-${orderProvider.discount} \₹",
+                        style: Helper.getTheme(context).titleLarge,
                       )
                     ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                if(orderProvider.couponAmount>0)  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Applied Coupon (${orderProvider.couponCode})"),
-                      Text(
-                        "-\$${orderProvider.couponAmount}",
-                        style: Helper.getTheme(context).headline3,
-                      )
-                    ],
-                  ),
-
+                  if (orderProvider.couponAmount > 0)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Applied Coupon (${orderProvider.couponCode})"),
+                        Text(
+                          "-${orderProvider.couponAmount} \₹",
+                          style: Helper.getTheme(context).titleLarge,
+                        )
+                      ],
+                    ),
                   Divider(
                     height: 40,
                     color: AppColor.placeholder.withOpacity(0.25),
@@ -483,8 +489,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     children: [
                       Text("Total"),
                       Text(
-                        "\$${orderProvider.subTotal + orderProvider.deliveryCost -( orderProvider.discount+orderProvider.couponAmount)}",
-                        style: Helper.getTheme(context).headline3,
+                        "${orderProvider.subTotal + orderProvider.deliveryCost - (orderProvider.discount + orderProvider.couponAmount)} \₹",
+                        style: Helper.getTheme(context).titleLarge,
                       )
                     ],
                   ),
@@ -612,7 +618,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           );
                         });
                   },
-                  child: Text("Send Order"),
+                  child: Text("Send Order",style: Helper.getTheme(context).titleLarge!.copyWith(color: Colors.white)),
                 ),
               ),
             ),

@@ -44,13 +44,14 @@ class _MyMapsState extends State<MyMaps> {
     location.onLocationChanged.listen((newLoc) {
 
       try {
-        setState(() { googleMapController.animateCamera(CameraUpdate.newCameraPosition( CameraPosition(
+       // setState(() {
+          googleMapController.animateCamera(CameraUpdate.newCameraPosition( CameraPosition(
             bearing: 192.8334901395799,
             target: LatLng(newLoc.latitude!, newLoc.longitude!),
             tilt: 59.440717697143555,
             zoom: 13.5)));
         // logger.i("$newLoc");
-       });
+     //  });
       } catch (err) {
         logger.d("error in loading $err");
       }
@@ -98,7 +99,6 @@ class _MyMapsState extends State<MyMaps> {
     // TODO: implement initState
     getCurrentLocation();
     setcustomMarkerIcon();
-   // updateCurrentLocation();
     getPolyPoints();
     super.initState();
   }
@@ -107,7 +107,7 @@ class _MyMapsState extends State<MyMaps> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My map"),
+        title: Text("Driver Location"),
       ),
       body: currentLocation == null
           ? Text("Loading")
