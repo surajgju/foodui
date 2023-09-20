@@ -5,12 +5,25 @@ import 'package:foodui/utils/helper.dart';
 import 'package:foodui/widgets/customNavBar.dart';
 import 'package:foodui/widgets/customTextInput.dart';
 
+import '../../widgets/navigate_back_widget.dart';
+
 class ProfileScreen extends StatelessWidget {
   static const routeName = "/profileScreen";
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return Scaffold(
+      appBar: AppBar(
+        leading: back(context),
+        title:  Text(
+          "Profile",
+          style: Helper.getTheme(context).headline5,
+        ),
+        actions: [ Image.asset(
+          Helper.getAssetName("cart.png", "virtual"),
+          scale: 5,
+        )],
+      ),
       body: SafeArea(
         child: Container(
           height: Helper.getScreenHeight(context),
@@ -20,19 +33,6 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Profile",
-                        style: Helper.getTheme(context).headline5,
-                      ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
-                        scale: 5,
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: 20,
                   ),

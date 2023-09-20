@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIProvider {
-  static const apiurl = "https://cssfounder.co.uk/CSS107/qconnect/api";
+  static const apiurl = "https://cssfounder.co.uk/CSS133/qconnect/api";
   // static const imageurl = "https://cssfounder.co.uk/CSS137/umr/uploads/";
   // static const noImage = "https://universeumr.com/icon/no-image.png";
 

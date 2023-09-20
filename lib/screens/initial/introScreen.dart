@@ -156,7 +156,7 @@ class _IntroScreenState extends State<IntroScreen> {
                               ],
                             ),
                             Text(
-                              "Login or Signup",
+                              "Login with Phone",
                               style: TextStyle(
                                   color: AppColor.primary,
                                   fontSize: 20,
@@ -166,49 +166,49 @@ class _IntroScreenState extends State<IntroScreen> {
                               padding: EdgeInsets.only(top: 20),
                               child: Column(
                                 children: [
-                                  Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizedBox(
-                                        width: 45.w,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            authProvider.isMobile = true;
-                                          });
-                                        },
-                                        child: Text(
-                                          "Mobile No",
-                                          style: TextStyle(
-                                              color: authProvider.isMobile
-                                                  ? AppColor.green
-                                                  : AppColor.primary,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20.w,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            authProvider.isMobile = false;
-                                          });
-                                        },
-                                        child: Text(
-                                          "Email ID",
-                                          style: TextStyle(
-                                              color: authProvider.isMobile
-                                                  ? AppColor.primary
-                                                  : AppColor.green,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  //   children: [
+                                  //     SizedBox(
+                                  //       width: 45.w,
+                                  //     ),
+                                  //     GestureDetector(
+                                  //       onTap: () {
+                                  //         setState(() {
+                                  //           authProvider.isMobile = true;
+                                  //         });
+                                  //       },
+                                  //       child: Text(
+                                  //         "Mobile No",
+                                  //         style: TextStyle(
+                                  //             color: authProvider.isMobile
+                                  //                 ? AppColor.green
+                                  //                 : AppColor.primary,
+                                  //             fontSize: 14.sp,
+                                  //             fontWeight: FontWeight.w400),
+                                  //       ),
+                                  //     ),
+                                  //     // SizedBox(
+                                  //     //   width: 20.w,
+                                  //     // ),
+                                  //     // GestureDetector(
+                                  //     //   onTap: () {
+                                  //     //     setState(() {
+                                  //     //       authProvider.isMobile = false;
+                                  //     //     });
+                                  //     //   },
+                                  //     //   child: Text(
+                                  //     //     "Email ID",
+                                  //     //     style: TextStyle(
+                                  //     //         color: authProvider.isMobile
+                                  //     //             ? AppColor.primary
+                                  //     //             : AppColor.green,
+                                  //     //         fontSize: 14.sp,
+                                  //     //         fontWeight: FontWeight.w400),
+                                  //     //   ),
+                                  //     // )
+                                  //   ],
+                                  // ),
                                   SizedBox(
                                     height: 5.w,
                                   ),
@@ -219,8 +219,10 @@ class _IntroScreenState extends State<IntroScreen> {
                                     children: [
                                       SizedBox(
                                           width: 260,
-                                          child: authProvider.isMobile
-                                              ? CustomTextInput(
+                                          child:
+                                          // authProvider.isMobile
+                                          //     ?
+                                          CustomTextInput(
                                                   hintText: "Mobile number",
                                                   controller: authProvider
                                                       .mobileInputController,
@@ -228,19 +230,22 @@ class _IntroScreenState extends State<IntroScreen> {
                                                       TextInputType.phone,
                                                   maxlength: 10,
                                                 )
-                                              : CustomTextInput(
-                                                  hintText: "Email ID",
-                                                  controller: authProvider
-                                                      .emailInputController,
-                                                )),
+                                              // : CustomTextInput(
+                                              //     hintText: "Email ID",
+                                              //     controller: authProvider
+                                              //         .emailInputController,
+                                              //   )
+                      ),
                                       SizedBox(
                                         width: 10.w,
                                       ),
                                       SizedBox(
                                         height: 42.h,
-                                        width: 80.w,
-                                        child: authProvider.isMobile
-                                            ? ElevatedButton(
+                                        width: 90.w,
+                                        child:
+                                        // authProvider.isMobile
+                                        //     ?
+                                        ElevatedButton(
                                                 style: ButtonStyle(
                                                     backgroundColor:
                                                         MaterialStateProperty
@@ -262,30 +267,30 @@ class _IntroScreenState extends State<IntroScreen> {
                                                         "Please enter correct phone number");
                                                   }
                                                 },
-                                                child: Text("Get OTP"),
+                                                child: Text("Get OTP",style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),),
                                               )
-                                            : ElevatedButton(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(AppColor
-                                                                .green)),
-                                          onPressed: () {
-                                            if (authProvider
-                                                .emailInputController
-                                                .text
-                                                .isValidEmail()) {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed(
-                                                  SendOTPScreen
-                                                      .routeName);
-                                            } else {
-                                              warningToast(
-                                                  "Please enter correct email Address");
-                                            }
-                                          },
-                                                child: Text("Proceed"),
-                                              ),
+                                          //   : ElevatedButton(
+                                          //       style: ButtonStyle(
+                                          //           backgroundColor:
+                                          //               MaterialStateProperty
+                                          //                   .all(AppColor
+                                          //                       .green)),
+                                          // onPressed: () {
+                                          //   if (authProvider
+                                          //       .emailInputController
+                                          //       .text
+                                          //       .isValidEmail()) {
+                                          //     Navigator.of(context)
+                                          //         .pushReplacementNamed(
+                                          //         SendOTPScreen
+                                          //             .routeName);
+                                          //   } else {
+                                          //     warningToast(
+                                          //         "Please enter correct email Address");
+                                          //   }
+                                          // },
+                                          //       child: Text("Proceed"),
+                                          //     ),
                                       )
                                       // GestureDetector(child: Container(
                                       //   margin: EdgeInsets.only(left: 10 ),

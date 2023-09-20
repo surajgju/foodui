@@ -5,6 +5,8 @@ import 'package:foodui/utils/helper.dart';
 import 'package:foodui/widgets/customNavBar.dart';
 import 'package:foodui/widgets/customTextInput.dart';
 
+import '../../widgets/navigate_back_widget.dart';
+
 class PaymentScreen extends StatelessWidget {
   static const routeName = "/paymentScreen";
   @override
@@ -12,37 +14,22 @@ class PaymentScreen extends StatelessWidget {
     ScreenUtil.init(context);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: back(context),
+        title:  Text(
+          "Payment Details",
+          style: Helper.getTheme(context).headline5,
+        ),
+        actions: [ Image.asset(
+          Helper.getAssetName("cart.png", "virtual"),
+          scale: 5,
+        )],
+      ),
       body: SafeArea(
+
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Payment Details",
-                      style: Helper.getTheme(context).headline5,
-                    ),
-                  ),
-                  Image.asset(
-                    Helper.getAssetName(
-                      "cart.png",
-                      "virtual",
-                    ),
-                  )
-                ],
-              ),
-            ),
+
             SizedBox(
               height: 10,
             ),
@@ -52,7 +39,7 @@ class PaymentScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Customize your payment method",
-                    style: Helper.getTheme(context).headline3,
+                    style: Helper.getTheme(context).bodyLarge,
                   )
                 ],
               ),
@@ -66,7 +53,7 @@ class PaymentScreen extends StatelessWidget {
               ),
             ),
             Container(
-              height: 170,
+              height: 170.h,
               width: Helper.getScreenWidth(context),
               decoration: BoxDecoration(
                 color: AppColor.placeholderBg,
@@ -171,7 +158,7 @@ class PaymentScreen extends StatelessWidget {
                         builder: (context) {
                           return Container(
                             height: Helper.getScreenHeight(context) * 0.7,
-                            child: Column(
+                            child: ListView(
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -194,7 +181,7 @@ class PaymentScreen extends StatelessWidget {
                                       Text(
                                         "Add Credit/Debit Card",
                                         style: Helper.getTheme(context)
-                                            .headline3,
+                                            .titleLarge,
                                       )
                                     ],
                                   ),

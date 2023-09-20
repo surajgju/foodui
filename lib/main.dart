@@ -9,12 +9,15 @@ import 'package:foodui/provider/foodMainScreenProvider.dart';
 import 'package:foodui/provider/menuProvider.dart';
 import 'package:foodui/provider/onBoardingProvider.dart';
 import 'package:foodui/provider/ordersProviders.dart';
+import 'package:foodui/provider/searchProvider.dart';
 import 'package:foodui/screens/auth/changeAddressScreen.dart';
 import 'package:foodui/screens/food/foodHomeScreen.dart';
 import 'package:foodui/screens/food/offerHomeScreen.dart';
 import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
 import 'package:foodui/screens/offers/offersMainHomeScreen.dart';
+import 'package:foodui/screens/search/search_screen.dart';
 import 'package:foodui/screens/tracking/locationTracking.dart';
+import 'package:foodui/screens/tracking/order_status.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'screens/initial/spashScreen.dart';
@@ -56,6 +59,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=>Orders()),
         ChangeNotifierProvider(create: (_)=>FeaturedRestaurantCategoriesProvider()),
         ChangeNotifierProvider(create: (_)=>CheckoutProvider()),
+        ChangeNotifierProvider(create: (_)=>SearchProvider()),
 
       ],
       child: MyApp()));
@@ -143,7 +147,9 @@ class MyApp extends StatelessWidget {
         ChangeAddressScreen.routeName: (context) => ChangeAddressScreen(),
         FoodHomeScreen.routeName:(context)=>FoodHomeScreen(),
         OfferHomeScreen.routeName:(context)=>OfferHomeScreen(),
-        MyMaps.routeName:(context)=>MyMaps(),
+        DeliveryStatus.routeName:(context)=>DeliveryStatus(),
+        OrderStatus.routeName:(context)=>OrderStatus(),
+        SearchScreen.routeName:(context)=>SearchScreen(),
 
         RestaurantDetailViewScreen.routeName:(context)=>RestaurantDetailViewScreen()
       },

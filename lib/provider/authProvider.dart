@@ -39,7 +39,7 @@ var logger = Logger();
         sixthOtp.text.trim();
    try {
      Response response = await apiProvider.post(
-         url: "/user/auth/verify", payload: {"otp": smsCode});
+         url: "/login.php", payload: {"phone":mobileInputController.text,"otp": int.parse(smsCode)});
      //logger.i(response);
 
     if(response.data['status']==true){
@@ -59,9 +59,11 @@ var logger = Logger();
 
   loginWithPhone(context) async {
     loadingWidget(context, true);
-    Response response = await apiProvider.post(url: "/user/auth", payload: {"phone":mobileInputController.text});
+    Response response = await apiProvider.post(url: "/login.php", payload: {"phone":mobileInputController.text});
    logger.i(response);
-   if(response.data['status']==true){
+   //ToDo:need to change validation
+   if(response.data['status']==false){
+   // if(response.data['status']==true){
      //loadingWidget(context, false);
      Navigator.of(context).pushReplacementNamed(SendOTPScreen.routeName);
 

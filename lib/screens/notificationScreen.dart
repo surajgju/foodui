@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/const/colors.dart';
 import 'package:foodui/utils/helper.dart';
 import 'package:foodui/widgets/customNavBar.dart';
@@ -7,35 +8,28 @@ class NotificationScreen extends StatelessWidget {
   static const routeName = "/notiScreen";
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Scaffold(
-      body: SafeArea(
-          child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_rounded,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "Notifications",
-                    style: Helper.getTheme(context).headline5,
-                  ),
-                ),
-                Image.asset(
-                  Helper.getAssetName("cart.png", "virtual"),
-                  scale: 5,
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        leading:  IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Colors.black87,
           ),
+        ),
+        title:  Text(
+          "Notifications",
+          style: Helper.getTheme(context).headline5,
+        ),
+      ),
+      body: SafeArea(
+
+          child: ListView(
+        children: [
+
           SizedBox(
             height: 20,
           ),
@@ -97,9 +91,11 @@ class NotiCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
+
     return Container(
-      height: 60,
-      width: double.infinity,
+      height: 80.h,
+     // width: double.infinity,
       decoration: BoxDecoration(
         color: _color,
         border: Border(
@@ -109,10 +105,14 @@ class NotiCard extends StatelessWidget {
           ),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+      //padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(
+            width: 20,
+          ),
           CircleAvatar(
             backgroundColor: AppColor.green,
             radius: 5,
@@ -124,13 +124,20 @@ class NotiCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                _title!,
-                style: TextStyle(
-                  color: AppColor.primary,
+              SizedBox(
+                width:300.w,
+                child: Text(
+                  _title!,
+                  style: TextStyle(
+                    color: AppColor.primary,
+                    fontSize: 16.sp
+                  ),
                 ),
               ),
-              Text(_time!),
+              Text(_time!,style:TextStyle(
+                  color: AppColor.primary,
+                  fontSize: 12.sp
+              )),
             ],
           )
         ],

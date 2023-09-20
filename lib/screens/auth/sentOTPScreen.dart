@@ -144,7 +144,7 @@ TextEditingController? controller;
     ScreenUtil.init(context);
     return Container(
 
-      padding: EdgeInsets.only(left: 10,right:10,top: 10,bottom: 15),
+      padding: EdgeInsets.only(left: 10,right:10,top: 10,bottom: 10),
       decoration: ShapeDecoration(
         color: AppColor.placeholderBg,
        // color: Colors.red,
@@ -156,10 +156,10 @@ TextEditingController? controller;
       child: SizedBox(
 
         width: 20.w,
-        height: 40.h,
+       // height: 40.h,
         child: TextField(
           cursorHeight: 30.sp,
-          style: TextStyle(fontSize: 35.sp),
+          style: TextStyle(fontSize: 25.sp),
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 0),

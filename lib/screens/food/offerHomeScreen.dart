@@ -56,7 +56,7 @@ class _FoodHomeScreenState extends State<OfferHomeScreen> {
                     margin: EdgeInsets.only(right: 5),
                     decoration: BoxDecoration(
                         color: Colors.black45, shape: BoxShape.circle),
-                    child: Icon(Icons.arrow_back,color: Colors.white,size: 22.sp))),
+                    child: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,size: 22.sp))),
             actions: [Container(
                 padding: EdgeInsets.fromLTRB(8, 8, 8, 8).r,
                 margin: EdgeInsets.only(right: 10),

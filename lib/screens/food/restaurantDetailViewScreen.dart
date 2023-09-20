@@ -152,11 +152,11 @@ List<String> foodIdList =["2Pn7TxwYih0sVsPDfHFZ",
                 },
                 child: Container(
                   margin:
-                      EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 5).r,
+                      EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 4).r,
                   decoration: BoxDecoration(
                       color: Colors.white, shape: BoxShape.circle),
                   child: Icon(
-                    Icons.arrow_back_outlined,
+                    Icons.arrow_back_ios_outlined,
                     color: Colors.black87,
                   ),
                 ),

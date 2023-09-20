@@ -10,6 +10,7 @@ import '../../const/urls.dart';
 import '../../provider/foodMainScreenProvider.dart';
 import '../../utils/helper.dart';
 import '../../widgets/deliverLocation.dart';
+import '../../widgets/navigate_back_widget.dart';
 import '../../widgets/offerCard.dart';
 import 'foodCompactScroller.dart';
 import 'foodTopScrollChips.dart';
@@ -38,13 +39,10 @@ ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
         //toolbarHeight: 150,
-
         backgroundColor: Colors.white10,
         elevation: 0,
         //automaticallyImplyLeading: false,
-        leading: GestureDetector(
-            onTap: (){Navigator.of(context).pop();},
-            child: Icon(Icons.arrow_back,color: Colors.black45,size: 28.sp)),
+        leading: back(context),
         title: DeliverLocation(),
         actions: [Container(
             padding: EdgeInsets.only(right: 10),
@@ -57,8 +55,7 @@ ScreenUtil.init(context);
           physics: ScrollPhysics(),
         //  shrinkWrap: true,
           children: [
-
-            FoodTopScrollChips(),
+            //FoodTopScrollChips(),
             SizedBox(height: 15.w,),
             PromotionScroller(),
             SizedBox(height: 15.w,),

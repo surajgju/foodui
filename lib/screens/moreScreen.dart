@@ -13,6 +13,7 @@ import 'package:foodui/widgets/customNavBar.dart';
 
 import '../utils/firebaseDatafilling.dart';
 import 'auth/profileScreen.dart';
+import 'orders/order_history.dart';
 
 class MoreScreen extends StatelessWidget {
   static const routeName = "/moreScreen";
@@ -44,7 +45,7 @@ class MoreScreen extends StatelessWidget {
                           // decoration: BoxDecoration(
                           //     color: Colors.white, shape: BoxShape.circle),
                           child: Icon(
-                            Icons.arrow_back_outlined,
+                            Icons.arrow_back_ios_outlined,
                             color: Colors.black87,
                           ),
                         ),
@@ -68,7 +69,7 @@ class MoreScreen extends StatelessWidget {
               MoreCard(
                 image: Image.asset(
                   Helper.getAssetName("user.png", "virtual"),
-                  color: Colors.black54,
+                  color: Colors.black87,
                 ),
                 name: "User Profile",
                 handler: () {
@@ -82,31 +83,37 @@ class MoreScreen extends StatelessWidget {
               ),
               MoreCard(
                 image: Image.asset(
+                  Helper.getAssetName("shopping_bag.png", "virtual"),
+                  color: Colors.black87,
+                ),
+                name: "Orders History",
+                handler: () {
+                  //OrderHistoryScreen
+                //  Navigator.of(context).pushNamed(ProfileScreen.routeName);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OrderHistoryScreen()));
+               //   Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              MoreCard(
+                image: Image.asset(
                   Helper.getAssetName("income.png", "virtual"),
+                  color: Colors.black87,
                 ),
                 name: "Payment Details",
                 handler: () {
                   Navigator.of(context).pushNamed(PaymentScreen.routeName);
                 },
               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // MoreCard(
-              //   image: Image.asset(
-              //     Helper.getAssetName("shopping_bag.png", "virtual"),
-              //   ),
-              //   name: "My Orders",
-              //   handler: () {
-              //     Navigator.of(context).pushNamed(MyOrderScreen.routeName);
-              //   },
-              // ),
               SizedBox(
                 height: 10,
               ),
               MoreCard(
                 image: Image.asset(
                   Helper.getAssetName("noti.png", "virtual"),
+                  color: Colors.black87,
                 ),
                 name: "Notifications",
                 isNoti: true,
@@ -121,6 +128,7 @@ class MoreScreen extends StatelessWidget {
               MoreCard(
                 image: Image.asset(
                   Helper.getAssetName("mail.png", "virtual"),
+                  color: Colors.black87,
                 ),
                 name: "Inbox",
                 handler: () {
@@ -133,6 +141,7 @@ class MoreScreen extends StatelessWidget {
               MoreCard(
                 image: Image.asset(
                   Helper.getAssetName("info.png", "virtual"),
+                  color: Colors.black87,
                 ),
                 name: "About Us",
                 handler: () {
@@ -157,6 +166,7 @@ class MoreScreen extends StatelessWidget {
               MoreCard(
                 image: Image.asset(
                   Helper.getAssetName("info.png", "virtual"),
+                  color: Colors.black87,
                 ),
                 name: "Sign Out",
                 handler: () async{
@@ -198,6 +208,13 @@ class MoreCard extends StatelessWidget {
       child: Container(
         height: 70,
         width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              //repeat: ImageRepeat.repeatX,
+              fit: BoxFit.cover,
+              image: AssetImage("assets/images/virtual/design1.jpeg")),
+          borderRadius: BorderRadius.circular(10)
+        ),
         child: Stack(
           children: [
             Container(
@@ -211,7 +228,7 @@ class MoreCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                color: AppColor.placeholderBg,
+              //  color: AppColor.placeholderBg,
               ),
               child: Row(
                 children: [
@@ -220,7 +237,7 @@ class MoreCard extends StatelessWidget {
                       height: 50,
                       decoration: ShapeDecoration(
                         shape: CircleBorder(),
-                        color: AppColor.placeholder,
+                        color: Colors.white,
                       ),
                       child: _image),
                   SizedBox(
@@ -229,7 +246,9 @@ class MoreCard extends StatelessWidget {
                   Text(
                     _name!,
                     style: TextStyle(
-                      color: AppColor.primary,
+                      color: AppColor.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16
                     ),
                   ),
                 ],
@@ -240,9 +259,10 @@ class MoreCard extends StatelessWidget {
               child: Container(
                 height: 45.h,
                 width: 45.w,
+                margin: EdgeInsets.only(right: 10),
                 decoration: ShapeDecoration(
                   shape: CircleBorder(),
-                  color: AppColor.placeholderBg,
+                  color: Colors.transparent,
                 ),
                 child: Icon(
                   Icons.arrow_forward_ios_rounded,
@@ -251,27 +271,27 @@ class MoreCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (_isNoti!)
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  margin: const EdgeInsets.only(
-                    right: 50,
-                  ),
-                  decoration: ShapeDecoration(
-                    shape: CircleBorder(),
-                    color: Colors.red,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "15",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              )
+            // if (_isNoti!)
+            //   Align(
+            //     alignment: Alignment.centerRight,
+            //     child: Container(
+            //       height: 20,
+            //       width: 20,
+            //       margin: const EdgeInsets.only(
+            //         right: 50,
+            //       ),
+            //       decoration: ShapeDecoration(
+            //         shape: CircleBorder(),
+            //         color: Colors.red,
+            //       ),
+            //       child: Center(
+            //         child: Text(
+            //           "15",
+            //           style: TextStyle(color: Colors.white),
+            //         ),
+            //       ),
+            //     ),
+            //   )
           ],
         ),
       ),

@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 import '../../provider/cart.dart';
 import '../../provider/checkoutProvider.dart';
 import '../../provider/ordersProviders.dart';
+import '../tracking/locationTracking.dart';
+import '../tracking/order_status.dart';
 
 class CheckoutScreen extends StatefulWidget {
   static const routeName = "/checkoutScreen";
@@ -588,7 +590,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       height: 50.h,
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, OrderStatus.routeName);
+
+                                        },
                                         child: Text("Track My Order"),
                                       ),
                                     ),

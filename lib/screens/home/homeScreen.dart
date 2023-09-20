@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/screens/food/offerHomeScreen.dart';
+import 'package:foodui/screens/tracking/order_status.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
@@ -15,6 +16,7 @@ import '../../widgets/compactCard1.dart';
 import '../../widgets/compactCard2.dart';
 import '../../widgets/customNavBar.dart';
 import '../../widgets/orderItemsPopup.dart';
+import '../../widgets/sliding_up_panel.dart';
 import '../../widgets/temporary.dart';
 import '../food/foodCompactScroller.dart';
 import '../food/restaurantsListing.dart';
@@ -159,14 +161,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.only(left: 15).r,
                         child: GestureDetector(
                             onTap: (){
-                              Navigator.pushNamed(context, MyMaps.routeName);
+                             // Navigator.pushNamed(context, MyMaps.routeName);
                             },
                             child: DeliverLocation())),SizedBox(width: 20.w,),
                     GestureDetector(
                         onTap: (){
+                          Navigator.pushNamed(context, OrderStatus.routeName);
+                         //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SlidingUpPanelExample()));
                         },
                         child: Image.asset("assets/images/virtual/logo.png",color:AppColor.green,width: 100.w,)),
-                    SizedBox(width: 50.w,),
+                    SizedBox(width: 42.w,),
                     Row(
                       children: [
                         GestureDetector(
@@ -334,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 250.h,
               width: 1.sw,
-              child:Expanded(child: FoodCategoriesCard())),
+              child:FoodCategoriesCard()),
               SizedBox(
                 height: 20.h,
               ),
@@ -622,127 +626,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: cartProvider.cart.length > 0?
-    Stack(
 
-      children: [
-        Visibility(
-          visible: cartProvider.cartDetailVisibility,
-          child:
-          Container(
-            width: 1.sw,
-            height: 1.sh,
-            margin: EdgeInsets.only(bottom: 52),
-            color: Colors.black45,
-            child: Align(
-              alignment: Alignment.bottomCenter, child:Wrap(children:[
-              Align(alignment: Alignment.center,child: GestureDetector(
-                onTap: (){
-                  setState(() {
-                    cartProvider.cartDetailVisibility = false;
-                  });
-                },
-                child: Container(
-                    padding: EdgeInsets.all(5),
-                    margin: EdgeInsets.only(bottom: 5),
-                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
-                    child: Icon(Icons.close,color: Colors.white,)),
-              ),),
-              OrderItemsPopup()
-              // OrderItems()
-            ]),
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Card(
-            elevation: 5,
-            child: Container(
-              color: Colors.white,
-              width: double.maxFinite,
-              height: 50.h,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      Helper.getAssetName("cart.png", "virtual"),
-                      scale: 5,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      setState(() {
-                        cartProvider.cartDetailVisibility = !cartProvider.cartDetailVisibility;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10, left: 5),
-                      child: Row(
-                        children: [
-                          Text("${cartProvider.cart.length} ITEMS ADDED",
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12)),
-                          Icon(
-                            Icons.arrow_drop_up_outlined,
-                            color: AppColor.green,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 50.w,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(MyOrderScreen.routeName);
-                    },
-                    child: Container(
-                      width: 130.w,
-                      height: 35.h,
-                      //   padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: AppColor.green,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Next",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: Icon(
-                                Icons.arrow_right,
-                                size: 16.sp,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-
-        ),
-      ],
-    ):Container());
+   );
   }
 }
 
