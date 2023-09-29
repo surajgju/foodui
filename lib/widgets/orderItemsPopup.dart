@@ -43,7 +43,7 @@ class _OrderdItemsDetailsState extends State<OrderItemsPopup> {
                 itemBuilder: (c,i){
                   String id = orderProvider.orders.keys.elementAt(i);
                   return OrderItemCard(
-                      price:( num.parse(orderProvider.orders[id]!.food_price!) * orderProvider.orderQuantity[id]!).toString(),
+                      price:( num.parse(orderProvider.orders[id]!.price!) * orderProvider.orderQuantity[id]!).toString(),
                       name: orderProvider.orders[id]!.food_name!,
                       quantity:orderProvider.orderQuantity[id]
 

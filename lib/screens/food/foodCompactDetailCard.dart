@@ -3,11 +3,12 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
+import 'package:foodui/utils/snackbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
 import '../../modals/foods/food.dart';
-import '../../modals/restaurants/restaurant.dart';
+import '../../modals/restaurants/Restaurant.dart';
 import '../../provider/cart.dart';
 import '../../provider/ordersProviders.dart';
 import '../../utils/helper.dart';
@@ -18,21 +19,31 @@ class FoodCompactDetailCard extends StatefulWidget {
     @required String? name,
     @required String? image,
     @required String? foods,
+    @required String? food_description,
+    @required String? price,
     bool? ispro,
     bool? topchoice,
     int? cartItem = 0,
     required String? foodId,
+    required int? restaurantId,
+    int? menuId,
     final VoidCallback? addItem,
     final VoidCallback? removeItem,
+    final Restaurant? restaurantDetails,
   })  : _name = name,
         _image = image,
         _foods = foods,
+        _food_description = food_description,
         _ispro = ispro,
         _topchoice = topchoice,
         _foodId = foodId,
+        _restaurantId = restaurantId,
+        _menuId = menuId,
         _cartItem = cartItem,
         _addItem=addItem,
         _removeItem=removeItem,
+        _price=price,
+        _restaurantDetails = restaurantDetails,
         super(key: key);
 
   final String? _name;
@@ -41,9 +52,15 @@ class FoodCompactDetailCard extends StatefulWidget {
   final bool? _ispro;
   final bool? _topchoice;
   final String? _foodId;
+  final int? _restaurantId;
+  final int? _menuId;
+  final String? _price;
+  final String? _food_description;
   final int? _cartItem;
   final VoidCallback? _addItem;
   final VoidCallback? _removeItem;
+  final Restaurant? _restaurantDetails;
+
 
   @override
   State<FoodCompactDetailCard> createState() => _FoodCompactDetailCardState();
@@ -74,10 +91,10 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                     children: [
                       Container(
                         constraints:
-                            BoxConstraints(minWidth: 100.w, maxWidth: 200.w),
+                            BoxConstraints(minWidth: 100.w, maxWidth: 163.w),
                         child: Text(
                           widget._name!,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.clip,
                           maxLines: 1,
                           style: Helper.getTheme(context)
                               .headlineMedium
@@ -187,11 +204,11 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                       ),
                       SizedBox(width: 10.w),
                       Icon(
-                        Icons.pedal_bike,
+                        Icons.delivery_dining,
                         color: Colors.black54,
                       ),
                       Text(
-                        'ADE 7.50',
+                        '${widget._price} ₹',
                         style: TextStyle(color: Colors.black54),
                       )
                     ],
@@ -253,29 +270,29 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                         GestureDetector(
                           onTap:(){
                             cartProvider.removeFromCart(widget._foodId);
-                            orderProvider.removeOrder("9cO7oNxlZG1zahF397s2",
+                            orderProvider.removeOrder(widget._restaurantId!,
                                 widget._foodId!,
                                 Foods(
+                                  food_id:int.parse( widget._foodId!),
                                     food_name: widget._name,
-                                    food_description: "delicious taste and sugar free",
+                                    food_description: widget._food_description,
                                     food_minimum_order: "1",
-                                    food_rating: "4.8",
-                                    cuisines_id: "2,1",
-                                    food_images: [widget._image!],
-                                    food_type: "French",
-                                    food_price: "23",
-                                    food_reviews_id: "snFdsEFEnjsds"),
-                                Restaurants(rest_name: "restaurent 1",
-                                    rest_owner_name:"owner name",
-                                    rest_owner_number :"+91 8168673754",
-                                    rest_description:"restaurant description in datail. Fast food available",
-                                    rest_address :"16 street, park avenue, New york,USA",
-                                    rest_opening_hrs : "9:30 AM - 12:30 AM",
-                                    rest_delivery_time:"30 min",
-                                    rest_minimum_order :"1",
-                                    rest_rating:"2.5",
-                                    cuisines_id:"2,4",
-                                    rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
+                                    menu_id: widget._menuId,
+                                    img: widget._image!,
+                                    food_type: widget._foods,
+                                  price: widget._price,),
+                                Restaurant(
+                                    id: widget._restaurantDetails!.id,
+                                    brandName: widget._restaurantDetails!.brandName,
+                                    ownerName:widget._restaurantDetails!.ownerName,
+                                    mobNumber :widget._restaurantDetails!.ownerMobNumber,
+                                    restaurantCity: widget._restaurantDetails!.restaurantCity,
+                                    restaurantPin: widget._restaurantDetails!.restaurantPin,
+                                    ownerEmail:widget._restaurantDetails!.ownerEmail,
+                                    storeType: widget._restaurantDetails!.storeType,
+                                    restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                                    img1:widget._restaurantDetails!.img1,
+                                    img2: widget._restaurantDetails!.img1
                                 ));
                           },
                           child: Container(
@@ -299,29 +316,29 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                           onTap: (){
 
                               cartProvider.addToCart(widget._foodId);
-                              orderProvider.addOrder("9cO7oNxlZG1zahF397s2",
+                              orderProvider.addOrder(widget._restaurantId!,
                                   widget._foodId!,
                                   Foods(
-                                      food_name: widget._name,
-                                      food_description: "delicious taste and sugar free",
-                                      food_minimum_order: "1",
-                                      food_rating: "4.8",
-                                      cuisines_id: "2,1",
-                                      food_images: [widget._image!],
-                                      food_type: "French",
-                                      food_price: "23",
-                                      food_reviews_id: "snFdsEFEnjsds"),
-                                  Restaurants(rest_name: "restaurent 1",
-                                      rest_owner_name:"owner name",
-                                      rest_owner_number :"+91 8168673754",
-                                      rest_description:"restaurant description in datail. Fast food available",
-                                      rest_address :"16 street, park avenue, New york,USA",
-                                      rest_opening_hrs : "9:30 AM - 12:30 AM",
-                                      rest_delivery_time:"30 min",
-                                      rest_minimum_order :"1",
-                                      rest_rating:"2.5",
-                                      cuisines_id:"2,4",
-                                      rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
+                                    food_id:int.parse( widget._foodId!),
+                                    food_name: widget._name,
+                                    food_description: widget._food_description,
+                                    food_minimum_order: "1",
+                                    menu_id: widget._menuId,
+                                    img: widget._image!,
+                                    food_type: widget._foods,
+                                    price: widget._price,),
+                                  Restaurant(
+                                      id: widget._restaurantDetails!.id,
+                                      brandName: widget._restaurantDetails!.brandName,
+                                      ownerName:widget._restaurantDetails!.ownerName,
+                                      mobNumber :widget._restaurantDetails!.ownerMobNumber,
+                                      restaurantCity: widget._restaurantDetails!.restaurantCity,
+                                      restaurantPin: widget._restaurantDetails!.restaurantPin,
+                                      ownerEmail:widget._restaurantDetails!.ownerEmail,
+                                      storeType: widget._restaurantDetails!.storeType,
+                                      restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                                      img1:widget._restaurantDetails!.img1,
+                                      img2: widget._restaurantDetails!.img1
                                   ));
                           },
 
@@ -340,31 +357,31 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                   ):
                   GestureDetector(
                     onTap: (){
-
+                  //successToast(widget._restaurantId!.toString());
                       cartProvider.addToCart(widget._foodId);
-                      orderProvider.addOrder("9cO7oNxlZG1zahF397s2",
+                      orderProvider.addOrder(widget._restaurantId!,
                           widget._foodId!,
                           Foods(
-                              food_name: widget._name,
-                              food_description: "delicious taste and sugar free",
-                              food_minimum_order: "1",
-                              food_rating: "4.8",
-                              cuisines_id: "2,1",
-                              food_images: [widget._image!],
-                              food_type: "French",
-                              food_price: "23",
-                              food_reviews_id: "snFdsEFEnjsds"),
-                          Restaurants(rest_name: "restaurent 1",
-                              rest_owner_name:"owner name",
-                              rest_owner_number :"+91 8168673754",
-                              rest_description:"restaurant description in datail. Fast food available",
-                              rest_address :"16 street, park avenue, New york,USA",
-                              rest_opening_hrs : "9:30 AM - 12:30 AM",
-                              rest_delivery_time:"30 min",
-                              rest_minimum_order :"1",
-                              rest_rating:"2.5",
-                              cuisines_id:"2,4",
-                              rest_menu_images :["https://images.unsplash.com/photo-1552566626-52f8b828add9"]
+                            food_id:int.parse( widget._foodId!),
+                            food_name: widget._name,
+                            food_description: widget._food_description,
+                            food_minimum_order: "1",
+                            menu_id: widget._menuId,
+                            img: widget._image!,
+                            food_type: widget._foods,
+                            price: widget._price,),
+                          Restaurant(
+                              id: widget._restaurantDetails!.id,
+                              brandName: widget._restaurantDetails!.brandName,
+                              ownerName:widget._restaurantDetails!.ownerName,
+                              mobNumber :widget._restaurantDetails!.ownerMobNumber,
+                              restaurantCity: widget._restaurantDetails!.restaurantCity,
+                              restaurantPin: widget._restaurantDetails!.restaurantPin,
+                              ownerEmail:widget._restaurantDetails!.ownerEmail,
+                              storeType: widget._restaurantDetails!.storeType,
+                              restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                              img1:widget._restaurantDetails!.img1,
+                              img2: widget._restaurantDetails!.img1
                           ));
                     },
 

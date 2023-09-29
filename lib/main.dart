@@ -1,3 +1,4 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodui/provider/authProvider.dart';
@@ -5,7 +6,7 @@ import 'package:foodui/provider/cart.dart';
 import 'package:foodui/provider/checkoutProvider.dart';
 import 'package:foodui/provider/featuredCategoriesProvider.dart';
 import 'package:foodui/provider/featuredRestaurantCategoriesProvider.dart';
-import 'package:foodui/provider/foodMainScreenProvider.dart';
+import 'package:foodui/provider/homeScreenProvider.dart';
 import 'package:foodui/provider/menuProvider.dart';
 import 'package:foodui/provider/onBoardingProvider.dart';
 import 'package:foodui/provider/ordersProviders.dart';
@@ -14,7 +15,7 @@ import 'package:foodui/screens/auth/changeAddressScreen.dart';
 import 'package:foodui/screens/food/foodHomeScreen.dart';
 import 'package:foodui/screens/food/offerHomeScreen.dart';
 import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
-import 'package:foodui/screens/offers/offersMainHomeScreen.dart';
+import 'package:foodui/screens/food/restaurantListingScreen.dart';
 import 'package:foodui/screens/search/search_screen.dart';
 import 'package:foodui/screens/tracking/locationTracking.dart';
 import 'package:foodui/screens/tracking/order_status.dart';
@@ -44,6 +45,7 @@ import './const/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 void main() async{
+ // ChuckerFlutter.showOnRelease = true;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -51,7 +53,6 @@ void main() async{
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=>OnBoardingProvider()),
-        ChangeNotifierProvider(create: (_)=>FoodMainScreenProvider()),
         ChangeNotifierProvider(create: (_)=>AuthProvider()),
         ChangeNotifierProvider(create: (_)=>MenuProvider()),
         ChangeNotifierProvider(create: (_)=>FeaturedCategoriesProvider()),
@@ -60,6 +61,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=>FeaturedRestaurantCategoriesProvider()),
         ChangeNotifierProvider(create: (_)=>CheckoutProvider()),
         ChangeNotifierProvider(create: (_)=>SearchProvider()),
+        ChangeNotifierProvider(create: (_)=>HomeScreenProvider()),
 
       ],
       child: MyApp()));
@@ -77,7 +79,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Qconnect',
       debugShowCheckedModeBanner: false,
-
+      //navigatorObservers: [ChuckerFlutter.navigatorObserver],
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: GoogleFonts.openSans().fontFamily,
@@ -125,9 +127,7 @@ class MyApp extends StatelessWidget {
 
       ),
       home: SplashScreen(),
-     //home:HomeScreen(),
       routes: {
-      //  LandingScreen.routeName: (context) => LandingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         ForgetPwScreen.routeName: (context) => ForgetPwScreen(),
@@ -150,8 +150,8 @@ class MyApp extends StatelessWidget {
         DeliveryStatus.routeName:(context)=>DeliveryStatus(),
         OrderStatus.routeName:(context)=>OrderStatus(),
         SearchScreen.routeName:(context)=>SearchScreen(),
-
-        RestaurantDetailViewScreen.routeName:(context)=>RestaurantDetailViewScreen()
+        RestaurantDetailViewScreen.routeName:(context)=>RestaurantDetailViewScreen(),
+        RestaurantListingScreen.routeName:(context)=>RestaurantListingScreen()
       },
     );
   }

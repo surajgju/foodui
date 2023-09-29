@@ -16,14 +16,28 @@ class OrderStatus extends StatefulWidget {
 }
 
 class _OrderStatusState extends State<OrderStatus> {
+  Widget order = Scaffold(body: Container(
+      margin: EdgeInsets.only(top: 10),
+      child: PrepareStatus()));
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(seconds: 6),(){
+      setState(() {
+        order = DeliveryStatus();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
-    return
-        //PrepareStatus();
-        DeliveryStatus();
+    return order;
+        //DeliveryStatus();
 
 
 
   }
+
 }

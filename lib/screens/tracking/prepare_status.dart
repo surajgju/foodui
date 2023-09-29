@@ -132,7 +132,7 @@ class _PrepareStatusState extends State<PrepareStatus> {
                           fontFamily: GoogleFonts.poppins().fontFamily,
                           color: Colors.black87)
                   ),
-                  TextSpan(text:"Your food is being prepared, we will notify you when your order is ready" ,
+                  TextSpan(text:"Your order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your order",
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,

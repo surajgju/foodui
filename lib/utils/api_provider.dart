@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class APIProvider {
   final dio = Dio(BaseOptions(baseUrl: apiurl));
 
   get({required url}) async {
+    await intercepter(dio);
     debugPrint("************REQUEST URL : $url ************");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.getString("token")!;
@@ -41,6 +43,7 @@ class APIProvider {
 
   post({required url, required payload}) async {
      await intercepter(dio);
+    // dio.interceptors.add(ChuckerDioInterceptor());
     debugPrint(
         "************REQUEST URL : $url \n REQUEST BODY : $payload************");
     try {
@@ -58,7 +61,9 @@ class APIProvider {
   }
 
   formRequest({required url, required FormData payload, noToken}) async {
-    await intercepter(dio);
+    await intercepter(dio,noToken: noToken);
+ //   dio.interceptors.add(ChuckerDioInterceptor());
+
     debugPrint(
         "************REQUEST URL : $url \n REQUEST BODY : ${payload.fields}************");
 
@@ -84,10 +89,11 @@ class APIProvider {
     logger.e("${response.statusCode.toString()}");
   }
 
-  intercepter(Dio dio) async {
+  intercepter(Dio dio,{bool? noToken}) async {
     final logger = Logger();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = await prefs.getString("token") ?? "";
+    String token = noToken != null && noToken ? await prefs.getString("otp_token") ?? "" : await prefs.getString("token")?? "";
+    // dio.interceptors.add(ChuckerDioInterceptor());
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         options.headers["Authorization"] =
@@ -97,18 +103,20 @@ class APIProvider {
           logger.i('Headers: ${options.headers.toString()}');
           if(options.data != null ) logger.i('Body: ${options.data.toString()}');
         }
-        // debugPrint('Request: ${options.method.toString()} ${options.uri.toString()}');
-        // debugPrint('Headers: ${options.headers.toString()}');
-        // if(options.data != null )debugPrint('Body: ${options.data.toString()}');
-        //if(options.data != null )debugPrint('Body: ${options.data.fields.toString()}');
+       // debugPrint('Request: ${options.method.toString()} ${options.uri.toString()}');
+       // debugPrint('Headers: ${options.headers.toString()}');
+       // if(options.data != null )logger.i('Body: ${options.data.toString()}');
+       //  if(options.data != null )logger.i('Body: ${options.data.fields.toString()}');
         handler.next(options);
       },
 
       onResponse: (Response response,  handler) {
     if(kDebugMode){ logger.i('Response: ${response.statusCode}');
         logger.i('Headers: ${response.headers}');
-        logger.i('Data: ${response.data}');
-       handler.next(response);
+       // logger.i('Data: ${response.data}');
+    logger.i('Raw Response: ${response.toString()}');
+
+    handler.next(response);
       }},
       onError: (DioException error, ErrorInterceptorHandler handler) {
     if(kDebugMode) {

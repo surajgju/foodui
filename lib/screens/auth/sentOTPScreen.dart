@@ -38,7 +38,7 @@ class SendOTPScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              "Please check your mobile number 071*****12 continue to reset your password",
+              "Please check your mobile number ${authProvider.mobileInputController.text} continue to reset your password ${authProvider.otp}",
               textAlign: TextAlign.center,
             ),
             SizedBox(

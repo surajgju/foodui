@@ -2,19 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/const/colors.dart';
-import 'package:foodui/screens/food/promotionScroller.dart';
-import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
-import 'package:foodui/screens/food/restaurantsListing.dart';
 import 'package:provider/provider.dart';
-
-import '../../const/urls.dart';
-import '../../provider/foodMainScreenProvider.dart';
-import '../../utils/helper.dart';
+import '../../provider/featuredRestaurantCategoriesProvider.dart';
 import '../../widgets/compactCard2.dart';
 import '../../widgets/compactCard3.dart';
-import '../../widgets/deliverLocation.dart';
-import '../../widgets/offerCard.dart';
-import '../home/homeScreen.dart';
 import 'foodCompactScroller.dart';
 import 'foodTopScrollChips.dart';
 
@@ -37,7 +28,7 @@ class _FoodHomeScreenState extends State<OfferHomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final foodController = Provider.of<FoodMainScreenProvider>(context);
+    final foodController = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
     ScreenUtil.init(context);
     return Scaffold(
 

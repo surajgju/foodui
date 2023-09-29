@@ -1,68 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:foodui/utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import '../const/firebase.dart';
+import '../modals/categories/FoodCategoriesListing.dart';
 import '../modals/featured/featuredFoodCategories.dart';
+import '../modals/foods/FoodCategoriesListing.dart' as foodCatListing;
 import '../modals/foods/food.dart';
+import '../modals/restaurants/RestaurantCategoriesByFoodItem.dart' as resCatFoodItem;
+import '../utils/api_provider.dart';
 
 class FeaturedCategoriesProvider extends ChangeNotifier {
-  List<FoodCategoriesItem> foodCategory = [];
-  Map<String, Foods> foodCategoryFoods = {};
 
-  List<FoodCategoriesItem> foodCategory2 = [];
-  Map<String, Foods> foodCategoryFoods2 = {};
+  APIProvider apiProvider = APIProvider();
+  List<resCatFoodItem.Data> foodCategoriesListing = [];
+  List<foodCatListing.Data> foodItemsListing = [];
 
-  getFeaturedFoodCategories(food_featured_Id) async {
-    try {  foodCategory = [];
-    foodCategoryFoods={};
-    QuerySnapshot featuredFoodCategories = await FirebaseFirestore.instance
-        .collection(FirebaseConst.FEATURED_FOOD_CATEGORIES)
-        .doc(food_featured_Id)
-        .collection(FirebaseConst.FOOD_CATEGORIES_ITEM)
-        .get();
-      featuredFoodCategories.docs.forEach((e) async {
-        String food_id = FoodCategoriesItem.fromJson((e.data() as Map<String, dynamic>)).food_id!;
-        final foodData = await getFood(food_id);
-        if (foodData != null) {
-          final data = Foods.fromJson((foodData as Map<String, dynamic>));
-          foodCategory.add(FoodCategoriesItem.fromJson((e.data() as Map<String, dynamic>)));
-          foodCategoryFoods[food_id] = data;
-        }
-        notifyListeners();
-      });
-    } catch (err) {
-      print(err);
-    }
-  }
-  getFeaturedFoodCategories2(food_featured_Id) async {
-    try {  foodCategory2 = [];
-    foodCategoryFoods2={};
-    QuerySnapshot featuredFoodCategories = await FirebaseFirestore.instance
-        .collection(FirebaseConst.FEATURED_FOOD_CATEGORIES)
-        .doc(food_featured_Id)
-        .collection(FirebaseConst.FOOD_CATEGORIES_ITEM)
-        .get();
-    featuredFoodCategories.docs.forEach((e) async {
-      String food_id = FoodCategoriesItem.fromJson((e.data() as Map<String, dynamic>)).food_id!;
-      final foodData = await getFood(food_id);
-      if (foodData != null) {
-        final data = Foods.fromJson((foodData as Map<String, dynamic>));
-        foodCategory2.add(FoodCategoriesItem.fromJson((e.data() as Map<String, dynamic>)));
-        foodCategoryFoods2[food_id] = data;
-      }
+ getMainFoodCategories()async{
+   foodCategoriesListing =[];
+   Response response = await apiProvider.get(
+       url: "/restaurant_category.php");
+   if(response.data['status'] ==true){
+     successToast(response.data['message']);
+     foodCategoriesListing = resCatFoodItem.RestaurantCategoriesByFoodItem.fromJson(response.data).data!;
+     notifyListeners();
+   }else{
+     warningToast("Something went wrong");
+   }
+ }
+  getSpecialFoodCategories()async{
+    foodItemsListing = [];
+    Response response = await apiProvider.get(
+        url: "/food_category.php");
+    if(response.data['status'] ==true){
+      successToast(response.data['message']);
+      foodItemsListing= foodCatListing.FoodCategoriesListing.fromJson(response.data).data!;
       notifyListeners();
-    });
-    } catch (err) {
-      print(err);
+    }else{
+      warningToast("Something went wrong");
     }
-  }
-  getFood(doc_id) async {
-    DocumentSnapshot food = await FirebaseFirestore.instance
-        .collection(FirebaseConst.FOODS)
-        .doc(doc_id)
-        .get();
-    return food.data();
   }
 
 

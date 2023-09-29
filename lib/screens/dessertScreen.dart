@@ -51,6 +51,7 @@ class DessertScreen extends StatelessWidget {
               ),
               sb.SearchBar(
                 title: "Search Food",
+                  onTap: (){}
               ),
               SizedBox(
                 height: 15,

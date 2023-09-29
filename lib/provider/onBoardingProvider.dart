@@ -1,28 +1,36 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/home/homeScreen.dart';
 import '../screens/initial/introScreen.dart';
 import 'featuredCategoriesProvider.dart';
+import 'homeScreenProvider.dart';
 
 class OnBoardingProvider extends ChangeNotifier{
-  // FoodMainScreenProvider();
+final logger = Logger();
+  isUserLoggedin(context)async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? authToken = await prefs.getString("token");
 
-  isUserLoggedin(context){
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    getData(context);
-    if(uid != null){
+    if(authToken != null && authToken.isNotEmpty){
+      logger.i(authToken);
+      getData(context);
       Future.delayed(Duration(seconds: 1),()=>Navigator.of(context).pushReplacementNamed(HomeScreen.routeName));
       // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    }else{
-      Navigator.of(context).pushReplacementNamed(IntroScreen.routeName);
+    return;
     }
+      Navigator.of(context).pushReplacementNamed(IntroScreen.routeName);
   }
-  getData(context){
-    Provider.of<FeaturedCategoriesProvider>(context,listen: false).
-    getFeaturedFoodCategories("FozfU8xnLe6kvbluyDNN");
-    Provider.of<FeaturedCategoriesProvider>(context,listen: false).
-    getFeaturedFoodCategories2("Z65vGcmjCcxTt93BHUnD");
+  getData(context)async{
+   final featuredCategoriesProvider = Provider.of<FeaturedCategoriesProvider>(context,listen: false);
+  final homeProvider =  Provider.of<HomeScreenProvider>(context,listen: false);
+   await featuredCategoriesProvider.getMainFoodCategories();
+  await featuredCategoriesProvider.getSpecialFoodCategories();
+   homeProvider.getCurrentAddress();
+
+
   }
 }

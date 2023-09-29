@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/foodMainScreenProvider.dart';
+import '../../provider/featuredRestaurantCategoriesProvider.dart';
 import '../../utils/helper.dart';
 import '../../widgets/chipFilter.dart';
 import '../../widgets/chipOption.dart';
@@ -22,7 +22,7 @@ class _FoodHomeScreenState extends State<FoodCompactScroller> {
 
   @override
   Widget build(BuildContext context) {
-    final foodController = Provider.of<FoodMainScreenProvider>(context);
+    final foodController = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
     ScreenUtil.init(context);
     return Container(
       height: 210.h,

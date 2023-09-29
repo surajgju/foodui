@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,22 +5,24 @@ import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
 
 import '../../const/colors.dart';
 import '../../utils/helper.dart';
+
 class RestaurantDescriptionCard extends StatelessWidget {
   RestaurantDescriptionCard({
     Key? key,
     @required String? name,
     @required String? image,
     @required String? foods,
+    @required String? location,
     bool? ispro,
     bool? topchoice,
     required int? restaurantId,
-
   })  : _name = name,
         _image = image,
         _foods = foods,
         _ispro = ispro,
         _topchoice = topchoice,
-        _restaurantId= restaurantId,
+        _restaurantId = restaurantId,
+        _location = location,
         super(key: key);
 
   final String? _name;
@@ -29,8 +30,8 @@ class RestaurantDescriptionCard extends StatelessWidget {
   final String? _foods;
   final bool? _ispro;
   final bool? _topchoice;
-  final  int? _restaurantId;
-
+  final int? _restaurantId;
+  final String? _location;
 
   @override
   Widget build(BuildContext context) {
@@ -44,31 +45,28 @@ class RestaurantDescriptionCard extends StatelessWidget {
     );
     return Container(
       padding: EdgeInsets.fromLTRB(5, 5, 5, 0).r,
-
       decoration: BoxDecoration(
-        color :Colors.white,
-         // color: Color(0xFFf4f4f4),
-          borderRadius: BorderRadius.circular(10)
-      ),
+          color: Colors.white,
+          // color: Color(0xFFf4f4f4),
+          borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8).w,
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(5, 5, 10, 0).r,
-                  padding: EdgeInsets.fromLTRB(5, 5, 0, 5).r,
-
-                  decoration: BoxDecoration(
-                     border:Border.all(color: Colors.black12),
-                     borderRadius: BorderRadius.circular(8).w
+              Container(
+                margin: EdgeInsets.fromLTRB(5, 5, 10, 0).r,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8).w,
+                  child: SizedBox(
+                    width: 85.w,
+                    height: 85.h,
+                    child: Image.network(
+                      _image!,
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                  width: 85.w,
-                  height: 85.h,
-                  child: Image.asset(_image!),
                 ),
               ),
               SizedBox(
@@ -78,43 +76,51 @@ class RestaurantDescriptionCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(top: 10),
                   height: 80.h,
-                  //color: Colors.red,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Container(
-                            constraints:BoxConstraints(minWidth: 100.w,maxWidth: 200.w),
-
+                            constraints: BoxConstraints(
+                                minWidth: 100.w, maxWidth: 200.w),
                             child: Text(
                               _name!,
                               overflow: TextOverflow.ellipsis,
-
                               maxLines: 1,
                               style: Helper.getTheme(context)
                                   .headlineMedium
-                                  ?.copyWith(color: AppColor.primary,fontSize: 16.sp),
+                                  ?.copyWith(
+                                      color: AppColor.primary, fontSize: 16.sp),
                             ),
-                          ),SizedBox(
+                          ),
+                          SizedBox(
                             width: 10,
                           ),
-                          if( _ispro != null)   Container(
-                            padding: EdgeInsets.only(left: 5,right: 5,bottom: 2,top: 2).r,
-                            decoration: BoxDecoration(
-                                color: Color(0xff011ddd),
-                                borderRadius: BorderRadius.circular(3).w
-                            ),
-                            child: Text(
-                              "pro"!,
-                              style: Helper.getTheme(context)
-                                  .headlineSmall
-                                  ?.copyWith(color: Colors.white,fontSize: 14,fontStyle:FontStyle.italic,fontWeight: FontWeight.w600),
-                            ),
-                          )
+                          if (_ispro != null)
+                            Container(
+                              padding: EdgeInsets.only(
+                                      left: 5, right: 5, bottom: 2, top: 2)
+                                  .r,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff011ddd),
+                                  borderRadius: BorderRadius.circular(3).w),
+                              child: Text(
+                                "pro"!,
+                                style: Helper.getTheme(context)
+                                    .headlineSmall
+                                    ?.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w600),
+                              ),
+                            )
                         ],
                       ),
-                      SizedBox(height: 3.h,),
+                      SizedBox(
+                        height: 3.h,
+                      ),
                       Row(
                         children: [
                           // Text("Cafe",style: TextStyle(color: Colors.black54)),
@@ -134,51 +140,67 @@ class RestaurantDescriptionCard extends StatelessWidget {
                           // SizedBox(
                           //   width: 5,
                           // ),
-                          Text(_foods??"Western Food",style: TextStyle(color: Colors.black54)),
+                          Text(_foods ?? "Food Type",
+                              style: TextStyle(color: Colors.black54)),
                           SizedBox(
                             width: 20.w,
                           ),
                         ],
-                      ), SizedBox(height: 2.h,),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
                       Row(
                         children: [
                           Icon(
-                            Icons.star,
-                            color: Color(0xFFFFD700),
-                            size: 20.sp,
+                            Icons.location_on,
+                           // color: Color(0xFFFFD700),
+                            color: Colors.black26,
+                            size: 16.sp,
                           ),
+                          // SizedBox(
+                          //   width: 5.w,
+                          // ),
+                          // Text(
+                          //   "4.9",
+                          //   style: TextStyle(
+                          //     color: AppColor.primary,
+                          //   ),
+                          // ),
+                          // SizedBox(width: 10.w),
                           SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            "4.9",
-                            style: TextStyle(
-                              color: AppColor.primary,
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          Text('(124 Ratings )'),
-                          if(_topchoice != null)  Container(
-                            padding: EdgeInsets.only(left: 5,right: 5,bottom: 4,top: 4).r,
-                            decoration: BoxDecoration(
-                                color: Color(0xfffde7e3),
-                                borderRadius: BorderRadius.circular(5).w
-                            ),
-                            child: Row(
-                              children: [
-                                Image.asset(Helper.getAssetName("fav_filled.png", "virtual"),width: 12.w,),
-                                Text(
-                                  "Top choice"!,
-                                  style: Helper.getTheme(context)
-                                      .headlineSmall
-                                      ?.copyWith(color: Colors.black54,fontSize: 14,fontStyle:FontStyle.normal,fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                          )
+                              width: 120.w,
+                              child: Text(_location ?? "Address",style: TextStyle(fontSize: 10,height: 1,color:Colors.black54),overflow: TextOverflow.fade,maxLines: 2,)),
+                          if (_topchoice != null)
+                            Container(
+                              padding: EdgeInsets.only(
+                                      left: 5, right: 5, bottom: 4, top: 4)
+                                  .r,
+                              decoration: BoxDecoration(
+                                  color: Color(0xfffde7e3),
+                                  borderRadius: BorderRadius.circular(5).w),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    Helper.getAssetName(
+                                        "fav_filled.png", "virtual"),
+                                    width: 12.w,
+                                  ),
+                                  Text(
+                                    "Top choice"!,
+                                    style: Helper.getTheme(context)
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            color: Colors.black54,
+                                            fontSize: 14,
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.normal),
+                                  ),
+                                ],
+                              ),
+                            )
                         ],
                       ),
-
                     ],
                   ),
                 ),
@@ -188,7 +210,10 @@ class RestaurantDescriptionCard extends StatelessWidget {
                 margin: EdgeInsets.only(left: 5),
                 // decoration: BoxDecoration(
                 //     color: Colors.white, shape: BoxShape.circle),
-                child: Icon(Icons.info_outline,color: AppColor.primary,),
+                child: Icon(
+                  Icons.info_outline,
+                  color: AppColor.primary,
+                ),
               )
             ],
           ),

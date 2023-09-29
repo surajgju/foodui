@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/foodMainScreenProvider.dart';
+import '../../provider/featuredRestaurantCategoriesProvider.dart';
 import '../../widgets/chipFilter.dart';
 import '../../widgets/chipOption.dart';
 
@@ -18,10 +18,11 @@ bool? isBottomSheet;
 class _FoodHomeScreenState extends State<FoodTopScrollChips> {
   @override
   Widget build(BuildContext context) {
-    final foodController = Provider.of<FoodMainScreenProvider>(context);
+    final foodController = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
     ScreenUtil.init(context);
     return Container(
       height: 35.h,
+      width: 1.sw,
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,

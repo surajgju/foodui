@@ -131,7 +131,7 @@ class ChangeAddressScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              sb.SearchBar(title : "Search Address",),
+              sb.SearchBar(title : "Search Address",onTap: (){},),
               SizedBox(
                 height: 10,
               ),

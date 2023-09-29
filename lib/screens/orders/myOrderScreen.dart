@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/const/colors.dart';
@@ -6,6 +8,7 @@ import 'package:foodui/utils/helper.dart';
 import 'package:foodui/utils/snackbar.dart';
 import 'package:foodui/widgets/customNavBar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/cart.dart';
@@ -276,6 +279,10 @@ class MyOrderScreen extends StatelessWidget {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
+                                var logger = Logger();
+                                // logger.i(json.encode(orderProvider.orders));
+                                // logger.i(json.encode(orderProvider.orderQuantity));
+
                                 Navigator.of(context)
                                     .pushNamed(CheckoutScreen.routeName);
                               },

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodui/const/colors.dart';
 import 'package:foodui/utils/helper.dart';
-import 'package:foodui/utils/snackbar.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/searchProvider.dart';
-import '../screens/search/search_screen.dart';
+import '../provider/featuredRestaurantCategoriesProvider.dart';
 
 class SearchBar extends StatelessWidget {
   final String? title;
-  SearchBar({@required this.title});
+  VoidCallback onTap;
+  TextEditingController? searchController;
+  SearchBar({@required this.title,required this.onTap,this.searchController});
   @override
   Widget build(BuildContext context) {
-    final searchProvider = Provider.of<SearchProvider>(context);
+    final foodCategoryProvider = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -24,13 +23,19 @@ class SearchBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)
         ),
         child: TextField(
+          onChanged: (s){
+             foodCategoryProvider.searchRestaurantByLocation();
+          },
+          //controller: foodCategoryProvider.searchString,
+          controller: searchController,
           decoration: InputDecoration(
             border: InputBorder.none,
             suffixIcon: GestureDetector(
-              onTap: (){
-                // successToast("search");
-                Navigator.of(context).pushNamed(SearchScreen.routeName);
-              },
+              onTap:onTap,
+              // onTap: (){
+              // successToast("search");
+              //   Navigator.of(context).pushNamed(SearchScreen.routeName);
+              // },
               child: Image.asset(
                 Helper.getAssetName("search_filled.png", "virtual",),
                 color: AppColor.secondary,

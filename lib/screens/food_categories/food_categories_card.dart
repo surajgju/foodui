@@ -1,4 +1,13 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../const/colors.dart';
+import '../../const/constant.dart';
+import '../../provider/featuredCategoriesProvider.dart';
+import '../food/restaurantListingScreen.dart';
 
 class FoodCategoriesCard extends StatefulWidget {
   const FoodCategoriesCard({super.key});
@@ -38,37 +47,56 @@ class _FoodCategoriesCardState extends State<FoodCategoriesCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: GridView.builder(
+    ScreenUtil.init(context);
+    final featuredCategoriesProvider =
+    Provider.of<FeaturedCategoriesProvider>(context);
+    return Container(child:
+    featuredCategoriesProvider.foodCategoriesListing != null &&  featuredCategoriesProvider.foodCategoriesListing!.length >0?
+    GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 1,
+        childAspectRatio: 0.8.sp,
       ),
-      itemCount: categories.length,
+      itemCount: 6,
       itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(categories[index]['image']!),
-                    fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: (){
+            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesListing[index].catName});
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 80.w,
+                  height: 80.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesListing[index].img!),
+                     // image: NetworkImage(categories[index]['image']!),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 8),
-              Text(categories[index]['name']!),
-            ],
+                SizedBox(height: 8),
+                SizedBox(width: 140,child: Text(featuredCategoriesProvider.foodCategoriesListing[index].catName!,
+                  overflow: TextOverflow.clip,
+                  maxLines: 1,
+                  style: TextStyle(color: AppColor.secondary,fontSize: 13,fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,)),
+              ],
+            ),
           ),
         );
       },
-    ));
+    ):
+    Center(child: CircularProgressIndicator(),)
+    );
 
   }
 }

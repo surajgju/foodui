@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodui/const/colors.dart';
 
 class ChipOption extends StatelessWidget {
    ChipOption({super.key, required  this.chipText,required this.chipPrefix,required this.chipTrailing, required this.onTap});
@@ -14,15 +15,18 @@ class ChipOption extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(right: 10),
+
+        margin: EdgeInsets.only(right: 6),
         padding: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
+         // color: Colors.red,
             border: Border.all(
-                color: Colors.black12
+                color: AppColor.textColor
             ),
             borderRadius: BorderRadius.circular(20)
         ),
         child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(chipPrefix,size: 16.sp,),
             SizedBox(width: 2.w,),

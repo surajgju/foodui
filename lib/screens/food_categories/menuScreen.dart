@@ -7,17 +7,22 @@ import 'package:foodui/widgets/customNavBar.dart';
 import 'package:foodui/widgets/searchBar.dart' as sb;
 import 'package:provider/provider.dart';
 
+import '../../const/constant.dart';
 import '../../provider/cart.dart';
+import '../../provider/featuredCategoriesProvider.dart';
 import '../../provider/menuProvider.dart';
+import '../food/restaurantListingScreen.dart';
 
 class MenuScreen extends StatelessWidget {
   static const routeName = "/menuScreen";
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     final menuProvider = Provider.of<MenuProvider>(context);
     final cartProvider = Provider.of<Cart>(context);
-
+    final featuredCategoriesProvider =
+    Provider.of<FeaturedCategoriesProvider>(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -82,29 +87,38 @@ class MenuScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                sb.SearchBar(title: "Search Food"),
+                sb.SearchBar(title: "Search Food",onTap: (){}),
                 SizedBox(
                   height: 20,
                 ),
                 SizedBox(
-                    height: Helper.getScreenHeight(context) * 0.6,
+                    height: Helper.getScreenHeight(context) * 0.76,
                     width: Helper.getScreenWidth(context),
-                    child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (c, i) => MenuCard(
-                              imageShape: ClipOval(
-                                child: Container(
-                                  height: 70,
-                                  width: 70,
-                                  child: Image.asset(
-                                    Helper.getAssetName("western2.jpg", "real"),
-                                    fit: BoxFit.cover,
+                    child:
+                    featuredCategoriesProvider.foodCategoriesListing != null  && featuredCategoriesProvider.foodCategoriesListing.length >0?
+
+                    ListView.builder(
+                        itemCount: featuredCategoriesProvider.foodCategoriesListing.length,
+                        itemBuilder: (c, i) => GestureDetector(
+                          onTap:(){
+                            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesListing[i].catName});
+
+                          },
+                          child: MenuCard(
+                                imageShape: ClipOval(
+                                  child: Container(
+                                    height: 70.h,
+                                    width: 70.w,
+                                    child:Image.network( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesListing[i].img!)
+                                    ,
                                   ),
                                 ),
+                                name: featuredCategoriesProvider.foodCategoriesListing[i].catName,
+                                count: "120",
                               ),
-                              name: menuProvider.list[i],
-                              count: "120",
-                            )))
+                        )):
+                Center(child: CircularProgressIndicator(),)
+                )
               ],
             ),
           ),
@@ -140,7 +154,7 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return Container(
-      height: 70.h,
+      height: 75.h,
       width: 0.8.sw,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6).r,
       // padding: const EdgeInsets.only(
@@ -191,10 +205,10 @@ class MenuCard extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                Text(
-                  "$_count items",
-                  style: Helper.getTheme(context).bodySmall,
-                )
+                // Text(
+                //   "$_count items",
+                //   style: Helper.getTheme(context).bodySmall,
+                // )
               ],
             ),
           ),

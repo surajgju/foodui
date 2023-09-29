@@ -10,6 +10,7 @@ import 'package:foodui/screens/notificationScreen.dart';
 import 'package:foodui/screens/orders/paymentScreen.dart';
 import 'package:foodui/utils/helper.dart';
 import 'package:foodui/widgets/customNavBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/firebaseDatafilling.dart';
 import 'auth/profileScreen.dart';
@@ -170,8 +171,8 @@ class MoreScreen extends StatelessWidget {
                 ),
                 name: "Sign Out",
                 handler: () async{
-                 await FirebaseAuth.instance.signOut();
-
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setString("token", "");
                   Navigator.of(context).pushReplacementNamed(IntroScreen.routeName);
                 },
               ),

@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/screens/food/promotionScroller.dart';
 import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
-import 'package:foodui/screens/food/restaurantsListing.dart';
+import 'package:foodui/screens/food/restaurantsListingWidget.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/urls.dart';
-import '../../provider/foodMainScreenProvider.dart';
+import '../../provider/featuredRestaurantCategoriesProvider.dart';
+import '../../provider/homeScreenProvider.dart';
 import '../../utils/helper.dart';
 import '../../widgets/deliverLocation.dart';
 import '../../widgets/navigate_back_widget.dart';
@@ -34,8 +35,10 @@ class _FoodHomeScreenState extends State<FoodHomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final foodController = Provider.of<FoodMainScreenProvider>(context);
-ScreenUtil.init(context);
+    final foodController = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
+    final homeProvider = Provider.of<HomeScreenProvider>(context);
+
+    ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
         //toolbarHeight: 150,
@@ -43,7 +46,7 @@ ScreenUtil.init(context);
         elevation: 0,
         //automaticallyImplyLeading: false,
         leading: back(context),
-        title: DeliverLocation(),
+        title: DeliverLocation(location: homeProvider.placemarks![0].name!),
         actions: [Container(
             padding: EdgeInsets.only(right: 10),
             child: Icon(Icons.search_outlined,color: Colors.black45,size: 28.sp,))],

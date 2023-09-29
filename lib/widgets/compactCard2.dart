@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../const/colors.dart';
 import '../screens/food/restaurantDetailViewScreen.dart';
+import '../screens/food/restaurantListingScreen.dart';
 import '../utils/helper.dart';
 
 class CompactCard2 extends StatelessWidget {
@@ -36,7 +37,9 @@ class CompactCard2 extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: (){
-            Navigator.of(context).pushNamed(RestaurantDetailViewScreen.routeName,arguments: {"restaurantId":"_restaurantId"});
+            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food_item','category':_name});
+
+          //  Navigator.of(context).pushNamed(RestaurantDetailViewScreen.routeName,arguments: {"restaurantId":"_restaurantId"});
 
           },
           child: Stack(
@@ -91,11 +94,11 @@ class CompactCard2 extends StatelessWidget {
                 ?.copyWith(color: AppColor.primary),
           ),
         ),
-        Container(
-          width: 60.w,
-          padding: EdgeInsets.only(left: 5),
-          child: Text(_orderTime!,style: Helper.getTheme(context).titleSmall,),
-        )
+        // Container(
+        //   width: 60.w,
+        //   padding: EdgeInsets.only(left: 5),
+        //   child: Text(_orderTime!,style: Helper.getTheme(context).titleSmall,),
+        // )
       ],
     );
   }

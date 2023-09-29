@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodui/const/constant.dart';
 import 'package:foodui/screens/food/offerHomeScreen.dart';
 import 'package:foodui/screens/tracking/order_status.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
 import '../../modals/foods/food.dart';
-import '../../modals/restaurants/restaurant.dart';
 import '../../provider/cart.dart';
 import '../../provider/featuredCategoriesProvider.dart';
+import '../../provider/featuredRestaurantCategoriesProvider.dart';
+import '../../provider/homeScreenProvider.dart';
 import '../../utils/helper.dart';
 import '../../widgets/carousel1.dart';
 import '../../widgets/categoryCard.dart';
@@ -18,8 +20,9 @@ import '../../widgets/customNavBar.dart';
 import '../../widgets/orderItemsPopup.dart';
 import '../../widgets/sliding_up_panel.dart';
 import '../../widgets/temporary.dart';
+import '../auth/changeAddressScreen.dart';
 import '../food/foodCompactScroller.dart';
-import '../food/restaurantsListing.dart';
+import '../food/restaurantsListingWidget.dart';
 import '../food_categories/food_categories_card.dart';
 import '../individualItem.dart';
 import '../../widgets/deliverLocation.dart';
@@ -30,6 +33,7 @@ import '../food/foodHomeScreen.dart';
 import '../food_categories/menuScreen.dart';
 import '../moreScreen.dart';
 import '../orders/myOrderScreen.dart';
+import '../search/search_screen.dart';
 import '../tracking/locationTracking.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,105 +44,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Restaurants> restaurantDetails = [
-    Restaurants(
-        rest_name: "restaurent 1",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1552566626-52f8b828add9"
-        ]),
-    Restaurants(
-        rest_name: "restaurent 2",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1613946069412-38f7f1ff0b65"
-        ]),
-    Restaurants(
-        rest_name: "restaurent 3",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1525648199074-cee30ba79a4a"
-        ]),
-    Restaurants(
-        rest_name: "restaurent 4",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6"
-        ]),
-    Restaurants(
-        rest_name: "restaurent 5",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1544148103-0773bf10d330"
-        ]),
-    Restaurants(
-        rest_name: "restaurent 6",
-        rest_owner_name: "owner name",
-        rest_owner_number: "+91 8168673754",
-        rest_description:
-            "restaurant description in datail. Fast food available",
-        rest_address: "16 street, park avenue, New york,USA",
-        rest_opening_hrs: "9:30 AM - 12:30 AM",
-        rest_delivery_time: "30 min",
-        rest_minimum_order: "1",
-        rest_rating: "2.5",
-        cuisines_id: "2,4",
-        rest_menu_images: [
-          "https://images.unsplash.com/photo-1623800330578-2cd67efaec75"
-        ]),
-  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Provider.of<HomeScreenProvider>(context,listen: false).getCurrentAddress();
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
     final featuredCategoriesProvider =
         Provider.of<FeaturedCategoriesProvider>(context);
+    final featuredRestaurantCategoriesProvider =
+        Provider.of<FeaturedRestaurantCategoriesProvider>(context);
     final cartProvider = Provider.of<Cart>(context);
-
+    final homeProvider = Provider.of<HomeScreenProvider>(context);
     ScreenUtil.init(context);
     return Scaffold(
       body: SafeArea(
@@ -161,12 +83,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.only(left: 15).r,
                         child: GestureDetector(
                             onTap: (){
+
+                              Navigator.pushNamed(context, ChangeAddressScreen.routeName);
+
+                              // homeProvider.getCurrentAddress();
                              // Navigator.pushNamed(context, MyMaps.routeName);
                             },
-                            child: DeliverLocation())),SizedBox(width: 20.w,),
+                            child: DeliverLocation(location:homeProvider.placemarks != null? homeProvider.placemarks![0].name! : "",))),SizedBox(width: 20.w,),
                     GestureDetector(
                         onTap: (){
-                          Navigator.pushNamed(context, OrderStatus.routeName);
+                          //Navigator.pushNamed(context, OrderStatus.routeName);
                          //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SlidingUpPanelExample()));
                         },
                         child: Image.asset("assets/images/virtual/logo.png",color:AppColor.green,width: 100.w,)),
@@ -246,7 +172,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15.h,
               ),
               sb.SearchBar(
-                title: "Search foods",
+                title: "Search Foods By Location",
+                  onTap: (){
+                    Navigator.of(context).pushNamed(SearchScreen.routeName);
+                  },
+                searchController: featuredRestaurantCategoriesProvider.searchString,
               ),SizedBox(
                 height: 20.h,
               ),
@@ -336,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
           SizedBox(
-            height: 250.h,
+            height: 270.h,
               width: 1.sw,
               child:FoodCategoriesCard()),
               SizedBox(
@@ -359,27 +289,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(left: 10, top: 10).r,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: featuredCategoriesProvider.foodCategory.length,
+                      itemCount: featuredCategoriesProvider.foodItemsListing.length,
                       itemBuilder: (c, i) {
                         String food_id = featuredCategoriesProvider
-                            .foodCategory[i]!.food_id!;
-                        Foods foods = Foods();
-                        foods = featuredCategoriesProvider
-                            .foodCategoryFoods[food_id]!;
+                            .foodItemsListing[i]!.id!;
+
                         return Row(
                           children: [
                             CompactCard2(
-                              image: foods.food_images![0],
-                              name: foods.food_name,
-                              imageTitle: featuredCategoriesProvider
-                                      .foodCategory[i].offer_price!.isNotEmpty
-                                  ? featuredCategoriesProvider
-                                          .foodCategory[i].offer_price! +
-                                      " OFF"
-                                  : featuredCategoriesProvider
-                                          .foodCategory[i].offer_percentage! +
-                                      "% OFF",
-                              imageSubTitle: "ABOVE 200",
+                              image: featuredCategoriesProvider.foodItemsListing[i].img!.isNotEmpty?
+                              IMAGE_UPLOAD_URL+ featuredCategoriesProvider.foodItemsListing[i].img!
+                                  :"",
+                              name: featuredCategoriesProvider.foodItemsListing[i].category!.isNotEmpty?
+                              featuredCategoriesProvider.foodItemsListing[i].category
+                                  :"Food name",
+                              imageTitle:"10 % OFF",
+                              imageSubTitle: "ABOVE 150",
                               orderTime: "40 min",
                             ),
                             SizedBox(
@@ -409,55 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.fromLTRB(10, 5, 0, 12).r,
                 child: FoodCompactScroller(),
               ),
-              Container(
-                width: 0.975.sw,
-                padding: EdgeInsets.fromLTRB(10, 10, 5, 8).r,
-                child: Text(
-                  "Featured for you ",
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87),
-                ),
-              ),
-              Container(
-                  height: 170.h,
-                  //color: Colors.red,
-                  //width: double.infinity,
-                  width: 0.975.sw,
-                  padding: const EdgeInsets.only(left: 10, top: 10).r,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          featuredCategoriesProvider.foodCategory2.length,
-                      itemBuilder: (c, i) {
-                        String food_id = featuredCategoriesProvider
-                            .foodCategory2[i]!.food_id!;
-                        Foods foods = Foods();
-                        foods = featuredCategoriesProvider
-                            .foodCategoryFoods2[food_id]!;
-                        return Row(
-                          children: [
-                            CompactCard2(
-                              image: foods.food_images![0],
-                              name: foods.food_name,
-                              imageTitle: featuredCategoriesProvider
-                                      .foodCategory2[i].offer_price!.isNotEmpty
-                                  ? featuredCategoriesProvider
-                                          .foodCategory2[i].offer_price! +
-                                      " OFF"
-                                  : featuredCategoriesProvider
-                                          .foodCategory2[i].offer_percentage! +
-                                      "% OFF",
-                              imageSubTitle: "ABOVE 200",
-                              orderTime: "40 min",
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                          ],
-                        );
-                      })),
+
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10).r,
                 child: Row(
@@ -478,150 +355,150 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: RestaurantListing(),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Popular Restaurants",
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87),
-                    ),
-                    TextButton(onPressed: () {}, child: Text("View all"))
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              RestaurantCard(
-                image: Image.asset(
-                  Helper.getAssetName("pizza2.jpg", "real"),
-                  fit: BoxFit.cover,
-                ),
-                name: "Minute by tuk tuk",
-              ),
-              RestaurantCard(
-                image: Image.asset(
-                  Helper.getAssetName("breakfast.jpg", "real"),
-                  fit: BoxFit.cover,
-                ),
-                name: "Cafe de Noir",
-              ),
-              RestaurantCard(
-                image: Image.asset(
-                  Helper.getAssetName("bakery.jpg", "real"),
-                  fit: BoxFit.cover,
-                ),
-                name: "Bakes by Tella",
-              ),
-              SizedBox(
-                height: 50.h,
-              ),
-              Container(
-                width: 0.975.sw,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Most Popular",
-                      style: Helper.getTheme(context).headline5,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text("View all",style: TextStyle(color: AppColor.secondary),),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                height: 260.h,
-                width: 0.975.sw,
-               // width: double.infinity,
-                padding: const EdgeInsets.only(left: 10).r,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      CompactCard1(
-                        image: Image.asset(
-                          Helper.getAssetName("pizza4.jpg", "real"),
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Cafe De Bambaa",
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      CompactCard1(
-                        name: "Burger by Bella",
-                        image: Image.asset(
-                          Helper.getAssetName("dessert3.jpg", "real"),
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Recent Items",
-                      style: Helper.getTheme(context).headlineSmall,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text("View all"),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ).r,
-                height: 380.h,
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: RecentItemCard(
-                        image: Image.asset(
-                          Helper.getAssetName("pizza3.jpg", "real"),
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Mulberry Pizza by Josh",
-                      ),
-                    ),
-                    RecentItemCard(
-                        image: Image.asset(
-                          Helper.getAssetName("coffee.jpg", "real"),
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Barita"),
-                    RecentItemCard(
-                        image: Image.asset(
-                          Helper.getAssetName("pizza.jpg", "real"),
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Pizza Rush Hour"),
-                  ],
-                ),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         "Popular Restaurants",
+              //         style: TextStyle(
+              //             fontSize: 20.sp,
+              //             fontWeight: FontWeight.w500,
+              //             color: Colors.black87),
+              //       ),
+              //       TextButton(onPressed: () {}, child: Text("View all"))
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.h,
+              // ),
+              // RestaurantCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("pizza2.jpg", "real"),
+              //     fit: BoxFit.cover,
+              //   ),
+              //   name: "Minute by tuk tuk",
+              // ),
+              // RestaurantCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("breakfast.jpg", "real"),
+              //     fit: BoxFit.cover,
+              //   ),
+              //   name: "Cafe de Noir",
+              // ),
+              // RestaurantCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("bakery.jpg", "real"),
+              //     fit: BoxFit.cover,
+              //   ),
+              //   name: "Bakes by Tella",
+              // ),
+              // SizedBox(
+              //   height: 50.h,
+              // ),
+              // Container(
+              //   width: 0.975.sw,
+              //   padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         "Most Popular",
+              //         style: Helper.getTheme(context).headline5,
+              //       ),
+              //       TextButton(
+              //         onPressed: () {},
+              //         child: Text("View all",style: TextStyle(color: AppColor.secondary),),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.h,
+              // ),
+              // Container(
+              //   height: 260.h,
+              //   width: 0.975.sw,
+              //  // width: double.infinity,
+              //   padding: const EdgeInsets.only(left: 10).r,
+              //   child: SingleChildScrollView(
+              //     scrollDirection: Axis.horizontal,
+              //     child: Row(
+              //       children: [
+              //         CompactCard1(
+              //           image: Image.asset(
+              //             Helper.getAssetName("pizza4.jpg", "real"),
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Cafe De Bambaa",
+              //         ),
+              //         SizedBox(
+              //           width: 10.w,
+              //         ),
+              //         CompactCard1(
+              //           name: "Burger by Bella",
+              //           image: Image.asset(
+              //             Helper.getAssetName("dessert3.jpg", "real"),
+              //             fit: BoxFit.cover,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.h,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         "Recent Items",
+              //         style: Helper.getTheme(context).headlineSmall,
+              //       ),
+              //       TextButton(
+              //         onPressed: () {},
+              //         child: Text("View all"),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 20,
+              //   ).r,
+              //   height: 380.h,
+              //   child: Column(
+              //     children: [
+              //       GestureDetector(
+              //         onTap: () {},
+              //         child: RecentItemCard(
+              //           image: Image.asset(
+              //             Helper.getAssetName("pizza3.jpg", "real"),
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Mulberry Pizza by Josh",
+              //         ),
+              //       ),
+              //       RecentItemCard(
+              //           image: Image.asset(
+              //             Helper.getAssetName("coffee.jpg", "real"),
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Barita"),
+              //       RecentItemCard(
+              //           image: Image.asset(
+              //             Helper.getAssetName("pizza.jpg", "real"),
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Pizza Rush Hour"),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),

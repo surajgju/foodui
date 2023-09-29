@@ -517,111 +517,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    showModalBottomSheet(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        isScrollControlled: true,
-                        isDismissible: false,
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            height: Helper.getScreenHeight(context) * 0.7,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        icon: Icon(Icons.clear),
-                                      ),
-                                    ],
-                                  ),
-                                  Image.asset(
-                                    Helper.getAssetName(
-                                      "order_confirm.png",
-                                      "virtual",
-                                    ),
-                                    height: 200.h,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Text(
-                                    "Thank You!",
-                                    style: TextStyle(
-                                      color: AppColor.primary,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 30.sp,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    "for your order",
-                                    style: Helper.getTheme(context)
-                                        .headline4
-                                        ?.copyWith(color: AppColor.primary),
-                                  ),
-                                  SizedBox(
-                                    height: 20.h,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                            horizontal: 20.0)
-                                        .r,
-                                    child: Text(
-                                        "Your order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your order"),
-                                  ),
-                                  SizedBox(
-                                    height: 20.h,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                    ).r,
-                                    child: SizedBox(
-                                      height: 50.h,
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, OrderStatus.routeName);
+                    orderProvider.placeOrder(context);
 
-                                        },
-                                        child: Text("Track My Order"),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                    ),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                HomeScreen.routeName);
-                                      },
-                                      child: Text(
-                                        "Back To Home",
-                                        style: TextStyle(
-                                          color: AppColor.primary,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
                   },
                   child: Text("Send Order",style: Helper.getTheme(context).titleLarge!.copyWith(color: Colors.white)),
                 ),
@@ -632,6 +529,115 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
     );
   }
+
+  //  showConfirmation(){
+  //  return showModalBottomSheet(
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(20),
+  //       ),
+  //       isScrollControlled: true,
+  //       isDismissible: false,
+  //       context: context,
+  //       builder: (context) {
+  //         return Container(
+  //           height: Helper.getScreenHeight(context) * 0.7,
+  //           child: SingleChildScrollView(
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               children: [
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.end,
+  //                   children: [
+  //                     IconButton(
+  //                       onPressed: () {
+  //                         Navigator.of(context).pop();
+  //                       },
+  //                       icon: Icon(Icons.clear),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 Image.asset(
+  //                   Helper.getAssetName(
+  //                     "order_confirm.png",
+  //                     "virtual",
+  //                   ),
+  //                   height: 200.h,
+  //                   fit: BoxFit.cover,
+  //                 ),
+  //                 SizedBox(
+  //                   height: 15.h,
+  //                 ),
+  //                 Text(
+  //                   "Thank You!",
+  //                   style: TextStyle(
+  //                     color: AppColor.primary,
+  //                     fontWeight: FontWeight.w900,
+  //                     fontSize: 30.sp,
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 10.h,
+  //                 ),
+  //                 Text(
+  //                   "for your order",
+  //                   style: Helper.getTheme(context)
+  //                       .headline4
+  //                       ?.copyWith(color: AppColor.primary),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 20.h,
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(
+  //                       horizontal: 20.0)
+  //                       .r,
+  //                   child: Text(
+  //                       "Your order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your order"),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 20.h,
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(
+  //                     horizontal: 20,
+  //                   ).r,
+  //                   child: SizedBox(
+  //                     height: 50.h,
+  //                     width: double.infinity,
+  //                     child: ElevatedButton(
+  //                       onPressed: () {
+  //                         Navigator.pushNamed(context, OrderStatus.routeName);
+  //
+  //                       },
+  //                       child: Text("Track My Order"),
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(
+  //                     horizontal: 20,
+  //                   ),
+  //                   child: TextButton(
+  //                     onPressed: () {
+  //                       Navigator.of(context)
+  //                           .pushReplacementNamed(
+  //                           HomeScreen.routeName);
+  //                     },
+  //                     child: Text(
+  //                       "Back To Home",
+  //                       style: TextStyle(
+  //                         color: AppColor.primary,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       });
+  // }
 }
 
 class PaymentCard extends StatelessWidget {

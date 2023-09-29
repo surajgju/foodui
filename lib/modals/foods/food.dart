@@ -5,25 +5,27 @@ part 'food.g.dart';
 
 @JsonSerializable()
 class Foods {
-
+  final int? food_id;
   final String? food_name;
   final String? food_description;
   final String? food_minimum_order;
   final String? food_rating;
-  final String? cuisines_id;
-  final List? food_images;
+  final int? menu_id;
+  final String? img;
   final String? food_type;
-  final String? food_price;
+  final String? price;
   final String? food_reviews_id;
 
-  Foods({this.food_name,
+  Foods({
+    this.food_id,
+    this.food_name,
  this.food_description,
  this.food_minimum_order,
  this.food_rating,
- this.cuisines_id,
- this.food_images,
+ this.menu_id,
+ this.img,
  this.food_type,
- this.food_price,
+ this.price,
  this.food_reviews_id});
 
   factory Foods.fromJson(Map<String,dynamic> json)=> _$FoodsFromJson(json);
