@@ -192,54 +192,54 @@ class _HomeScreenState extends State<HomeScreen> {
               //   indent: 20,
               //   endIndent: 20,
               // ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(left: 10, right: 10).r,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: CategoryCard(
-                        image: Image.asset(
-                          Helper.getAssetName(
-                              "last_minute_offer.png", "virtual"),
-                          height: 100.h,
-                           width: 80.w,
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Offer Zone",
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, OfferHomeScreen.routeName);
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-
-                    Flexible(
-                      child: CategoryCard(
-                        image: Image.asset(
-                          Helper.getAssetName("grocery.png", "real"),
-                          height: 100.h,
-                          width: 80.w,
-                          fit: BoxFit.cover,
-                        ),
-                        name: "Premium",
-                        onTap: () {
-                          //  print("gggggg");
-                          Navigator.pushNamed(
-                              context, FoodHomeScreen.routeName);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
+              // Container(
+              //   width: double.infinity,
+              //   padding: const EdgeInsets.only(left: 10, right: 10).r,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Flexible(
+              //         child: CategoryCard(
+              //           image: Image.asset(
+              //             Helper.getAssetName(
+              //                 "last_minute_offer.png", "virtual"),
+              //             height: 100.h,
+              //              width: 80.w,
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Offer Zone",
+              //           onTap: () {
+              //             Navigator.pushNamed(
+              //                 context, OfferHomeScreen.routeName);
+              //           },
+              //         ),
+              //       ),
+              //       SizedBox(
+              //         width: 10.w,
+              //       ),
+              //
+              //       Flexible(
+              //         child: CategoryCard(
+              //           image: Image.asset(
+              //             Helper.getAssetName("grocery.png", "real"),
+              //             height: 100.h,
+              //             width: 80.w,
+              //             fit: BoxFit.cover,
+              //           ),
+              //           name: "Premium",
+              //           onTap: () {
+              //             //  print("gggggg");
+              //             Navigator.pushNamed(
+              //                 context, FoodHomeScreen.routeName);
+              //           },
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.h,
+              // ),
 
               // SizedBox(
               //   height: 20.h,
@@ -293,7 +293,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (c, i) {
                         String food_id = featuredCategoriesProvider
                             .foodItemsListing[i]!.id!;
-
                         return Row(
                           children: [
                             CompactCard2(

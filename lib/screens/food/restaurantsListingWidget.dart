@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
 import 'package:provider/provider.dart';
+import '../../const/constant.dart';
+import '../../provider/featuredCategoriesProvider.dart';
 import '../../provider/featuredRestaurantCategoriesProvider.dart';
 
 class RestaurantListing extends StatefulWidget {
@@ -14,7 +16,7 @@ class RestaurantListing extends StatefulWidget {
 class _FoodHomeScreenState extends State<RestaurantListing> {
   @override
   Widget build(BuildContext context) {
-    final foodController = Provider.of<FeaturedRestaurantCategoriesProvider>(context);
+    final foodResController = Provider.of<FeaturedCategoriesProvider>(context);
     ScreenUtil.init(context);
     return Container(
      // height: 220.h,
@@ -22,12 +24,12 @@ class _FoodHomeScreenState extends State<RestaurantListing> {
 
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: 5,
+        itemCount: foodResController.PopularRestaurantCategories.length,//5,
         itemBuilder:(c,i) {
          return RestaurantCompactDetailCard(
-            image: "https://cssfounder.co.uk/CSS133/qconnect/vendor/uploads/40698hotel1.jpg",
-            name: "Al Barsha Inasal Restaurant",
-            foods: 'Lebanese, BreakFast, Desserts',
+            image: VENDOR_IMAGE_UPLOAD+foodResController.PopularRestaurantCategories[i].img1!,
+            name: foodResController.PopularRestaurantCategories[i].brandName,
+            foods: foodResController.PopularRestaurantCategories[i].storeType,
             restaurantId: 2,);
 
 

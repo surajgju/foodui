@@ -116,6 +116,7 @@ var logger = Logger();
     await featuredCategoriesProvider.getMainFoodCategories();
     await featuredCategoriesProvider.getSpecialFoodCategories();
     Provider.of<HomeScreenProvider>(context,listen: false).getCurrentAddress();
+    featuredCategoriesProvider.getTopRestaurant();
 
   }
 

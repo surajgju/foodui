@@ -19,7 +19,6 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
   bool isFreeDeliveryEnable = false;
   bool isUnderTenMinutesEnable = false;
   bool isNewlyAddedEnable = false;
-  List<RestaurantCategoriesItem> PopularRestaurantCategories = [];
   APIProvider apiProvider = APIProvider();
   List<resCat.Data> restaurantCategories = [];
   List<resCat.Data> restaurantCategoriesForWidget = [];
@@ -40,21 +39,21 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  getRestaurantByLocation(String location) async {
-    Response response = await apiProvider.get(
-      url: "/get_restaurant_category_name.php?cat_name=$location",
-    );
-    if (response.data['status'] == true) {
-      successToast(response.data['message']);
-      notifyListeners();
-    }
-  }
+  // getRestaurantByLocation(String location) async {
+  //   Response response = await apiProvider.get(
+  //     url: "/get_restaurant_category_name.php?cat_name=$location",
+  //   );
+  //   if (response.data['status'] == true) {
+  //     successToast(response.data['message']);
+  //     notifyListeners();
+  //   }
+  // }
   getRestaurantByFoodItem(String food_item) async {
-    //ToDo: need to change url
     Response response = await apiProvider.get(
       url: "/get_restaurant_product_name.php?product_name=$food_item",
     );
     if (response.data['status'] == true) {
+      restaurantCategories = resCat.RestaurantListingByCategories.fromJson(response.data).data!;
       successToast(response.data['message']);
       notifyListeners();
     }

@@ -30,6 +30,7 @@ final logger = Logger();
    await featuredCategoriesProvider.getMainFoodCategories();
   await featuredCategoriesProvider.getSpecialFoodCategories();
    homeProvider.getCurrentAddress();
+   featuredCategoriesProvider.getTopRestaurant();
 
 
   }
