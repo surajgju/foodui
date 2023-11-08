@@ -19,7 +19,6 @@ import '../../widgets/compactCard2.dart';
 import '../../widgets/customNavBar.dart';
 import '../../widgets/orderItemsPopup.dart';
 import '../../widgets/sliding_up_panel.dart';
-import '../../widgets/temporary.dart';
 import '../auth/changeAddressScreen.dart';
 import '../food/foodCompactScroller.dart';
 import '../food/restaurantsListingWidget.dart';
@@ -76,26 +75,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   right: 10,
                 ).r,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                         padding: EdgeInsets.only(left: 15).r,
                         child: GestureDetector(
                             onTap: (){
-
                               Navigator.pushNamed(context, ChangeAddressScreen.routeName);
-
                               // homeProvider.getCurrentAddress();
                              // Navigator.pushNamed(context, MyMaps.routeName);
                             },
-                            child: DeliverLocation(location:homeProvider.placemarks != null? homeProvider.placemarks![0].name! : "",))),SizedBox(width: 20.w,),
-                    GestureDetector(
-                        onTap: (){
-                          //Navigator.pushNamed(context, OrderStatus.routeName);
-                         //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SlidingUpPanelExample()));
-                        },
-                        child: Image.asset("assets/images/virtual/logo.png",color:AppColor.green,width: 100.w,)),
+                            child: DeliverLocation(location:homeProvider.placemarks != null? homeProvider.placemarks![0].street! : "",))),SizedBox(width: 0.w,),
+                    // GestureDetector(
+                    //     onTap: (){
+                    //       //Navigator.pushNamed(context, OrderStatus.routeName);
+                    //      //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SlidingUpPanelExample()));
+                    //     },
+                    //     child: Image.asset("assets/images/virtual/logo.png",color:AppColor.green,width: 100.w,)),
                     SizedBox(width: 42.w,),
                     Row(
                       children: [
@@ -172,7 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15.h,
               ),
               sb.SearchBar(
-                title: "Search Foods By Location",
+                title: homeProvider.placemarks != null ? homeProvider.placemarks![0].locality : "Search Foods By Location",
+               // title: "Search Foods By Location",
                   onTap: (){
                     Navigator.of(context).pushNamed(SearchScreen.routeName);
                   },
@@ -292,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: featuredCategoriesProvider.foodItemsListing.length,
                       itemBuilder: (c, i) {
                         String food_id = featuredCategoriesProvider
-                            .foodItemsListing[i]!.id!;
+                            .foodItemsListing[i]!.id!.toString();
                         return Row(
                           children: [
                             CompactCard2(

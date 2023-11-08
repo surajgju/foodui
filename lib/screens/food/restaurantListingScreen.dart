@@ -59,10 +59,10 @@ class _RestaurantListingScreenState extends State<RestaurantListingScreen> {
                 padding: EdgeInsets.only(top: 10),
                 child: RestaurantCompactDetailCard(
                         // image: Helper.getAssetName("restaurant01.jpeg", "real"),
-                        image:VENDOR_IMAGE_UPLOAD+ restaurantController.restaurantCategories![i].img1!,
+                        image:IMAGE_UPLOAD_URL+ restaurantController.restaurantCategories![i].img1!,
                         name: restaurantController.restaurantCategories![i].restaurantName,
                         foods: restaurantController.restaurantCategories![i].storeType,
-                        restaurantId:int.parse(restaurantController.restaurantCategories![i].id!),
+                        restaurantId:restaurantController.restaurantCategories![i].id!.toInt(),
                       ),
               );}):Center(child: Column(
                       children: [

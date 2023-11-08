@@ -95,19 +95,19 @@ class MoreScreen extends StatelessWidget {
                //   Navigator.of(context).pushNamed(PaymentScreen.routeName);
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
-              MoreCard(
-                image: Image.asset(
-                  Helper.getAssetName("income.png", "virtual"),
-                  color: Colors.black87,
-                ),
-                name: "Payment Details",
-                handler: () {
-                  Navigator.of(context).pushNamed(PaymentScreen.routeName);
-                },
-              ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // MoreCard(
+              //   image: Image.asset(
+              //     Helper.getAssetName("income.png", "virtual"),
+              //     color: Colors.black87,
+              //   ),
+              //   name: "Payment Details",
+              //   handler: () {
+              //     Navigator.of(context).pushNamed(PaymentScreen.routeName);
+              //   },
+              // ),
               SizedBox(
                 height: 10,
               ),
@@ -210,11 +210,12 @@ class MoreCard extends StatelessWidget {
         height: 70,
         width: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-              //repeat: ImageRepeat.repeatX,
-              fit: BoxFit.cover,
-              image: AssetImage("assets/images/virtual/design1.jpeg")),
-          borderRadius: BorderRadius.circular(10)
+          // image: DecorationImage(
+          //     //repeat: ImageRepeat.repeatX,
+          //     fit: BoxFit.cover,
+          //     image: AssetImage("assets/images/virtual/design1.jpeg")),
+          border: Border(bottom: BorderSide(color: AppColor.placeholderBg,width: 1),),
+          //borderRadius: BorderRadius.circular(10)
         ),
         child: Stack(
           children: [

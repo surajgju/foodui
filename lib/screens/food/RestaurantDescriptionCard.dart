@@ -13,6 +13,8 @@ class RestaurantDescriptionCard extends StatelessWidget {
     @required String? image,
     @required String? foods,
     @required String? location,
+    @required num? deliveryFees,
+    @required String? deliveryTime,
     bool? ispro,
     bool? topchoice,
     required int? restaurantId,
@@ -23,6 +25,8 @@ class RestaurantDescriptionCard extends StatelessWidget {
         _topchoice = topchoice,
         _restaurantId = restaurantId,
         _location = location,
+        _deliveryFees = deliveryFees,
+        _deliveryTime = deliveryTime,
         super(key: key);
 
   final String? _name;
@@ -32,6 +36,8 @@ class RestaurantDescriptionCard extends StatelessWidget {
   final bool? _topchoice;
   final int? _restaurantId;
   final String? _location;
+  final num? _deliveryFees;
+  final String? _deliveryTime;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class RestaurantDescriptionCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(5, 5, 10, 0).r,
+                margin: EdgeInsets.fromLTRB(5, 12, 0, 0).r,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8).w,
                   child: SizedBox(
@@ -65,17 +71,21 @@ class RestaurantDescriptionCard extends StatelessWidget {
                     child: Image.network(
                       _image!,
                       fit: BoxFit.fill,
+                        errorBuilder: (c, o, i) {
+                          return Image.asset(
+                              Helper.getAssetName("no_image_found.png", "virtual"));
+                        }
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 15,
+                width: 7,
               ),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(top: 10),
-                  height: 80.h,
+                  height: 110.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -83,7 +93,7 @@ class RestaurantDescriptionCard extends StatelessWidget {
                         children: [
                           Container(
                             constraints: BoxConstraints(
-                                minWidth: 100.w, maxWidth: 200.w),
+                                minWidth: 100.w, maxWidth: 180.w),
                             child: Text(
                               _name!,
                               overflow: TextOverflow.ellipsis,
@@ -94,28 +104,7 @@ class RestaurantDescriptionCard extends StatelessWidget {
                                       color: AppColor.primary, fontSize: 16.sp),
                             ),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          if (_ispro != null)
-                            Container(
-                              padding: EdgeInsets.only(
-                                      left: 5, right: 5, bottom: 2, top: 2)
-                                  .r,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff011ddd),
-                                  borderRadius: BorderRadius.circular(3).w),
-                              child: Text(
-                                "pro"!,
-                                style: Helper.getTheme(context)
-                                    .headlineSmall
-                                    ?.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.w600),
-                              ),
-                            )
+
                         ],
                       ),
                       SizedBox(
@@ -123,23 +112,7 @@ class RestaurantDescriptionCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          // Text("Cafe",style: TextStyle(color: Colors.black54)),
-                          // SizedBox(
-                          //   width: 5,
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(bottom: 5.0),
-                          //   child: Text(
-                          //     ".",
-                          //     style: TextStyle(
-                          //       color: AppColor.green,
-                          //       fontWeight: FontWeight.w900,
-                          //     ),
-                          //   ),
-                          // ),
-                          // SizedBox(
-                          //   width: 5,
-                          // ),
+
                           Text(_foods ?? "Food Type",
                               style: TextStyle(color: Colors.black54)),
                           SizedBox(
@@ -154,109 +127,41 @@ class RestaurantDescriptionCard extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.location_on,
-                           // color: Color(0xFFFFD700),
                             color: Colors.black26,
                             size: 16.sp,
                           ),
-                          // SizedBox(
-                          //   width: 5.w,
-                          // ),
-                          // Text(
-                          //   "4.9",
-                          //   style: TextStyle(
-                          //     color: AppColor.primary,
-                          //   ),
-                          // ),
-                          // SizedBox(width: 10.w),
+
                           SizedBox(
-                              width: 120.w,
-                              child: Text(_location ?? "Address",style: TextStyle(fontSize: 10,height: 1,color:Colors.black54),overflow: TextOverflow.fade,maxLines: 2,)),
-                          if (_topchoice != null)
-                            Container(
-                              padding: EdgeInsets.only(
-                                      left: 5, right: 5, bottom: 4, top: 4)
-                                  .r,
-                              decoration: BoxDecoration(
-                                  color: Color(0xfffde7e3),
-                                  borderRadius: BorderRadius.circular(5).w),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    Helper.getAssetName(
-                                        "fav_filled.png", "virtual"),
-                                    width: 12.w,
-                                  ),
-                                  Text(
-                                    "Top choice"!,
-                                    style: Helper.getTheme(context)
-                                        .headlineSmall
-                                        ?.copyWith(
-                                            color: Colors.black54,
-                                            fontSize: 14,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.normal),
-                                  ),
-                                ],
-                              ),
-                            )
+                              width: 140.w,
+                              child: Text(_location ?? "Address",style: TextStyle(fontSize: 12,height: 1,color:Colors.black54),overflow: TextOverflow.ellipsis,maxLines: 2,)),
+
                         ],
                       ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Row(children: [
+                        Text("Delivery fee : ",style: TextStyle(fontSize: 13,color: Colors.black54),),
+                        SizedBox(height: 5.h,), Text("${_deliveryFees.toString()} \₹",style: TextStyle(fontSize: 12.sp,color: Colors.black87))
+                      ],),  Row(children: [
+                        Text("Delivery time : ",style: TextStyle(fontSize: 13,color: Colors.black54),),
+                        SizedBox(height: 5.h,), Text(_deliveryTime!,style: TextStyle(fontSize: 12.sp,color: Colors.black87))   ],)
                     ],
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                margin: EdgeInsets.only(left: 5),
-                // decoration: BoxDecoration(
-                //     color: Colors.white, shape: BoxShape.circle),
-                child: Icon(
-                  Icons.info_outline,
-                  color: AppColor.primary,
-                ),
-              )
+              // Container(
+              //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              //   margin: EdgeInsets.only(left: 5),
+              //   // decoration: BoxDecoration(
+              //   //     color: Colors.white, shape: BoxShape.circle),
+              //   child: Icon(
+              //     Icons.info_outline,
+              //     color: AppColor.primary,
+              //   ),
+              // )
             ],
           ),
-          // Container(
-          //  // color: Colors.yellow,
-          //   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //
-          //     Flexible(
-          //      // padding: EdgeInsets.only(left: 10,right: 10),
-          //       child: Column(
-          //         children: [
-          //           Text("Delivery fee",style: TextStyle(fontSize: 16,color: Colors.black54),),
-          //           SizedBox(height: 5.h,), Text("ADE 6.50",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-          //         ],
-          //       ),
-          //     ),
-          //     Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-          //     Flexible(
-          //      // padding: EdgeInsets.only(left: 10,right: 10),
-          //       child: Column(
-          //         children: [
-          //           Text("Delivery time",style: TextStyle(fontSize: 16,color: Colors.black54),),
-          //           SizedBox(height: 5.h,), Text("40 mins",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-          //         ],
-          //       ),
-          //     ), Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-          //
-          //     Flexible(
-          //      // padding: EdgeInsets.only(left: 10,right: 10),
-          //       child: Column(
-          //         children: [
-          //           Text("Delivered by",style: TextStyle(fontSize: 16,color: Colors.black54),),
-          //          SizedBox(height: 5.h,),
-          //           Text("Qconnect",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-          //         ],
-          //       ),
-          //     ),
-          //
-          //   ],),
-          // )
         ],
       ),
     );

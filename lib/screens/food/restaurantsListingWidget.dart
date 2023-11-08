@@ -18,24 +18,22 @@ class _FoodHomeScreenState extends State<RestaurantListing> {
   Widget build(BuildContext context) {
     final foodResController = Provider.of<FeaturedCategoriesProvider>(context);
     ScreenUtil.init(context);
-    return Container(
+    return foodResController.PopularRestaurantCategories != null && foodResController.PopularRestaurantCategories.length>0? Container(
      // height: 220.h,
       child: ListView.builder(
-
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: foodResController.PopularRestaurantCategories.length,//5,
         itemBuilder:(c,i) {
+
          return RestaurantCompactDetailCard(
-            image: VENDOR_IMAGE_UPLOAD+foodResController.PopularRestaurantCategories[i].img1!,
-            name: foodResController.PopularRestaurantCategories[i].brandName,
+            image:foodResController.PopularRestaurantCategories[i].img1 != null? IMAGE_UPLOAD_URL+ foodResController.PopularRestaurantCategories[i].img1! : "",
+            name: foodResController.PopularRestaurantCategories[i].name ?? "restaurant name",
             foods: foodResController.PopularRestaurantCategories[i].storeType,
-            restaurantId: 2,);
-
-
+            restaurantId: foodResController.PopularRestaurantCategories[i].id!.toInt(),);
         },
       ),
-    );
+    ):Container(child: Center(child: Text("Category not found"),),);
   }
 
 

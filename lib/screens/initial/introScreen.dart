@@ -65,17 +65,18 @@ class _IntroScreenState extends State<IntroScreen> {
               child: Column(
                 children: [
                   // Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(HomeScreen.routeName);
-                    },
-                    child: Container(
-                        margin: EdgeInsets.only(top: 50, left: 300).r,
-                        child: Text(
-                          "Skip",
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.of(context).pushNamed(HomeScreen.routeName);
+                  //   },
+                  //   child: Container(
+                  //       margin: EdgeInsets.only(top: 50, left: 300).r,
+                  //       child: Text(
+                  //         "Skip",
+                  //         style: TextStyle(color: Colors.white),
+                  //       )),
+                  // ),
+                  Container(height: 60.h,),
                   Container(
                     margin: EdgeInsets.only(top: 50).r,
                     padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -245,30 +246,29 @@ class _IntroScreenState extends State<IntroScreen> {
                                         child:
                                         // authProvider.isMobile
                                         //     ?
-                                        ElevatedButton(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(AppColor
-                                                                .green)),
-                                                onPressed: () {
-                                                  if (authProvider
-                                                          .mobileInputController
-                                                          .text
-                                                          .isValidPhoneNumber()) {
-                                                    authProvider.loginWithPhone(context);
+                                        GestureDetector(
+                                            onTap: (){
+                                        if (authProvider
+                                            .mobileInputController
+                                            .text
+                                            .isValidPhoneNumber()) {
+                                        authProvider.loginWithPhone(context);
 
-                                                    // Navigator.of(context)
-                                                    //     .pushReplacementNamed(
-                                                    //         SendOTPScreen
-                                                    //             .routeName);
-                                                  } else {
-                                                    warningToast(
-                                                        "Please enter correct phone number");
-                                                  }
-                                                },
-                                                child: Text("Get OTP",style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),),
-                                              )
+                                        // Navigator.of(context)
+                                        //     .pushReplacementNamed(
+                                        //         SendOTPScreen
+                                        //             .routeName);
+                                        } else {
+                                        warningToast(
+                                        "Please enter correct phone number");
+                                        }
+                                        },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: AppColor.green,
+                                                    borderRadius: BorderRadius.circular(5)
+                                                ),
+                                                child: Center(child: Text("Get OTP",style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white,fontSize: 14.sp),))))
                                           //   : ElevatedButton(
                                           //       style: ButtonStyle(
                                           //           backgroundColor:
@@ -319,7 +319,7 @@ class _IntroScreenState extends State<IntroScreen> {
                                       color: Colors.white,
                                       border:
                                           Border.all(color: AppColor.placeholder),
-                                      borderRadius: BorderRadius.circular(30)),
+                                      borderRadius: BorderRadius.circular(5)),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -328,7 +328,7 @@ class _IntroScreenState extends State<IntroScreen> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(30)),
+                                                BorderRadius.circular(5).w),
                                         child: Image.asset(
                                           Helper.getAssetName(
                                             "google.png",

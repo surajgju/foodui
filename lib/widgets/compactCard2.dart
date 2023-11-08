@@ -51,6 +51,11 @@ class CompactCard2 extends StatelessWidget {
                 width: 90.w,
                 height: 100.h,
                 fit: BoxFit.cover,
+                  errorBuilder: (c, o, i) {
+                    return Image.asset(
+                        Helper.getAssetName("no_image_found.png", "virtual") ,width: 90.w,
+                      height: 100.h,);
+                  }
 
               ),),
 

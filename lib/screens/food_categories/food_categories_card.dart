@@ -51,7 +51,7 @@ class _FoodCategoriesCardState extends State<FoodCategoriesCard> {
     final featuredCategoriesProvider =
     Provider.of<FeaturedCategoriesProvider>(context);
     return Container(child:
-    featuredCategoriesProvider.foodCategoriesListing != null &&  featuredCategoriesProvider.foodCategoriesListing!.length >0?
+    featuredCategoriesProvider.foodCategoriesMain != null &&  featuredCategoriesProvider.foodCategoriesMain!.length >0?
     GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -63,7 +63,7 @@ class _FoodCategoriesCardState extends State<FoodCategoriesCard> {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: (){
-            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesListing[index].catName});
+            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesMain[index].name});
           },
           child: Padding(
             padding: const EdgeInsets.all(6.0),
@@ -77,14 +77,14 @@ class _FoodCategoriesCardState extends State<FoodCategoriesCard> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesListing[index].img!),
+                      image: NetworkImage( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesMain[index].image!),
                      // image: NetworkImage(categories[index]['image']!),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 SizedBox(height: 8),
-                SizedBox(width: 140,child: Text(featuredCategoriesProvider.foodCategoriesListing[index].catName!,
+                SizedBox(width: 140,child: Text(featuredCategoriesProvider.foodCategoriesMain[index].name!,
                   overflow: TextOverflow.clip,
                   maxLines: 1,
                   style: TextStyle(color: AppColor.secondary,fontSize: 13,fontWeight: FontWeight.w400),

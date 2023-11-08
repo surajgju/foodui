@@ -96,6 +96,107 @@ class OrderItemCard extends StatelessWidget {
               style: Helper.getTheme(context)
                   .titleMedium,
             ),
+          ), Container(
+            padding:EdgeInsets.only(left: 8,right: 8),
+            margin: EdgeInsets.only(right: 15),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black,width: 0.4),
+              borderRadius: BorderRadius.circular(6)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisSize: MainAxisSize.max,
+              children: [
+                GestureDetector(
+                  onTap:(){
+                    // cartProvider.removeFromCart(widget._foodId);
+                    // orderProvider.removeOrder(widget._restaurantId!,
+                    //     widget._foodId!,
+                    //     Foods(
+                    //       food_id:int.parse( widget._foodId!),
+                    //       food_name: widget._name,
+                    //       food_description: widget._food_description,
+                    //       food_minimum_order: "1",
+                    //       menu_id: widget._menuId,
+                    //       img: widget._image!,
+                    //       food_type: widget._foods,
+                    //       price: widget._price,),
+                    //     Restaurant(
+                    //         id: widget._restaurantDetails!.id,
+                    //         brandName: widget._restaurantDetails!.brandName,
+                    //         ownerName:widget._restaurantDetails!.ownerName,
+                    //         mobNumber :widget._restaurantDetails!.ownerMobNumber,
+                    //         restaurantCity: widget._restaurantDetails!.restaurantCity,
+                    //         restaurantPin: widget._restaurantDetails!.restaurantPin,
+                    //         ownerEmail:widget._restaurantDetails!.ownerEmail,
+                    //         storeType: widget._restaurantDetails!.storeType,
+                    //         restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                    //         img1:widget._restaurantDetails!.img1,
+                    //         img2: widget._restaurantDetails!.img1
+                    //     ));
+                  },
+                  child: Container(
+                    child: Text(
+                      "−",
+                      style: TextStyle(
+                          color: AppColor.green,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:EdgeInsets.only(left: 12,right: 12),
+                  child: Text(_quantity.toString(),
+                  //  "${orderProvider.orderQuantity.containsKey!(widget._foodId)?orderProvider.orderQuantity[widget._foodId]:0}",
+                    style: TextStyle(
+                        color: AppColor.green,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+
+                    // cartProvider.addToCart(widget._foodId);
+                    // orderProvider.addOrder(widget._restaurantId!,
+                    //     widget._foodId!,
+                    //     Foods(
+                    //       food_id:int.parse( widget._foodId!),
+                    //       food_name: widget._name,
+                    //       food_description: widget._food_description,
+                    //       food_minimum_order: "1",
+                    //       menu_id: widget._menuId,
+                    //       img: widget._image!,
+                    //       food_type: widget._foods,
+                    //       price: widget._price,),
+                    //     Restaurant(
+                    //         id: widget._restaurantDetails!.id,
+                    //         brandName: widget._restaurantDetails!.brandName,
+                    //         ownerName:widget._restaurantDetails!.ownerName,
+                    //         mobNumber :widget._restaurantDetails!.ownerMobNumber,
+                    //         restaurantCity: widget._restaurantDetails!.restaurantCity,
+                    //         restaurantPin: widget._restaurantDetails!.restaurantPin,
+                    //         ownerEmail:widget._restaurantDetails!.ownerEmail,
+                    //         storeType: widget._restaurantDetails!.storeType,
+                    //         restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                    //         img1:widget._restaurantDetails!.img1,
+                    //         img2: widget._restaurantDetails!.img1
+                    //     ));
+                  },
+
+                  child: Container(
+                    child: Text(
+                      "+",
+                      style: TextStyle(
+                          color: AppColor.green,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           Text(
             "$_price \₹",

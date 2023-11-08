@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const/colors.dart';
 
 class CustomTextInput extends StatelessWidget {
@@ -29,12 +30,14 @@ final VoidCallback? _onEditingComplete;
 final int? _maxlength;
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Container(
       width: double.infinity,
-      height: 50,
-      decoration: ShapeDecoration(
+      height: 50.h,
+      decoration: BoxDecoration(
         color: AppColor.placeholderBg,
-        shape: StadiumBorder(),
+       borderRadius: BorderRadius.circular(5).w
+       // shape: StadiumBorder(),
       ),
       child: TextField(
         decoration: InputDecoration(

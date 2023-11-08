@@ -95,13 +95,13 @@ class MenuScreen extends StatelessWidget {
                     height: Helper.getScreenHeight(context) * 0.76,
                     width: Helper.getScreenWidth(context),
                     child:
-                    featuredCategoriesProvider.foodCategoriesListing != null  && featuredCategoriesProvider.foodCategoriesListing.length >0?
+                    featuredCategoriesProvider.foodCategoriesMain != null  && featuredCategoriesProvider.foodCategoriesMain.length >0?
 
                     ListView.builder(
-                        itemCount: featuredCategoriesProvider.foodCategoriesListing.length,
+                        itemCount: featuredCategoriesProvider.foodCategoriesMain.length,
                         itemBuilder: (c, i) => GestureDetector(
                           onTap:(){
-                            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesListing[i].catName});
+                            Navigator.of(context).pushNamed(RestaurantListingScreen.routeName, arguments: {'search_by':'food','category':featuredCategoriesProvider.foodCategoriesMain[i].name});
 
                           },
                           child: MenuCard(
@@ -109,11 +109,17 @@ class MenuScreen extends StatelessWidget {
                                   child: Container(
                                     height: 70.h,
                                     width: 70.w,
-                                    child:Image.network( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesListing[i].img!)
+                                    child:Image.network( IMAGE_UPLOAD_URL+featuredCategoriesProvider.foodCategoriesMain[i].image!,
+                                        errorBuilder: (c, o, i) {
+                                          return Image.asset(
+                                              Helper.getAssetName("no_image_found.png", "virtual"));
+                                        },
+                                      fit: BoxFit.cover,
+                                    )
                                     ,
                                   ),
                                 ),
-                                name: featuredCategoriesProvider.foodCategoriesListing[i].catName,
+                                name: featuredCategoriesProvider.foodCategoriesMain[i].name,
                                 count: "120",
                               ),
                         )):

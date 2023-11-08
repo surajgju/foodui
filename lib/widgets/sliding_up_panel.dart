@@ -7,6 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/helper.dart';
+
 void main() => runApp(SlidingUpPanelExample());
 
 class SlidingUpPanelExample extends StatelessWidget {
@@ -192,6 +194,10 @@ class _HomePageState extends State<HomePage> {
                         height: 120.0,
                         width: (MediaQuery.of(context).size.width - 48) / 2 - 2,
                         fit: BoxFit.cover,
+                          errorBuilder: (c, o, i) {
+                            return Image.asset(
+                                Helper.getAssetName("no_image_found.png", "virtual"));
+                          }
                       ),
                       Image.network(
 
@@ -199,6 +205,10 @@ class _HomePageState extends State<HomePage> {
                         width: (MediaQuery.of(context).size.width - 48) / 2 - 2,
                         height: 120.0,
                         fit: BoxFit.cover,
+                          errorBuilder: (c, o, i) {
+                            return Image.asset(
+                                Helper.getAssetName("no_image_found.png", "virtual"));
+                          }
                       ),
                     ],
                   ),

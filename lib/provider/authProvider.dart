@@ -48,9 +48,9 @@ var logger = Logger();
      final payload = FormData.fromMap({"otp": int.parse(smsCode)});
 
      Response response = await apiProvider.formRequest(
-         url: "/auth_otp.php", payload: payload,noToken: true);
-
-    if(response.data['status']==true){
+         url: "/auth.html", payload: payload,noToken: true);
+     print("Api response is of type "+response.data.runtimeType.toString());
+    if( response.data['status']==true){
       if(response.data['token'] != null)
       await prefs.setString("token", response.data['token']);
       notifyListeners();
@@ -58,7 +58,6 @@ var logger = Logger();
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     }else if(response.data['status']==false){
       await prefs.setString("token", "");
-
       loadingWidget(context, false);
       warningToast(response.data['message']);
     }else{
@@ -77,8 +76,8 @@ var logger = Logger();
       'phone': mobileInputController.text,
     });
     // Response response = await apiProvider.post(url: "/login.php", payload: {"phone":num.parse(mobileInputController.text)});
-     Response response = await apiProvider.formRequest(url: "/login.php", payload: loginRequest);
-    logger.i(response);
+     Response response = await apiProvider.formRequest(url: "/login.html", payload: loginRequest);
+   // logger.i(response);
     if(response.data['status']==true){
       SharedPreferences prefs = await SharedPreferences.getInstance();
       otpToken = response.data['otp_token'];
@@ -90,7 +89,7 @@ var logger = Logger();
      loadingWidget(context, false);
      warningToast("Something went Wrong");
    }
-
+    loadingWidget(context, false);
   }
 
 
@@ -113,9 +112,12 @@ var logger = Logger();
   }
   getData(context)async{
     final featuredCategoriesProvider = Provider.of<FeaturedCategoriesProvider>(context,listen: false);
+    final homeProvider =  Provider.of<HomeScreenProvider>(context,listen: false);
     await featuredCategoriesProvider.getMainFoodCategories();
     await featuredCategoriesProvider.getSpecialFoodCategories();
     Provider.of<HomeScreenProvider>(context,listen: false).getCurrentAddress();
+    homeProvider.getMainBanners();
+
     featuredCategoriesProvider.getTopRestaurant();
 
   }

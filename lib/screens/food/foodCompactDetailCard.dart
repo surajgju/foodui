@@ -2,13 +2,13 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodui/modals/restaurants/RestaurantDetails.dart';
 import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
 import 'package:foodui/utils/snackbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
 import '../../modals/foods/food.dart';
-import '../../modals/restaurants/Restaurant.dart';
 import '../../provider/cart.dart';
 import '../../provider/ordersProviders.dart';
 import '../../utils/helper.dart';
@@ -29,7 +29,7 @@ class FoodCompactDetailCard extends StatefulWidget {
     int? menuId,
     final VoidCallback? addItem,
     final VoidCallback? removeItem,
-    final Restaurant? restaurantDetails,
+    final RestaurantDetails? restaurantDetails,
   })  : _name = name,
         _image = image,
         _foods = foods,
@@ -59,7 +59,7 @@ class FoodCompactDetailCard extends StatefulWidget {
   final int? _cartItem;
   final VoidCallback? _addItem;
   final VoidCallback? _removeItem;
-  final Restaurant? _restaurantDetails;
+  final RestaurantDetails? _restaurantDetails;
 
 
   @override
@@ -235,6 +235,10 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                   child: Image.network(
                     widget._image!,
                     fit: BoxFit.cover,
+                      errorBuilder: (c, o, i) {
+                        return Image.asset(
+                            Helper.getAssetName("no_image_found.png", "virtual"));
+                      }
                   ),
                 ),
               ),
@@ -281,19 +285,19 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                                     img: widget._image!,
                                     food_type: widget._foods,
                                   price: widget._price,),
-                                Restaurant(
-                                    id: widget._restaurantDetails!.id,
+                                RestaurantDetails(
+                                    id: widget._restaurantDetails!.id!.toInt(),
                                     brandName: widget._restaurantDetails!.brandName,
                                     ownerName:widget._restaurantDetails!.ownerName,
-                                    mobNumber :widget._restaurantDetails!.ownerMobNumber,
-                                    restaurantCity: widget._restaurantDetails!.restaurantCity,
-                                    restaurantPin: widget._restaurantDetails!.restaurantPin,
+                                    phone :widget._restaurantDetails!.ownerMobNumber,
+                                    city: widget._restaurantDetails!.city,
+                                    pincode: widget._restaurantDetails!.pincode,
                                     ownerEmail:widget._restaurantDetails!.ownerEmail,
                                     storeType: widget._restaurantDetails!.storeType,
-                                    restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                                    address :widget._restaurantDetails!.address,
                                     img1:widget._restaurantDetails!.img1,
                                     img2: widget._restaurantDetails!.img1
-                                ));
+                                ),);
                           },
                           child: Container(
                             child: Text(
@@ -327,16 +331,16 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                                     img: widget._image!,
                                     food_type: widget._foods,
                                     price: widget._price,),
-                                  Restaurant(
-                                      id: widget._restaurantDetails!.id,
+                                  RestaurantDetails(
+                                      id: widget._restaurantDetails!.id!.toInt(),
                                       brandName: widget._restaurantDetails!.brandName,
                                       ownerName:widget._restaurantDetails!.ownerName,
-                                      mobNumber :widget._restaurantDetails!.ownerMobNumber,
-                                      restaurantCity: widget._restaurantDetails!.restaurantCity,
-                                      restaurantPin: widget._restaurantDetails!.restaurantPin,
+                                      phone :widget._restaurantDetails!.ownerMobNumber,
+                                      city: widget._restaurantDetails!.city,
+                                      pincode: widget._restaurantDetails!.pincode,
                                       ownerEmail:widget._restaurantDetails!.ownerEmail,
                                       storeType: widget._restaurantDetails!.storeType,
-                                      restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                                      address :widget._restaurantDetails!.address,
                                       img1:widget._restaurantDetails!.img1,
                                       img2: widget._restaurantDetails!.img1
                                   ));
@@ -370,16 +374,16 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                             img: widget._image!,
                             food_type: widget._foods,
                             price: widget._price,),
-                          Restaurant(
-                              id: widget._restaurantDetails!.id,
+                          RestaurantDetails(
+                              id: widget._restaurantDetails!.id!.toInt(),
                               brandName: widget._restaurantDetails!.brandName,
                               ownerName:widget._restaurantDetails!.ownerName,
-                              mobNumber :widget._restaurantDetails!.ownerMobNumber,
-                              restaurantCity: widget._restaurantDetails!.restaurantCity,
-                              restaurantPin: widget._restaurantDetails!.restaurantPin,
+                              phone :widget._restaurantDetails!.ownerMobNumber,
+                              city: widget._restaurantDetails!.city,
+                              pincode: widget._restaurantDetails!.pincode,
                               ownerEmail:widget._restaurantDetails!.ownerEmail,
                               storeType: widget._restaurantDetails!.storeType,
-                              restaurantAddress :widget._restaurantDetails!.restaurantAddress,
+                              address :widget._restaurantDetails!.address,
                               img1:widget._restaurantDetails!.img1,
                               img2: widget._restaurantDetails!.img1
                           ));
@@ -390,7 +394,7 @@ class _FoodCompactDetailCardState extends State<FoodCompactDetailCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         
-                        Padding(
+                        Container(
                           padding: EdgeInsets.only(left: 32,top: 2).r,
                           child: Text(
                             "ADD",

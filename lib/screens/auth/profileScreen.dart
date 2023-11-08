@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                           width: 80,
                           child: Image.asset(
                             Helper.getAssetName(
-                              "user.jpg",
+                              "pic_passport.jpeg",
                               "real",
                             ),
                             fit: BoxFit.cover,
@@ -85,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Hi there Emilia!",
+                    "Hi there Suraj!",
                     style: Helper.getTheme(context).headline4?.copyWith(
                           color: AppColor.primary,
                         ),
@@ -99,21 +99,21 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   CustomFormImput(
                     label: "Name",
-                    value: "Emilia Clarke",
+                    value: "Suraj Singh",
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   CustomFormImput(
                     label: "Email",
-                    value: "emiliaclarke@email.com",
+                    value: "Suraj160110@email.com",
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   CustomFormImput(
                     label: "Mobile No",
-                    value: "emiliaclarke@email.com",
+                    value: "+918168673754",
                   ),
                   SizedBox(
                     height: 20,

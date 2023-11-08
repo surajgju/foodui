@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/const/colors.dart';
 import 'package:foodui/screens/orders/checkoutScreen.dart';
 import 'package:foodui/utils/helper.dart';
 import 'package:foodui/utils/snackbar.dart';
-import 'package:foodui/widgets/customNavBar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/cart.dart';
 import '../../provider/ordersProviders.dart';
 import 'orderItems.dart';

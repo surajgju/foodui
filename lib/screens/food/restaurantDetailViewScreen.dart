@@ -68,9 +68,9 @@ class _RestaurantDetailViewScreenState
               controller: _scrollController, slivers: [
             SliverAppBar(
               // key: Key("new"),
-              pinned: true,
-              floating: true,
-              snap: true,
+           //   pinned: false,
+              //floating: false,
+            //  snap: true,
               backgroundColor: Colors.white,
               leading: GestureDetector(
                 onTap: () {
@@ -87,117 +87,43 @@ class _RestaurantDetailViewScreenState
                   ),
                 ),
               ),
-              actions: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8).r,
-                  margin: EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white, shape: BoxShape.circle),
-                  child: Icon(Icons.more_vert_outlined, color: Colors.black87),
-                )
-              ],
+              // actions: [
+              //   Container(
+              //     padding: EdgeInsets.fromLTRB(8, 8, 8, 8).r,
+              //     margin: EdgeInsets.only(right: 10),
+              //     decoration: BoxDecoration(
+              //         color: Colors.white, shape: BoxShape.circle),
+              //     child: Icon(Icons.more_vert_outlined, color: Colors.black87),
+              //   )
+              // ],
 
-              expandedHeight: 0.40.sh,
+              expandedHeight: 0.25.sh,
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   children: [
                     Image.asset(
                       "assets/images/real/western2.jpg",
-                      height: 0.28.sh,
+                      height: 0.3.sh,
                       width: 1.sw,
                       fit: BoxFit.cover,
                     ),
                 Center(
-                  child: SizedBox(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 70),
                     width: ScreenUtil().screenWidth*0.9,
-                    height: 120,
+                    height: 120.h,
                     child:restaurantCategoriesProvider.restaurant != null && restaurantCategoriesProvider.restaurant.id != null ? RestaurantDescriptionCard(
-                        name : restaurantCategoriesProvider.restaurant.brandName?? "Restaurant Name",
-                        image :restaurantCategoriesProvider.restaurant.img1 != null && restaurantCategoriesProvider.restaurant.img1!.isNotEmpty ? VENDOR_IMAGE_UPLOAD+ restaurantCategoriesProvider.restaurant.img1! : VENDOR_IMAGE_UPLOAD+( restaurantCategoriesProvider.restaurant.img2 ??""),
-                        restaurantId : int.parse(restaurantCategoriesProvider.restaurant.id!),
+                        name : restaurantCategoriesProvider.restaurant.name?? "Restaurant Name",
+                        image :restaurantCategoriesProvider.restaurant.img1 != null && restaurantCategoriesProvider.restaurant.img1!.isNotEmpty ? IMAGE_UPLOAD_URL+ restaurantCategoriesProvider.restaurant.img1! : IMAGE_UPLOAD_URL+( restaurantCategoriesProvider.restaurant.img2 ??""),
+                        restaurantId : restaurantCategoriesProvider.restaurant.id!.toInt(),
                       foods: restaurantCategoriesProvider.restaurant.storeType,
-                      location:  restaurantCategoriesProvider.restaurant.restaurantAddress,
+                      location:  restaurantCategoriesProvider.restaurant.address,
+                      deliveryFees: restaurantCategoriesProvider.restaurantDistanceMatrix.rows != null ?restaurantCategoriesProvider.restaurantDistanceMatrix.rows![0].elements![0].distance!.value!.toDouble() < 5000 ?25:restaurantCategoriesProvider.calculatePrice(restaurantCategoriesProvider.restaurantDistanceMatrix.rows![0].elements![0].distance!.value!.toDouble()):25.00,
+                      deliveryTime: restaurantCategoriesProvider.restaurantDistanceMatrix.rows != null ?restaurantCategoriesProvider.restaurantDistanceMatrix.rows![0].elements![0].duration!.text:"15 Mins",
                       ):Center(child: CircularProgressIndicator()),
                   ),
                 ),
                   ],
-                ),
-              ),
-              bottom: PreferredSize(
-                preferredSize: Size(1.sw, 130.h),
-                child: Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Container(
-                     color: Colors.white,
-                    margin: EdgeInsets.only(top: 5),
-                    padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              // padding: EdgeInsets.only(left: 10,right: 10),
-                              child: Column(
-                                children: [
-                                  Text("Delivery fee",style: TextStyle(fontSize: 16,color: AppColor.textColor),),
-                                  SizedBox(height: 5.h,), Text("6.50 \₹",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                                ],
-                              ),
-                            ),
-                            Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-                            Flexible(
-                              // padding: EdgeInsets.only(left: 10,right: 10),
-                              child: Column(
-                                children: [
-                                  Text("Delivery time",style: TextStyle(fontSize: 16,color: AppColor.textColor),),
-                                  SizedBox(height: 5.h,), Text("40 mins",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                                ],
-                              ),
-                            ), Container(height: 45.h,width: 1.w,color: AppColor.placeholder,),
-
-                            Flexible(
-                              // padding: EdgeInsets.only(left: 10,right: 10),
-                              child: Column(
-                                children: [
-                                  Text("Delivered by",style: TextStyle(fontSize: 16,color: AppColor.textColor),),
-                                  SizedBox(height: 5.h,),
-                                  Text("Qconnect",style: TextStyle(fontSize: 17.sp,color: Colors.black87))
-                                ],
-                              ),
-                            ),
-
-                          ],),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          SizedBox(
-                              width: 310.w,
-                         child:   Container(
-                           margin: EdgeInsets.only(top: 5),
-                           height: 30.h,
-                           width: 1.sw,
-                           child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  physics: ScrollPhysics(),
-                                  itemCount: restaurantCategoriesProvider.restaurantMenu.length,
-                                  itemBuilder: (c, i) {
-                                    return GestureDetector(
-                                      onTap: (){
-                                        _scrollToItem(i,restaurantCategoriesProvider.scrollItemMap[restaurantCategoriesProvider.restaurantMenuItems[i].categoryId!]!);
-                                      },
-                                      child: chipOption(
-                                          chipText:restaurantCategoriesProvider.restaurantMenu[i].category),
-                                    );
-                                  }),
-                         )
-                          )],)
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -208,17 +134,15 @@ class _RestaurantDetailViewScreenState
                 return Container(
                   margin: EdgeInsets.only(left: 15, right: 10, top: 15 ),
                   child: FoodCompactDetailCard(
-                    // name: "Pizza",
                     name: restaurantCategoriesProvider.restaurantMenuItems[index].productName,
-                    image:VENDOR_DASHBOARD_IMAGE+ restaurantCategoriesProvider.restaurantMenuItems[index].img!,
-                    foodId: restaurantCategoriesProvider.restaurantMenuItems[index].id,
+                    image:restaurantCategoriesProvider.restaurantMenuItems[index].img != null ?IMAGE_UPLOAD_URL+  restaurantCategoriesProvider.restaurantMenuItems[index].img! :"",
+                    foodId: restaurantCategoriesProvider.restaurantMenuItems[index].id.toString(),
                     foods: restaurantCategoriesProvider.restaurantMenuItems[index].mainCategory,
                     restaurantId:(ModalRoute.of(context)!.settings.arguments as Map)['restaurant_id'] ,
                     price: restaurantCategoriesProvider.restaurantMenuItems[index].price,
                     menuId: int.parse(restaurantCategoriesProvider.restaurantMenuItems[index].categoryId!),
                     food_description: restaurantCategoriesProvider.restaurantMenuItems[index].description,
                     restaurantDetails: restaurantCategoriesProvider.restaurant,
-
                   ),
                 );
               },

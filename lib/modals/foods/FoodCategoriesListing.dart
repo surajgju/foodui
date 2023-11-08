@@ -47,7 +47,7 @@ class Data {
     slug = json['slug'];
     img = json['img'];
   }
-  String? id;
+  int? id;
   String? userId;
   String? category;
   String? status;

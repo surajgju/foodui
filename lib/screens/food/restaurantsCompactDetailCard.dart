@@ -44,6 +44,7 @@ class RestaurantCompactDetailCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8).w,
             child: Container(
+
              // padding: EdgeInsets.fromLTRB(5, 5, 5, 5).r,
              //  decoration: BoxDecoration(
              //      border: Border.all(color: Colors.black12),
@@ -62,7 +63,7 @@ class RestaurantCompactDetailCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 15,
+            width: 5,
           ),
           Expanded(
             child: Container(
@@ -74,7 +75,7 @@ class RestaurantCompactDetailCard extends StatelessWidget {
                     children: [
                       Container(
                         constraints:
-                            BoxConstraints(minWidth: 100.w, maxWidth: 200.w),
+                            BoxConstraints(minWidth: 100.w, maxWidth: 180.w),
                         child: Text(
                           _name!,
                           overflow: TextOverflow.ellipsis,

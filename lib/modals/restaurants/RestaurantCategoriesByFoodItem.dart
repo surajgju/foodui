@@ -43,7 +43,7 @@ class Data {
     img = json['img'];
     status = json['status'];
   }
-  String? id;
+  int? id;
   String? catName;
   String? img;
   String? status;

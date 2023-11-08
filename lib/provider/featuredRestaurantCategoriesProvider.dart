@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:foodui/modals/restaurants/RestaurantListingByCategories.dart' as resCat;
+import 'package:foodui/modals/restaurants/RestaurantListingByCategory.dart' as resCat;
 import '../const/firebase.dart';
-import '../modals/featured/featuredRestaurantCategories.dart';
-//import '../modals/restaurants/restaurant.dart';
-import '../modals/restaurants/Restaurant.dart';
+import '../modals/DistanceMatrixResponse.dart';
+import '../modals/GeoCodeResponse.dart';
+import '../modals/restaurants/RestaurantDetails.dart';
 import '../modals/restaurants/RestaurantMenu.dart' as resMenu;
 import '../modals/restaurants/RestaurantMenuItems.dart' as resMenuItems;
 import '../utils/api_provider.dart';
 import '../utils/snackbar.dart';
+import 'package:location/location.dart' as LocationPack ;
 
 class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
 
@@ -24,18 +25,18 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
   List<resCat.Data> restaurantCategoriesForWidget = [];
   List<resCat.Data> searchRestaurantByLocationList = [];
   TextEditingController searchString = TextEditingController();
-  Restaurant restaurant = Restaurant();
+  RestaurantDetails restaurant = RestaurantDetails();
   List<resMenu.Data> restaurantMenu = [];
   List<resMenuItems.Data> restaurantMenuItems = [];
   Map<String,int> scrollItemMap = {};
+  DistanceMatrixResponse restaurantDistanceMatrix= DistanceMatrixResponse();
   getRestaurantByCategories(String category) async {
     Response response = await apiProvider.get(
-      url: "/get_restaurant_category_name.php?cat_name=$category",
+      url: "/vendor-complete-details?vendor_id=$category",authToken: true
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
-  //  restaurantCategories = [];
       successToast(response.data['message']);
-      restaurantCategories = resCat.RestaurantListingByCategories.fromJson(response.data).data!;
+      restaurantCategories = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
   }
@@ -50,29 +51,35 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
   // }
   getRestaurantByFoodItem(String food_item) async {
     Response response = await apiProvider.get(
-      url: "/get_restaurant_product_name.php?product_name=$food_item",
+      url: "/rest-product.html?product_name=$food_item",
     );
     if (response.data['status'] == true) {
-      restaurantCategories = resCat.RestaurantListingByCategories.fromJson(response.data).data!;
+      restaurantCategories = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       successToast(response.data['message']);
       notifyListeners();
     }
   }
 
   getRestaurantDetailById(restaurant_id)async{
+    restaurant = RestaurantDetails();
+    LocationPack.Location locObj = LocationPack.Location();
+    var location =await  locObj!.getLocation();
     Response response = await apiProvider.get(
-      url: "/vendor_store_by_id.php?vendor_id=$restaurant_id",
+      url: "/vendor-store-by-id.html?vendor_id=$restaurant_id",
     );
     if (response.data['status'] == true) {
-      restaurant = Restaurant.fromJson(response.data['data'][0]);
+      restaurant = RestaurantDetails.fromJson(response.data['data'][0]);
       notifyListeners();
+      deliveryTimeCalculator(RestaurantDetails.fromJson(response.data['data'][0]).plusCode,location.latitude,location.longitude);
       successToast(response.data['message']);
+
     }
+
   }
   getRestaurantMenuById(restaurant_id)async{
     restaurantMenu =[];
     Response response = await apiProvider.get(
-      url: "/restaurant_menu_by_id.php?restaurant_id=$restaurant_id",
+      url: "/rest-menu.html?restaurant_id=$restaurant_id",
     );
     if (response.data['status'] == true) {
       resMenu.RestaurantMenu.fromJson(response.data).data!.forEach((e) {
@@ -85,7 +92,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
   getMenuItemByRestaurantId(restaurant_id)async{
     restaurantMenuItems =[];
     Response response = await apiProvider.get(
-      url: "/get_restaurant_product_by_menu.php?restaurant_id=$restaurant_id",
+      url: "/rest-product-menu.html?restaurant_id=$restaurant_id",authToken: true
     );
     if (response.data['status'] == true) {
       resMenuItems.RestaurantMenuItems.fromJson(response.data).data!.forEach((e) {
@@ -97,23 +104,25 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
     }
   }
   getRestaurantByCategoriesForWidget(String category) async {
+    restaurantCategoriesForWidget =[];
     Response response = await apiProvider.get(
-      url: "/get_restaurant_category_name.php?cat_name=$category",
+      url: "/rest-cat-name.html?cat_name=$category",
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
       //  restaurantCategoriesForWidget = [];
       successToast(response.data['message']);
-      restaurantCategoriesForWidget = resCat.RestaurantListingByCategories.fromJson(response.data).data!;
+      restaurantCategoriesForWidget = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
   }
   searchRestaurantByLocation() async {
+    searchRestaurantByLocationList = [];
     Response response = await apiProvider.get(
-      url: "/restaurant_by_location.php?location=${searchString.text}",
+      url: "/rest-location.html?location=${searchString.text}",authToken: true
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
       successToast(response.data['message']);
-      searchRestaurantByLocationList = resCat.RestaurantListingByCategories.fromJson(response.data).data!;
+      searchRestaurantByLocationList = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
   }
@@ -130,5 +139,31 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
       }
     notifyListeners();
     }}
+  
+  Future<GeoCodeResponse> plusCodeConverter(geoCode)async{
+    GeoCodeResponse geoCodeResponse = GeoCodeResponse();
+    var data = await apiProvider.dio.request("https://maps.googleapis.com/maps/api/geocode/json?address=$geoCode&key=AIzaSyAb8I4_6GO8jtMYPKAbwSYFDTMoUnj359Q");
+    geoCodeResponse = GeoCodeResponse.fromJson(data.data);
+    return geoCodeResponse;
+  }
+  Future<DistanceMatrixResponse> restaurantDistanceCalculator(sourceLat,sourceLong,destinationLat,destinationLong)async{
+    DistanceMatrixResponse distanceMatrixResponse = DistanceMatrixResponse();
+    var data = await apiProvider.dio.request("https://maps.googleapis.com/maps/api/distancematrix/json?origins=$sourceLat,$sourceLong&destinations=$destinationLat,$destinationLong&key=AIzaSyAb8I4_6GO8jtMYPKAbwSYFDTMoUnj359Q");
+    distanceMatrixResponse = DistanceMatrixResponse.fromJson(data.data);
+    return distanceMatrixResponse;
+  }
+
+  deliveryTimeCalculator(geoCode,currentLat,currentLong)async{
+    restaurantDistanceMatrix = DistanceMatrixResponse();
+    GeoCodeResponse geoCodeResponse = await plusCodeConverter(geoCode);
+    restaurantDistanceMatrix = await restaurantDistanceCalculator(geoCodeResponse.results![0].geometry!.location!.lat,geoCodeResponse.results![0].geometry!.location!.lng,currentLat,currentLong);
+    notifyListeners();
+  }
+
+  calculatePrice(double distance){
+    double extraDistance =  distance-5000;
+    double extimatedCost = extraDistance/1000*6+25;
+    return extimatedCost.round();
+  }
 
 }

@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'qconnect-5e16e.appspot.com',
     androidClientId: '95583806226-57afn0g0g1ejupeds4k493mkeju79eci.apps.googleusercontent.com',
     iosClientId: '95583806226-tfq19u4hm8vif57gf56pjfe3de7ea2te.apps.googleusercontent.com',
-    iosBundleId: 'com.example.foodui',
+    iosBundleId: 'com.qconnectglobal.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -80,6 +80,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'qconnect-5e16e.appspot.com',
     androidClientId: '95583806226-57afn0g0g1ejupeds4k493mkeju79eci.apps.googleusercontent.com',
     iosClientId: '95583806226-lncd098cjd70f1in09ia7iu9q7e4b8s8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.foodui.RunnerTests',
+    iosBundleId: 'com.qconnectglobal.app.RunnerTests',
   );
 }

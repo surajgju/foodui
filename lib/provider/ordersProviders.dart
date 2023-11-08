@@ -4,18 +4,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodui/modals/foods/food.dart';
+import 'package:foodui/modals/restaurants/RestaurantDetails.dart';
 import 'package:foodui/utils/snackbar.dart';
 import 'package:logger/logger.dart';
 
 import '../const/colors.dart';
-import '../modals/restaurants/Restaurant.dart';
 import '../screens/home/homeScreen.dart';
 import '../screens/tracking/order_status.dart';
 import '../utils/api_provider.dart';
 import '../utils/helper.dart';
 
 class Orders extends ChangeNotifier {
-  Restaurant orderRestaurantDetail = Restaurant();
+  RestaurantDetails orderRestaurantDetail = RestaurantDetails();
   String orderRestaurant_id = '';
   Map<String, Foods> orders = {};
   Map<String, int> orderQuantity = {};
@@ -30,24 +30,62 @@ class Orders extends ChangeNotifier {
   APIProvider apiProvider = APIProvider();
 
   TextEditingController deliveryInstruction =TextEditingController();
+  // addOrder(int restaurant_id, String food_id, Foods food,
+  //     RestaurantDetails restaurantDetail) {
+  //   if (!orderQuantity.containsKey(food_id)) {
+  //     restaurant_id = restaurant_id;
+  //     orderRestaurantDetail = restaurantDetail;
+  //     orders[food_id] = food;
+  //     orderQuantity[food_id] = 1;
+  //     //add in sub-total
+  //     subTotal = subTotal + num.parse(food.price!);
+  //
+  //   } else {
+  //     orderQuantity[food_id] = orderQuantity[food_id]! + 1;
+  //     //add in sub-total
+  //     subTotal = subTotal + num.parse(food.price!);
+  //   }
+  // }
   addOrder(int restaurant_id, String food_id, Foods food,
-      Restaurant restaurantDetail) {
+      RestaurantDetails restaurantDetail){
     if (!orderQuantity.containsKey(food_id)) {
-      restaurant_id = restaurant_id;
-      orderRestaurantDetail = restaurantDetail;
-      orders[food_id] = food;
-      orderQuantity[food_id] = 1;
-      //add in sub-total
-      subTotal = subTotal + num.parse(food.price!);
-    } else {
-      orderQuantity[food_id] = orderQuantity[food_id]! + 1;
-      //add in sub-total
-      subTotal = subTotal + num.parse(food.price!);
-    }
+          restaurant_id = restaurant_id;
+          orderRestaurantDetail = restaurantDetail;
+          orders[food_id] = food;
+          orderQuantity[food_id] = 1;
+          //add in sub-total
+          subTotal = subTotal + num.parse(food.price!);
+
+        } else {
+          orderQuantity[food_id] = orderQuantity[food_id]! + 1;
+          //add in sub-total
+          subTotal = subTotal + num.parse(food.price!);
+        }
+    var data = json.encode({
+      "product_id": food_id,
+      "product_name": food.food_name,
+      "product_img": food.img,
+      "product_price": food.price,
+      "product_description": food.food_description,
+      "product_qty": orderQuantity,
+      "restaurent_name": restaurantDetail.name,
+      "delevery_fee": "25"
+    });
+    Response res = apiProvider.post(url: "/add-to-cart", payload: data);
   }
 
+  /*$product_id = $request->product_id;
+        $product_name = $request->product_name;
+        $product_img = $request->product_img;
+        $product_price = $request->product_price;
+        $product_description = $request->product_description;
+        $product_qty = $request->product_qty;
+        $restaurent_name = $request->restaurent_name;
+        $delevery_fee = $request->delevery_fee;
+      $request->grediant --> With mutilpe product item ids*/
+
   removeOrder(int restaurant_id, String food_id, Foods food,
-      Restaurant restaurantDetails) {
+      RestaurantDetails restaurantDetails) {
     if (orderQuantity.containsKey(food_id) && orderQuantity[food_id] == 1) {
       orderRestaurant_id = "";
       orders.remove(food_id);
@@ -122,6 +160,8 @@ class Orders extends ChangeNotifier {
 
   placeOrder(context)async{
   var orderDetails =  prepareOrderDetails();
+  //ToDo:need to remove temp code
+  showConfirmation(context);
   if(orderDetails != null){
     Response response = await apiProvider.post(
       url: "/food_order_test.php",

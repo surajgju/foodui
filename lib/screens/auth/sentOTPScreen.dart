@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
@@ -22,104 +23,114 @@ class SendOTPScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
   return Scaffold(
         body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'We have sent you an OTP to your Mobile',
-              style: Helper.getTheme(context).headline6,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Please check your mobile number ${authProvider.mobileInputController.text} continue to reset your password ${authProvider.otp}",
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              children: [
-                OTPInput(
-                  focus: focusNode1,
-                  nextNode: focusNode2,
-                  controller: authProvider.firstOtp,
-
-                ),
-                OTPInput(
-                  focus: focusNode2,
-                  nextNode: focusNode3,
-                  previousNode: focusNode1,
-                  controller: authProvider.secondOtp,
-
-                ),
-                OTPInput(
-                  focus: focusNode3,
-                  nextNode: focusNode4,
-                  previousNode: focusNode2,
-                  controller: authProvider.thirdOtp,
-
-                ),
-                OTPInput(
-                  focus: focusNode4,
-                  nextNode: focusNode5,
-                  previousNode: focusNode3,
-                  controller: authProvider.fourthOtp,
-
-                ),
-                OTPInput(
-                  focus: focusNode5,
-                  nextNode: focusNode6,
-                  previousNode: focusNode4,
-                  controller: authProvider.fifthOtp,
-
-                ),
-                OTPInput(
-                  focus: focusNode6,
-                  previousNode: focusNode5,
-                  controller: authProvider.sixthOtp,
-
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  authProvider.varifyOtp(context);
-                  // Navigator.of(context)
-                  //     .pushReplacementNamed(NewPwScreen.routeName);
-                },
-                child: Text("Verify OTP"),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 60.h,
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Didn't Recieve? "),
-                Text(
-                  "Click Here",
-                  style: TextStyle(
-                    color: AppColor.green,
-                    fontWeight: FontWeight.bold,
+              Image.asset("assets/images/virtual/otp_vector.png"),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                'ENTER OTP',
+                style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,color: AppColor.secondary,
+                fontFamily: GoogleFonts.libreBaskerville().fontFamily
+                ),
+                textAlign: TextAlign.center,
+
+
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "We have sent you an OTP to your mobile number ${authProvider.mobileInputController.text} to continue ${authProvider.otp}",
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  OTPInput(
+                    focus: focusNode1,
+                    nextNode: focusNode2,
+                    controller: authProvider.firstOtp,
+
                   ),
-                )
-              ],
-            )
-          ],
+                  OTPInput(
+                    focus: focusNode2,
+                    nextNode: focusNode3,
+                    previousNode: focusNode1,
+                    controller: authProvider.secondOtp,
+
+                  ),
+                  OTPInput(
+                    focus: focusNode3,
+                    nextNode: focusNode4,
+                    previousNode: focusNode2,
+                    controller: authProvider.thirdOtp,
+
+                  ),
+                  OTPInput(
+                    focus: focusNode4,
+                    nextNode: focusNode5,
+                    previousNode: focusNode3,
+                    controller: authProvider.fourthOtp,
+
+                  ),
+                  OTPInput(
+                    focus: focusNode5,
+                    nextNode: focusNode6,
+                    previousNode: focusNode4,
+                    controller: authProvider.fifthOtp,
+
+                  ),
+                  OTPInput(
+                    focus: focusNode6,
+                    previousNode: focusNode5,
+                    controller: authProvider.sixthOtp,
+
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    authProvider.varifyOtp(context);
+                    // Navigator.of(context)
+                    //     .pushReplacementNamed(NewPwScreen.routeName);
+                  },
+                  child: Text("Verify OTP"),
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Didn't Recieve? "),
+                  Text(
+                    "Click Here",
+                    style: TextStyle(
+                      color: AppColor.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     ));

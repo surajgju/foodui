@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../const/colors.dart';
 
@@ -8,6 +9,7 @@ class DeliverLocation extends StatelessWidget {
 String location;
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return   Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,9 +19,9 @@ String location;
           child: Text("Delivering to", style: TextStyle(fontSize: 12,color:AppColor.primary)),
         ), DropdownButtonHideUnderline(
           child: SizedBox(
-            width: 120,
-            height: 20,
-            child: Text(location),
+            width: 120.w,
+            height: 20.h,
+            child: Text(location,softWrap: true,overflow: TextOverflow.ellipsis,),
             // child: DropdownButton(
             //   value: "current location",
             //   items: [

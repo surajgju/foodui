@@ -1,4 +1,4 @@
-package com.example.foodui
+package com.qconnectglobal.app
 
 import io.flutter.embedding.android.FlutterActivity
 

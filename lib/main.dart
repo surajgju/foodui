@@ -45,7 +45,7 @@ import './const/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 void main() async{
- // ChuckerFlutter.showOnRelease = true;
+  //ChuckerFlutter.showOnRelease = true;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -62,7 +62,6 @@ void main() async{
         ChangeNotifierProvider(create: (_)=>CheckoutProvider()),
         ChangeNotifierProvider(create: (_)=>SearchProvider()),
         ChangeNotifierProvider(create: (_)=>HomeScreenProvider()),
-
       ],
       child: MyApp()));
   SystemChrome.setSystemUIOverlayStyle(
@@ -79,7 +78,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Qconnect',
       debugShowCheckedModeBanner: false,
-      //navigatorObservers: [ChuckerFlutter.navigatorObserver],
+     // navigatorObservers: [ChuckerFlutter.navigatorObserver],
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: GoogleFonts.openSans().fontFamily,

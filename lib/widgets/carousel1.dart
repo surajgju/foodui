@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../const/colors.dart';
+import '../const/constant.dart';
+import '../provider/homeScreenProvider.dart';
 import '../utils/helper.dart';
 
 class CarouselOne extends StatefulWidget {
@@ -46,48 +49,33 @@ class _CarouselOneState extends State<CarouselOne> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    final homeProvider = Provider.of<HomeScreenProvider>(context);
     return SizedBox(
-      height: 185.h,
+      height: 170.h,
       child: CustomScrollView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         slivers: [
-          SliverList(delegate: SliverChildListDelegate([
-            SizedBox(width: 10,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(17),
-              child: Image.asset(Helper.getAssetName(_pages[0]['image']!,'real'),
-                width: 0.85.sw,
-                height: 200.h,
-                fit: BoxFit.fill,
-              ),
-            ),SizedBox(width: 10,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(17),
-              child: Image.asset(Helper.getAssetName(_pages[1]['image']!,'real'),
-                width: 0.85.sw,
-                height: 200.h,
-                fit: BoxFit.fill,
-              ),
-            ),SizedBox(width: 10,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(17),
-              child: Image.asset(Helper.getAssetName(_pages[2]['image']!,'real'),
-                width: 0.9.sw,
-                height: 200.h,
-                fit: BoxFit.fill,
-              ),
-            ),SizedBox(width: 10,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(17),
-              child: Image.asset(Helper.getAssetName(_pages[3]['image']!,'real'),
-                width: 0.9.sw,
-                height: 200.h,
-                fit: BoxFit.cover,
-              ),
-            ),
+          SliverFixedExtentList(
+        itemExtent: 0.72.sw,
+              delegate: SliverChildBuilderDelegate((c,i){
+                if(homeProvider.mainBannersList != null && homeProvider.mainBannersList.length>0){
+                return  Container(
+                  padding: EdgeInsets.only(right: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(17),
+                    child: Image.network(IMAGE_UPLOAD_URL+homeProvider.mainBannersList[i].image!,
+                      width: 0.72.sw,
+                      height: 170.h,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                );}else{
+                  Container(child: Center(child: CircularProgressIndicator(),),);
+                }},
+                childCount: homeProvider.mainBannersList.length
 
-          ]),)
+          ))
         ],
       ),
     );
