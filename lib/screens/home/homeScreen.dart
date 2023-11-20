@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               // homeProvider.getCurrentAddress();
                              // Navigator.pushNamed(context, MyMaps.routeName);
                             },
-                            child: DeliverLocation(location:homeProvider.placemarks != null? homeProvider.placemarks![0].street! : "",))),SizedBox(width: 0.w,),
+                            child: DeliverLocation(location:homeProvider.placemarks != null? homeProvider.placemarks![0].street! : "",)
+                        )),SizedBox(width: 0.w,),
                     // GestureDetector(
                     //     onTap: (){
                     //       //Navigator.pushNamed(context, OrderStatus.routeName);
@@ -170,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               sb.SearchBar(
                 title: homeProvider.placemarks != null ? homeProvider.placemarks![0].locality : "Search Foods By Location",
-               // title: "Search Foods By Location",
+                //title: "Search Foods By Location",
                   onTap: (){
                     Navigator.of(context).pushNamed(SearchScreen.routeName);
                   },
@@ -242,74 +243,75 @@ class _HomeScreenState extends State<HomeScreen> {
               // SizedBox(
               //   height: 20.h,
               // ),
-              Container(
-                width: 0.975.sw,
-                padding: const EdgeInsets.only(left: 10,bottom: 10).r,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Featured Categories",
-                      style: Helper.getTheme(context).titleLarge!.copyWith(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87),
-                    ),Spacer(),
-                    TextButton(
-                      onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuScreen()));
-                      },
-                      child: Text("View all",style: TextStyle(color: AppColor.secondary),),
-                    ),
-                  ],
-                ),
-              ),
-          SizedBox(
-            height: 270.h,
-              width: 1.sw,
-              child:FoodCategoriesCard()),
+              //Featured Categories Start
+              // Container(
+              //   width: 0.975.sw,
+              //   padding: const EdgeInsets.only(left: 10,bottom: 10).r,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         "Featured Categories",
+              //         style: Helper.getTheme(context).titleLarge!.copyWith(
+              //             fontSize: 20.sp,
+              //             fontWeight: FontWeight.w500,
+              //             color: Colors.black87),
+              //       ),Spacer(),
+              //       TextButton(
+              //         onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuScreen()));
+              //         },
+              //         child: Text("View all",style: TextStyle(color: AppColor.secondary),),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+          // SizedBox(
+          //   height: 270.h,
+          //     width: 1.sw,
+          //     child:FoodCategoriesCard()),
               SizedBox(
                 height: 20.h,
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 5, 8).r,
-                child: Text(
-                  "Top rated for you ",
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87),
-                ),
-              ),
-              Container(
-                  height: 170.h,
-                 // width: double.infinity,
-                  width: 0.975.sw,
-                  padding: const EdgeInsets.only(left: 10, top: 10).r,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: featuredCategoriesProvider.foodItemsListing.length,
-                      itemBuilder: (c, i) {
-                        String food_id = featuredCategoriesProvider
-                            .foodItemsListing[i]!.id!.toString();
-                        return Row(
-                          children: [
-                            CompactCard2(
-                              image: featuredCategoriesProvider.foodItemsListing[i].img!.isNotEmpty?
-                              IMAGE_UPLOAD_URL+ featuredCategoriesProvider.foodItemsListing[i].img!
-                                  :"",
-                              name: featuredCategoriesProvider.foodItemsListing[i].category!.isNotEmpty?
-                              featuredCategoriesProvider.foodItemsListing[i].category
-                                  :"Food name",
-                              imageTitle:"10 % OFF",
-                              imageSubTitle: "ABOVE 150",
-                              orderTime: "40 min",
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                          ],
-                        );
-                      })),
+              // Container(
+              //   padding: EdgeInsets.fromLTRB(10, 10, 5, 8).r,
+              //   child: Text(
+              //     "Top rated for you ",
+              //     style: TextStyle(
+              //         fontSize: 20.sp,
+              //         fontWeight: FontWeight.w500,
+              //         color: Colors.black87),
+              //   ),
+              // ),
+              // Container(
+              //     height: 170.h,
+              //    // width: double.infinity,
+              //     width: 0.975.sw,
+              //     padding: const EdgeInsets.only(left: 10, top: 10).r,
+              //     child: ListView.builder(
+              //         scrollDirection: Axis.horizontal,
+              //         itemCount: featuredCategoriesProvider.foodItemsListing.length,
+              //         itemBuilder: (c, i) {
+              //           String food_id = featuredCategoriesProvider
+              //               .foodItemsListing[i]!.id!.toString();
+              //           return Row(
+              //             children: [
+              //               CompactCard2(
+              //                 image: featuredCategoriesProvider.foodItemsListing[i].img!.isNotEmpty?
+              //                 IMAGE_UPLOAD_URL+ featuredCategoriesProvider.foodItemsListing[i].img!
+              //                     :"",
+              //                 name: featuredCategoriesProvider.foodItemsListing[i].category!.isNotEmpty?
+              //                 featuredCategoriesProvider.foodItemsListing[i].category
+              //                     :"Food name",
+              //                 imageTitle:"10 % OFF",
+              //                 imageSubTitle: "ABOVE 150",
+              //                 orderTime: "40 min",
+              //               ),
+              //               SizedBox(
+              //                 width: 10.w,
+              //               ),
+              //             ],
+              //           );
+              //         })),
               SizedBox(
                 height: 15.w,
               ),

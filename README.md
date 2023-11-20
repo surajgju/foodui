@@ -1,4 +1,7 @@
 # foodui
+#author: Suraj Singh
+#In case of any issue you can contact to developer at below details
+#email: Suraj7370@icloud.com
 
 A new Flutter project.
 

@@ -5,6 +5,8 @@ import 'package:geocoding/geocoding.dart' as geo;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart' as permissionHandler;
 
 import '../modals/categories/BannersMain.dart' as banners;
 import '../utils/api_provider.dart';
@@ -23,15 +25,31 @@ class HomeScreenProvider extends ChangeNotifier{
   var logger = Logger();
   try {
     Location location = Location();
+    location.changeSettings(accuracy: LocationAccuracy.high);
+    final status = await permissionHandler.Permission.location.status;
+    if(status.isGranted){
     location.getLocation().then((location) async {
       currentLocation = location;
       if (location != null) {
         placemarks = await geo.placemarkFromCoordinates(
             location!.latitude!, location!.longitude!);
-       // logger.i(placemarks.toString());
         notifyListeners();
       }
-    });
+    });}else if(status.isDenied) {
+      Map<permissionHandler.Permission, permissionHandler.PermissionStatus> status = await [permissionHandler.Permission.location].request();
+      if (await permissionHandler.Permission.location.isGranted) {
+        location.getLocation().then((location) async {
+          currentLocation = location;
+          if (location != null) {
+            placemarks = await geo.placemarkFromCoordinates(
+                location!.latitude!, location!.longitude!);
+            notifyListeners();
+          }
+        });
+      }else if(await permissionHandler.Permission.location.isPermanentlyDenied){
+        permissionHandler.openAppSettings();
+      }
+    }
   }catch(err){
     logger.e(err);
   }
@@ -42,7 +60,7 @@ class HomeScreenProvider extends ChangeNotifier{
     Response response = await apiProvider.get(
         url: "/banner");
     if(response.data['status'] ==true){
-      successToast(response.data['message']);
+     // successToast(response.data['message']);
       mainBannersList = banners.BannersMain.fromJson(response.data).data!;
       notifyListeners();
     }else{

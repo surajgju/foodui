@@ -40,15 +40,12 @@ class _RestaurantDetailViewScreenState
       final args = ModalRoute.of(context)!.settings.arguments as Map;
       final provider =
       Provider.of<FeaturedRestaurantCategoriesProvider>(context,listen: false);
-      print(args);
+
       if(args['restaurant_id'] != null) {
         provider.getRestaurantDetailById(args['restaurant_id']);
         provider.getRestaurantMenuById(args['restaurant_id']);
         provider.getMenuItemByRestaurantId(args['restaurant_id']);
       }
-      // if(args['food_item'] != null){
-      //   provider.getRestaurantByFoodItem(args['food_item']);
-      // }
     });
   }
 

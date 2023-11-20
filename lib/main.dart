@@ -1,3 +1,6 @@
+//author: Suraj Singh
+//In case of any issue you can contact to developer at below details
+//email: Suraj7370@icloud.com
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

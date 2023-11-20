@@ -27,7 +27,7 @@ class FeaturedCategoriesProvider extends ChangeNotifier {
    Response response = await apiProvider.get(
        url: "/food-category-main");
    if(response.data['status'] ==true){
-     successToast(response.data['message']);
+     // successToast(response.data['message']);
      foodCategoriesMain = foodCatMain.FoodCategoriesMain.fromJson(response.data).data!;
      notifyListeners();
    }else{
@@ -51,7 +51,7 @@ class FeaturedCategoriesProvider extends ChangeNotifier {
     Response response = await apiProvider.get(
         url: "/food-category.html");
     if(response.data['status'] ==true){
-      successToast(response.data['message']);
+    //  successToast(response.data['message']);
       foodItemsListing= foodCatListing.FoodCategoriesListing.fromJson(response.data).data!;
       notifyListeners();
     }else{
@@ -65,7 +65,7 @@ class FeaturedCategoriesProvider extends ChangeNotifier {
       url: "/top-restorent.html",
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
-      successToast(response.data['message']);
+    //  successToast(response.data['message']);
       PopularRestaurantCategories = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }

@@ -35,7 +35,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
       url: "/vendor-complete-details?vendor_id=$category",authToken: true
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
-      successToast(response.data['message']);
+     // successToast(response.data['message']);
       restaurantCategories = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
@@ -55,27 +55,30 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
     );
     if (response.data['status'] == true) {
       restaurantCategories = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
-      successToast(response.data['message']);
+     // successToast(response.data['message']);
       notifyListeners();
     }
   }
 
   getRestaurantDetailById(restaurant_id)async{
     restaurant = RestaurantDetails();
-    LocationPack.Location locObj = LocationPack.Location();
-    var location =await  locObj!.getLocation();
     Response response = await apiProvider.get(
       url: "/vendor-store-by-id.html?vendor_id=$restaurant_id",
     );
     if (response.data['status'] == true) {
       restaurant = RestaurantDetails.fromJson(response.data['data'][0]);
       notifyListeners();
-      deliveryTimeCalculator(RestaurantDetails.fromJson(response.data['data'][0]).plusCode,location.latitude,location.longitude);
-      successToast(response.data['message']);
-
+     // successToast(response.data['message']);
+      fetchDistanceMatrix(RestaurantDetails.fromJson(response.data['data'][0]));
     }
 
   }
+  fetchDistanceMatrix(RestaurantDetails restaurantDetails)async{
+    LocationPack.Location locObj = LocationPack.Location();
+    var location =await  locObj!.getLocation();
+    deliveryTimeCalculator(restaurantDetails.plusCode,location.latitude,location.longitude);
+  }
+
   getRestaurantMenuById(restaurant_id)async{
     restaurantMenu =[];
     Response response = await apiProvider.get(
@@ -86,7 +89,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
         restaurantMenu.add(e);
       });
       notifyListeners();
-      successToast(response.data['message']);
+    //  successToast(response.data['message']);
     }
   }
   getMenuItemByRestaurantId(restaurant_id)async{
@@ -99,7 +102,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
         restaurantMenuItems.add(e);
       });
       notifyListeners();
-      successToast(response.data['message']);
+    //  successToast(response.data['message']);
       mapScrollIndex();
     }
   }
@@ -110,7 +113,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
       //  restaurantCategoriesForWidget = [];
-      successToast(response.data['message']);
+      //successToast(response.data['message']);
       restaurantCategoriesForWidget = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
@@ -121,7 +124,7 @@ class FeaturedRestaurantCategoriesProvider extends ChangeNotifier {
       url: "/rest-location.html?location=${searchString.text}",authToken: true
     );
     if (response.data['status'] == true && response.data['data'] != null ) {
-      successToast(response.data['message']);
+    //  successToast(response.data['message']);
       searchRestaurantByLocationList = resCat.RestaurantListingByCategory.fromJson(response.data).data!;
       notifyListeners();
     }
