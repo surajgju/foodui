@@ -7,7 +7,6 @@ import 'package:location/location.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart' as permissionHandler;
-
 import '../modals/categories/BannersMain.dart' as banners;
 import '../utils/api_provider.dart';
 import '../utils/snackbar.dart';
@@ -19,15 +18,15 @@ class HomeScreenProvider extends ChangeNotifier{
 
   List<banners.Data> mainBannersList = [];
   APIProvider apiProvider = APIProvider();
-
+  Location location = Location();
   getCurrentAddress()async{
-  print("called ....");
   var logger = Logger();
   try {
-    Location location = Location();
-    location.changeSettings(accuracy: LocationAccuracy.high);
+
+
     final status = await permissionHandler.Permission.location.status;
     if(status.isGranted){
+      location.changeSettings(accuracy: LocationAccuracy.high);
     location.getLocation().then((location) async {
       currentLocation = location;
       if (location != null) {
@@ -36,8 +35,10 @@ class HomeScreenProvider extends ChangeNotifier{
         notifyListeners();
       }
     });}else if(status.isDenied) {
-      Map<permissionHandler.Permission, permissionHandler.PermissionStatus> status = await [permissionHandler.Permission.location].request();
+      Map<permissionHandler.Permission, permissionHandler.PermissionStatus> status =
+      await [permissionHandler.Permission.location].request();
       if (await permissionHandler.Permission.location.isGranted) {
+        location.changeSettings(accuracy: LocationAccuracy.high);
         location.getLocation().then((location) async {
           currentLocation = location;
           if (location != null) {

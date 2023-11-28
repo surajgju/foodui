@@ -71,7 +71,6 @@ void main() async{
     SystemUiOverlayStyle(statusBarColor: Colors.white12,
     statusBarIconBrightness: Brightness.dark,
     ),
-    // Replace "Colors.blue" with your desired color
   );
 }
 

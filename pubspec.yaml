@@ -6,7 +6,7 @@ description: Food Ordering application.
 
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.5.0+5
+version: 1.9.0+9
 environment:
   sdk: '>=3.0.5 <4.0.0'
 dependencies:

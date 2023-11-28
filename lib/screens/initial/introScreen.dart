@@ -80,7 +80,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   Container(
                     margin: EdgeInsets.only(top: 50).r,
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    height: 200.h,
+                    height: 190.h,
                     width: double.infinity,
                     color: AppColor.green,
                     child: PageView.builder(
@@ -152,7 +152,7 @@ class _IntroScreenState extends State<IntroScreen> {
                                   Helper.getAssetName("logo.png", "virtual"),
                                   color: AppColor.green,
                                   width: 100.w,
-                                  height: 80.h,
+                                  height: 70.h,
                                 )
                               ],
                             ),
@@ -341,6 +341,44 @@ class _IntroScreenState extends State<IntroScreen> {
                                         width: 30.w,
                                       ),
                                       Text("Continue with Google")
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ), SizedBox(
+                              height: 45.h,
+                              width: 330.w,
+                              child: GestureDetector(
+                                onTap: (){
+                                  authProvider.signInWithGoogle();
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: AppColor.placeholder),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(3),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(5).w),
+                                        child: Image.asset(
+                                          Helper.getAssetName(
+                                            "apple_logo.png",
+                                            "virtual",
+                                          ),
+                                          width: 15.w,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 30.w,
+                                      ),
+                                      Text("Sign in with Apple")
                                     ],
                                   ),
                                 ),
