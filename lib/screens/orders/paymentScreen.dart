@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
-import 'package:foodui/widgets/customTextInput.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
+import 'package:qconnect/widgets/customTextInput.dart';
 
 import '../../widgets/navigate_back_widget.dart';
 

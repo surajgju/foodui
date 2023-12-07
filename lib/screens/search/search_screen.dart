@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
+import 'package:qconnect/screens/food/restaurantsCompactDetailCard.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
@@ -10,7 +10,7 @@ import '../../provider/featuredRestaurantCategoriesProvider.dart';
 import '../../provider/homeScreenProvider.dart';
 import '../../widgets/navigate_back_widget.dart';
 import '../food/foodCompactDetailCard.dart';
-import 'package:foodui/widgets/searchBar.dart' as sb;
+import 'package:qconnect/widgets/searchBar.dart' as sb;
 
 class SearchScreen extends StatefulWidget {
   static const routeName = "/searchScreen";

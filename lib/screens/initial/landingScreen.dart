@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:foodui/screens/auth/loginScreen.dart';
+// import 'package:qconnect/screens/auth/loginScreen.dart';
 //
 // import '../../const/colors.dart';
 // import '../../utils/helper.dart';

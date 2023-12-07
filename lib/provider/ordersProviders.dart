@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/modals/foods/food.dart';
-import 'package:foodui/modals/restaurants/RestaurantDetails.dart';
-import 'package:foodui/utils/snackbar.dart';
+import 'package:qconnect/modals/foods/food.dart';
+import 'package:qconnect/modals/restaurants/RestaurantDetails.dart';
+import 'package:qconnect/utils/snackbar.dart';
 import 'package:logger/logger.dart';
 
 import '../const/colors.dart';

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
+import 'package:qconnect/const/colors.dart';
 
 class ChipOption extends StatelessWidget {
    ChipOption({super.key, required  this.chipText,required this.chipPrefix,required this.chipTrailing, required this.onTap});

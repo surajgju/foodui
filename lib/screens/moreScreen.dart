@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/screens/auth/aboutScreen.dart';
-import 'package:foodui/screens/inboxScreen.dart';
-import 'package:foodui/screens/initial/introScreen.dart';
-import 'package:foodui/screens/orders/myOrderScreen.dart';
-import 'package:foodui/screens/notificationScreen.dart';
-import 'package:foodui/screens/orders/paymentScreen.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/screens/auth/aboutScreen.dart';
+import 'package:qconnect/screens/inboxScreen.dart';
+import 'package:qconnect/screens/initial/introScreen.dart';
+import 'package:qconnect/screens/orders/myOrderScreen.dart';
+import 'package:qconnect/screens/notificationScreen.dart';
+import 'package:qconnect/screens/orders/paymentScreen.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/firebaseDatafilling.dart';

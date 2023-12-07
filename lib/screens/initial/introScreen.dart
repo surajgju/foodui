@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/screens/home/homeScreen.dart';
-import 'package:foodui/screens/auth/sentOTPScreen.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/utils/snackbar.dart';
-import 'package:foodui/utils/validators.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/screens/home/homeScreen.dart';
+import 'package:qconnect/screens/auth/sentOTPScreen.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/utils/snackbar.dart';
+import 'package:qconnect/utils/validators.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/authProvider.dart';
@@ -307,83 +307,86 @@ class _IntroScreenState extends State<IntroScreen> {
                             SizedBox(
                               height: 16.h,
                             ),
-                            SizedBox(
-                              height: 45.h,
-                              width: 330.w,
-                              child: GestureDetector(
-                                onTap: (){
-                                  authProvider.signInWithGoogle();
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: AppColor.placeholder),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(3),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(5).w),
-                                        child: Image.asset(
-                                          Helper.getAssetName(
-                                            "google.png",
-                                            "virtual",
-                                          ),
-                                          width: 15.w,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 30.w,
-                                      ),
-                                      Text("Continue with Google")
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ), SizedBox(
-                              height: 45.h,
-                              width: 330.w,
-                              child: GestureDetector(
-                                onTap: (){
-                                  authProvider.signInWithGoogle();
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: AppColor.placeholder),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(3),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(5).w),
-                                        child: Image.asset(
-                                          Helper.getAssetName(
-                                            "apple_logo.png",
-                                            "virtual",
-                                          ),
-                                          width: 15.w,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 30.w,
-                                      ),
-                                      Text("Sign in with Apple")
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // SizedBox(
+                            //   height: 45.h,
+                            //   width: 330.w,
+                            //   child: GestureDetector(
+                            //     onTap: (){
+                            //       authProvider.signInWithGoogle();
+                            //     },
+                            //     child: Container(
+                            //       decoration: BoxDecoration(
+                            //           color: Colors.white,
+                            //           border:
+                            //               Border.all(color: AppColor.placeholder),
+                            //           borderRadius: BorderRadius.circular(5)),
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           Container(
+                            //             padding: EdgeInsets.all(3),
+                            //             decoration: BoxDecoration(
+                            //                 color: Colors.white,
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(5).w),
+                            //             child: Image.asset(
+                            //               Helper.getAssetName(
+                            //                 "google.png",
+                            //                 "virtual",
+                            //               ),
+                            //               width: 15.w,
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             width: 30.w,
+                            //           ),
+                            //           Text("Sign in with Google")
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            //
+                            // SizedBox(
+                            //   height: 45.h,
+                            //   width: 330.w,
+                            //   child: GestureDetector(
+                            //     onTap: (){
+                            //       authProvider.signInWithGoogle();
+                            //     },
+                            //     child: Container(
+                            //       margin: EdgeInsets.only(top: 5),
+                            //       decoration: BoxDecoration(
+                            //           color: Colors.white,
+                            //           border:
+                            //               Border.all(color: AppColor.placeholder),
+                            //           borderRadius: BorderRadius.circular(5)),
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           Container(
+                            //             padding: EdgeInsets.all(3),
+                            //             decoration: BoxDecoration(
+                            //                 color: Colors.white,
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(5).w),
+                            //             child: Image.asset(
+                            //               Helper.getAssetName(
+                            //                 "apple_logo.png",
+                            //                 "virtual",
+                            //               ),
+                            //               width: 15.w,
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             width: 30.w,
+                            //           ),
+                            //           Text("Sign in with Apple")
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       )),

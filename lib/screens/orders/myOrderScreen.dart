@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/screens/orders/checkoutScreen.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/utils/snackbar.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/screens/orders/checkoutScreen.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/utils/snackbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';

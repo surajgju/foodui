@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
+import 'package:qconnect/screens/food/restaurantDetailViewScreen.dart';
 
 import '../../const/colors.dart';
 import '../../utils/helper.dart';

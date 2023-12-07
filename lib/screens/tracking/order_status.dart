@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/screens/tracking/prepare_status.dart';
+import 'package:qconnect/screens/tracking/prepare_status.dart';
 
 import 'delivery_status.dart';
 import 'locationTracking.dart';

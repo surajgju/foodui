@@ -2,9 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/modals/restaurants/RestaurantDetails.dart';
-import 'package:foodui/screens/food/restaurantDetailViewScreen.dart';
-import 'package:foodui/utils/snackbar.dart';
+import 'package:qconnect/modals/restaurants/RestaurantDetails.dart';
+import 'package:qconnect/screens/food/restaurantDetailViewScreen.dart';
+import 'package:qconnect/utils/snackbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
 
 class InboxScreen extends StatelessWidget {
   static const routeName = "/inboxScreen";
@@ -40,40 +40,8 @@ class InboxScreen extends StatelessWidget {
             MailCard(
               title: "qconnect Promotions",
               description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
-            ),
-            MailCard(
-              title: "qconnect Promotions",
-              description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
-              color: AppColor.placeholderBg,
-            ),
-            MailCard(
-              title: "qconnect Promotions",
-              description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
-            ),
-            MailCard(
-              title: "qconnect Promotions",
-              description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
-              color: AppColor.placeholderBg,
-            ),
-            MailCard(
-              title: "qconnect Promotions",
-              description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
-            ),
-            MailCard(
-              title: "qconnect Promotions",
-              description:
-                  "Lorem Ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor ",
-              time: "6th July",
+                  "Welcome to Qconnect global",
+              time: DateTime.now().toLocal().toString().split(" ")[0],
             ),
           ],
         ),

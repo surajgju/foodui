@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/screens/food/promotionScroller.dart';
-import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
-import 'package:foodui/screens/food/restaurantsListingWidget.dart';
+import 'package:qconnect/screens/food/promotionScroller.dart';
+import 'package:qconnect/screens/food/restaurantsCompactDetailCard.dart';
+import 'package:qconnect/screens/food/restaurantsListingWidget.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/urls.dart';

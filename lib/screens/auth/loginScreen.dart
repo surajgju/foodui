@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodui/screens/auth/forgetPwScreen.dart';
+import 'package:qconnect/screens/auth/forgetPwScreen.dart';
 
 import '../../const/colors.dart';
 import 'forgetPwScreen.dart';

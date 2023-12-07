@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:foodui/utils/snackbar.dart';
+import 'package:qconnect/utils/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ import '../modals/foods/FoodCategoriesListing.dart' as foodCatListing;
 import '../modals/foods/food.dart';
 import '../modals/restaurants/RestaurantCategoriesByFoodItem.dart' as resCatFoodItem;
 import '../utils/api_provider.dart';
-import 'package:foodui/modals/restaurants/RestaurantListingByCategory.dart' as resCat;
+import 'package:qconnect/modals/restaurants/RestaurantListingByCategory.dart' as resCat;
 
 class FeaturedCategoriesProvider extends ChangeNotifier {
 

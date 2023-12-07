@@ -1,4 +1,4 @@
-name: foodui
+name: qconnect
 description: Food Ordering application.
 #author: Suraj Singh
 #In case of any issue you can contact to developer at below details
@@ -6,7 +6,7 @@ description: Food Ordering application.
 
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.9.0+9
+version: 1.11.0+11
 environment:
   sdk: '>=3.0.5 <4.0.0'
 dependencies:

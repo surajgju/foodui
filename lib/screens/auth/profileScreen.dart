@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
-import 'package:foodui/widgets/customTextInput.dart';
-
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
+import 'package:qconnect/widgets/customTextInput.dart';
 import '../../widgets/navigate_back_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,10 +18,10 @@ class ProfileScreen extends StatelessWidget {
           "Profile",
           style: Helper.getTheme(context).headline5,
         ),
-        actions: [ Image.asset(
-          Helper.getAssetName("cart.png", "virtual"),
-          scale: 5,
-        )],
+        // actions: [ Image.asset(
+        //   Helper.getAssetName("cart.png", "virtual"),
+        //   scale: 5,
+        // )],
       ),
       body: SafeArea(
         child: Container(
@@ -66,21 +65,21 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Helper.getAssetName("edit_filled.png", "virtual"),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Edit Profile",
-                        style: TextStyle(color: AppColor.green),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Image.asset(
+                  //       Helper.getAssetName("edit_filled.png", "virtual"),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 5,
+                  //     ),
+                  //     Text(
+                  //       "Edit Profile",
+                  //       style: TextStyle(color: AppColor.green),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 10,
                   ),
@@ -93,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text("Sign Out"),
+                  // Text("Sign Out"),
                   SizedBox(
                     height: 40,
                   ),
@@ -141,14 +140,14 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Save"),
-                    ),
-                  )
+                  // SizedBox(
+                  //   height: 50,
+                  //   width: double.infinity,
+                  //   child: ElevatedButton(
+                  //     onPressed: () {},
+                  //     child: Text("Save"),
+                  //   ),
+                  // )
                 ],
               ),
             ),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:foodui/const/firebase.dart';
+import 'package:qconnect/const/firebase.dart';
 import 'package:logger/logger.dart';
 
 class FirebaseDataFilling extends StatefulWidget {

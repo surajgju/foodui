@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const routeName = "/notiScreen";
@@ -34,39 +34,9 @@ class NotificationScreen extends StatelessWidget {
             height: 20,
           ),
           NotiCard(
-            title: "Your order has been picked up",
-            time: "Now",
-          ),
-          NotiCard(
             title: "Your order has been delivered",
             time: "1 h ago",
             color: AppColor.placeholderBg,
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "3 h ago",
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "5 h ago",
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "05 Sep 2020",
-            color: AppColor.placeholderBg,
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "12 Aug 2020",
-            color: AppColor.placeholderBg,
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "20 Jul 2020",
-          ),
-          NotiCard(
-            title: "Lorem ipsum dolor sit amet, consectetur",
-            time: "12 Jul 2020",
           ),
         ],
       )),

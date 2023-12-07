@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/screens/auth/changeAddressScreen.dart';
-import 'package:foodui/screens/home/homeScreen.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
-import 'package:foodui/widgets/customTextInput.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/screens/auth/changeAddressScreen.dart';
+import 'package:qconnect/screens/home/homeScreen.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
+import 'package:qconnect/widgets/customTextInput.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/cart.dart';

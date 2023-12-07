@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
+import 'package:qconnect/screens/food/restaurantsCompactDetailCard.dart';
 import 'package:provider/provider.dart';
 import '../../const/constant.dart';
 import '../../provider/featuredCategoriesProvider.dart';

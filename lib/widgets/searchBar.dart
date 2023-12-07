@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
 import 'package:provider/provider.dart';
 import '../provider/featuredRestaurantCategoriesProvider.dart';
 

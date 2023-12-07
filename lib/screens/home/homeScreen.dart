@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/constant.dart';
-import 'package:foodui/screens/food/offerHomeScreen.dart';
-import 'package:foodui/screens/tracking/order_status.dart';
+import 'package:qconnect/const/constant.dart';
+import 'package:qconnect/screens/food/offerHomeScreen.dart';
+import 'package:qconnect/screens/tracking/order_status.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/colors.dart';
@@ -26,7 +26,7 @@ import '../food_categories/food_categories_card.dart';
 import '../individualItem.dart';
 import '../../widgets/deliverLocation.dart';
 import '../../widgets/searchBar.dart';
-import 'package:foodui/widgets/searchBar.dart' as sb;
+import 'package:qconnect/widgets/searchBar.dart' as sb;
 
 import '../food/foodHomeScreen.dart';
 import '../food_categories/menuScreen.dart';

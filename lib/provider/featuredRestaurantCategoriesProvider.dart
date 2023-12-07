@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:foodui/modals/restaurants/RestaurantListingByCategory.dart' as resCat;
+import 'package:qconnect/modals/restaurants/RestaurantListingByCategory.dart' as resCat;
 import '../const/firebase.dart';
 import '../modals/DistanceMatrixResponse.dart';
 import '../modals/GeoCodeResponse.dart';

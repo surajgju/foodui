@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodui/const/constant.dart';
-import 'package:foodui/screens/food/restaurantsCompactDetailCard.dart';
+import 'package:qconnect/const/constant.dart';
+import 'package:qconnect/screens/food/restaurantsCompactDetailCard.dart';
 import 'package:provider/provider.dart';
 import '../../provider/featuredRestaurantCategoriesProvider.dart';
 import '../../widgets/navigate_back_widget.dart';

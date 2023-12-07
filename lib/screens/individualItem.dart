@@ -1,8 +1,8 @@
 // // import 'package:clip_shadow/clip_shadow.dart';
 // import 'package:flutter/material.dart';
-// import 'package:foodui/const/colors.dart';
-// import 'package:foodui/utils/helper.dart';
-// import 'package:foodui/widgets/customNavBar.dart';
+// import 'package:qconnect/const/colors.dart';
+// import 'package:qconnect/utils/helper.dart';
+// import 'package:qconnect/widgets/customNavBar.dart';
 //
 // class IndividualItem extends StatelessWidget {
 //   static const routeName = "/individualScreen";

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
-import 'package:foodui/widgets/searchBar.dart' as sb;
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
+import 'package:qconnect/widgets/searchBar.dart' as sb;
 
 class DessertScreen extends StatelessWidget {
   static const routeName = '/dessertScreen';

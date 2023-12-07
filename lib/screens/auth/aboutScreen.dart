@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodui/const/colors.dart';
-import 'package:foodui/utils/helper.dart';
-import 'package:foodui/widgets/customNavBar.dart';
+import 'package:qconnect/const/colors.dart';
+import 'package:qconnect/utils/helper.dart';
+import 'package:qconnect/widgets/customNavBar.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routeName = "/aboutScreen";
@@ -44,11 +44,7 @@ class AboutScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  AboutCard(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  AboutCard(),
+
                 ],
               ),
             ],
@@ -79,7 +75,7 @@ class AboutCard extends StatelessWidget {
           ),
           Flexible(
             child: Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              "Welcome to QConnect, your premier destination for swift and delectable food delivery! At QConnect, we're passionate about connecting you with a diverse array of culinary experiences. Our mission is simple: to bring the finest flavors right to your doorstep. With a commitment to speed, quality, and exceptional service, we partner with local eateries to deliver a seamless dining experience. Whether you crave comfort classics, exotic cuisines, or health-conscious options, QConnect has you covered. Join us on a journey of culinary delight as we redefine the way you savor every bite. Your satisfaction is our priority, and we're delighted to be your go-to food delivery choice!",
               style: TextStyle(
                 color: AppColor.primary,
               ),
